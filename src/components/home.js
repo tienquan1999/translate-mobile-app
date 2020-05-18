@@ -19,7 +19,7 @@ export default function Home() {
   const [textSearch, onChangeText] = React.useState("");
 
   return (
-    <View style={styles.viewBoxSearch}>
+    <View>
       <Icon name="search" />
       <TextInput
         style={styles.boxSearch}
