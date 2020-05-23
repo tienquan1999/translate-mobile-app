@@ -4,8 +4,8 @@ import { Icon, Card, CardItem, Text, Body } from "native-base"
 
 export default function CardWord() {
   return (
-    <View>
-      <Card>
+    <View >
+      <Card style={styles.round}>
         <CardItem header style={styles.cardWord}>
           <Text style={styles.word}>face</Text>
         </CardItem>
@@ -29,13 +29,23 @@ export default function CardWord() {
   );
 }
 const styles = StyleSheet.create({
+  round:{
+    borderRadius:30,
+    elevation: 3,
+    backgroundColor: "#66a3ff",
+    
+    marginLeft : 20,
+    marginRight:20
+  },
   cardWord: {
+    borderRadius: 30,
     backgroundColor: "#66a3ff"
   },
   word: {
-    fontSize: 30,
+    fontSize: 40,
+   height:50,
     color: "#ffffff",
-    fontWeight: "300"
+    fontWeight: "bold"
   },
   meaning: {
     color: "#ffffff"

@@ -9,9 +9,10 @@ import PickerLanguge from '../components/PickerLanguage';
 export default function HomeScreen() {
   return (
     <View>
-      <Text style={styles.styleTitle}>Từ điển tra cứu </Text>
-      <BoxSwitchLanguage/>
+      {/* <Text style={styles.styleTitle}>Từ điển tra cứu </Text> */}
       <BoxSearch/>
+      <BoxSwitchLanguage/>
+      
       <CardWord/>
     </View>
   );

@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   viewBoxSearch: {
     flexDirection: 'row',
     backgroundColor: "#3385ff",
-
+    marginTop: 50,
     height: 60,
     alignItems: "center",
 
