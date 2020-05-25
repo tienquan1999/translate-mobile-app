@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import {StyleSheet} from "react-native"
-import { Form, Picker,View} from "native-base"
+import {Picker,View} from "native-base"
 
 export default function PickerLanguage(props) {
 
@@ -28,10 +28,9 @@ export default function PickerLanguage(props) {
 }
 const styles = StyleSheet.create({
   picker:{
-    width: 150, 
+    width: 130, 
     height:40,
-    color: "#66a3ff"
-
-     
+    color: "#66a3ff",
+    
   }
 })

@@ -13,6 +13,7 @@ export default function BoxSearch() {
           onChangeText={text => onChangeText(text)}
           value={textSearch}
           placeholder="Gõ từ để tra từ điển" />
+
       </Item>
       <Icon name="mic" style={styles.styleIcon} />
     </View>
@@ -21,15 +22,14 @@ export default function BoxSearch() {
 const styles = StyleSheet.create({
   viewBoxSearch: {
     flexDirection: 'row',
-    backgroundColor: "#3385ff",
-    
+    backgroundColor: "#0077b3",
     height: 60,
     alignItems: "center",
-
+    marginTop: 30
   },
   boxSearch: {
     height: 40,
-    borderColor: '#3385ff',
+    borderColor: '#0077b3',
     borderRadius: 10,
     backgroundColor: "#ffffff",
     padding: 10,

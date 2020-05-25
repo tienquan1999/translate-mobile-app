@@ -3,17 +3,19 @@ import React from 'react';
 import HomeScreen from './screens/HomeScreen';
 import { createAppContainer } from "react-navigation";
 import {createStackNavigator} from "react-navigation-stack"
-import DefinationScree from './screens/DefinationScreen';
+import DefinationScreen from './screens/DefinationScreen';
+import BoxSearch from './components/BoxSearch';
 
 const stack  = createStackNavigator({
   Home: {
     screen: HomeScreen,
-    navigationOptions:()=>({
-      title:"Home"
+     navigationOptions:()=>({
+      title: "home",
+      header: <BoxSearch/>
     })
   },
   Word:{
-    screen: DefinationScree,
+    screen: DefinationScreen,
     navigationOptions:()=>({
       title: "Word"
     })

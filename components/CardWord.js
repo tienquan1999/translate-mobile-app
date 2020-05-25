@@ -2,9 +2,11 @@ import React from "react";
 import { View, StyleSheet } from "react-native"
 import { Icon, Card, CardItem, Text, Body } from "native-base"
 
-export default function CardWord({item}) {
+export default function CardWord(props) {
+  const item = props.item;
+
   return (
-    <View >
+    <View>
       <Card style={styles.round}>
         <CardItem header style={styles.cardWord}>
           <Text style={styles.word}>{item.word}</Text>
@@ -13,14 +15,14 @@ export default function CardWord({item}) {
           <Body >
             <View style={styles.boxTypeWord}>
               <Text style={styles.typeWord}>
-               {item.proper}
-                  </Text>
+                {item.proper}
+              </Text>
               <Icon name="megaphone" />
             </View>
             <View >
               <Text style={styles.meaning}>
                 {item.mean}
-                  </Text>
+              </Text>
             </View>
           </Body>
         </CardItem>
@@ -29,22 +31,22 @@ export default function CardWord({item}) {
   );
 }
 const styles = StyleSheet.create({
-  round:{
-    borderRadius:15,
+  round: {
+    borderRadius: 15,
     elevation: 3,
-    backgroundColor: "#3385ff",
-    
-    marginLeft : 20,
-    marginRight:20
+    backgroundColor: "#0088cc",
+
+    marginLeft: 20,
+    marginRight: 20
   },
   cardWord: {
     borderRadius: 15,
-    backgroundColor: "#3385ff",
-    height:70
+    backgroundColor: "#0088cc",
+    height: 70
   },
   word: {
     fontSize: 40,
-   height:50,
+    height: 50,
     color: "#ffffff",
     fontWeight: "bold"
   },
