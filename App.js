@@ -1,10 +1,10 @@
 import React from 'react';
 
-import HomeScreen from './screens/HomeScreen';
+import HomeScreen from './src/screens/HomeScreen';
 import { createAppContainer } from "react-navigation";
 import {createStackNavigator} from "react-navigation-stack"
-import DefinationScreen from './screens/DefinationScreen';
-import BoxSearch from './components/BoxSearch';
+import DefinationScreen from './src/screens/DefinationScreen';
+import BoxSearch from './src/components/BoxSearch';
 
 const stack  = createStackNavigator({
   Home: {
