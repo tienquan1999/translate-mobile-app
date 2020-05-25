@@ -1,20 +1,20 @@
 let {connectToDatabase} = require("./database/index");
 let {findOne} = require("./database/query");
+let {translateWithGoogleApi} = require("./google-api/translate-api");
 
 async function translate({from, to, word}){
     try{
         word = word.replace(/\s\s+/g, ' ');
-        if(word.split(" ").length){
-            if(from === "en" && to === "vi"){
-                let result = await translateEnToVi(word);
-                return result;
-            } else if(from === "vi" && to === "en"){
-                let result = await translateViToEn(word);
-                return result;
-            }else{
-
-            }
+        let result
+        if(from === "en" && to === "vi"){
+            result = await translateEnToVi(word);
+        } else if(from === "vi" && to === "en"){
+            result = await translateViToEn(word);
         }
+        if(result === undefined){
+            result = await translateWithGoogleApi({from, to, word});
+        }
+        return result;
     }
     catch(e){
         throw e;

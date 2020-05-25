@@ -1,8 +1,10 @@
 import React from "react";
-import {View, Text} from "react-native"
+import { View, Text } from "react-native"
 
-export default function DefinationScreen(){
-    return (<View>
-        <Text>defination</Text>
+export default function DefinationScreen(props) {
+  return (
+    <View>
+      <Text>word</Text>
+      <Text>meeaning</Text>
     </View>)
 }

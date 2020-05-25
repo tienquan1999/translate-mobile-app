@@ -1,15 +1,15 @@
 import React from 'react';
-import { StyleSheet, View , TouchableHighlight} from 'react-native';
-import { Text, Button } from "native-base"
+import { StyleSheet, View , Button} from 'react-native';
+import { Text } from "native-base"
 import BoxSearch from "../components/BoxSearch"
 import BoxSwitchLanguage from "../components/BoxSwitchLanguage"
 import ListrecentWords from "../components/ListrecentWords"
 
-export default function HomeScreen(props) {
+export default function HomeScreen({navigation}) {
   return (
     <View>
       <BoxSwitchLanguage/>
-      <ListrecentWords/>
+      <ListrecentWords navigation={navigation}/>
     </View>
   );
 }
