@@ -31,5 +31,7 @@ const styles = StyleSheet.create({
     width: 150, 
     height:40,
     color: "#66a3ff"
+
+     
   }
 })

@@ -3,20 +3,16 @@ import { StyleSheet, View , Button} from 'react-native';
 import { Text } from "native-base"
 import BoxSearch from "../components/BoxSearch"
 import BoxSwitchLanguage from "../components/BoxSwitchLanguage"
-import CardWord from  "../components/CardWord"
+import ListrecentWords from "../components/ListrecentWords"
 
 export default function HomeScreen(props) {
   return (
     <View>
-      {/* <Text style={styles.styleTitle}>Từ điển tra cứu </Text> */}
+      
       <BoxSearch/>
       <BoxSwitchLanguage/>
       
-      <CardWord/>
-      <Button
-        title="Go to Word"
-        onPress={() => props.navigation.navigate('Word')}
-      />
+      <ListrecentWords/>
     </View>
   );
 }
