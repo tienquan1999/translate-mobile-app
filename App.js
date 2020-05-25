@@ -11,7 +11,7 @@ const stack  = createStackNavigator({
     screen: HomeScreen,
      navigationOptions:()=>({
       title: "home",
-      header: <BoxSearch/>
+      header: () => <BoxSearch/>
     })
   },
   Word:{
