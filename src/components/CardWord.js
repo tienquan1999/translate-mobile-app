@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native"
+import { View, StyleSheet, Image } from "react-native"
 import { Icon, Card, CardItem, Text, Body } from "native-base"
 
 export default function CardWord(props) {
@@ -17,7 +17,7 @@ export default function CardWord(props) {
               <Text style={styles.typeWord}>
                 {item.proper}
               </Text>
-              <Icon name="megaphone" />
+              <Image  style={styles.images} source={require('/home/diepnh/translate-mobile-app/src/icon/listen.png')}/>
             </View>
             <View >
               <Text style={styles.meaning}>
@@ -31,6 +31,10 @@ export default function CardWord(props) {
   );
 }
 const styles = StyleSheet.create({
+  images:{
+    width:20,
+    height:20
+  },
   round: {
     borderRadius: 15,
     elevation: 3,
