@@ -24,5 +24,6 @@ export default function ListrecentWords(props) {
 }
 const styles = StyleSheet.create({
   list: {
+    marginBottom:100
   }
 })
