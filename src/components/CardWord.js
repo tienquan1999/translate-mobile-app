@@ -1,12 +1,13 @@
 import React from "react";
-import { View, StyleSheet,Button , TouchableOpacity} from "react-native"
-import { Icon, Card, CardItem, Text, Body } from "native-base"
+
+import { View, StyleSheet, Image , TouchableOpacity} from "react-native"
+import { Card, CardItem, Text, Body } from "native-base"
 
 export default function CardWord(props) {
   const item = props.item;
 
   return (
-    <TouchableOpacity onPress={()=> props.nav.navigate('Word', {word: "hello", meaning:"xin chao"})}>
+    <TouchableOpacity onPress={()=> props.nav.navigate('Word')}>
       <Card style={styles.round}>
         <CardItem header style={styles.cardWord}>
           <Text style={styles.word}>{item.word}</Text>
@@ -17,7 +18,7 @@ export default function CardWord(props) {
               <Text style={styles.typeWord}>
                 {item.proper}
               </Text>
-              <Icon name="megaphone" />
+              <Image  style={styles.images} source={require('../icon/listen.png')}/>
             </View>
             <View >
               <Text style={styles.meaning}>
@@ -31,9 +32,9 @@ export default function CardWord(props) {
   );
 }
 const styles = StyleSheet.create({
-  buttonCard:{
-    height: 200,
-    width: 300,
+  images:{
+    width:20,
+    height:20
   },
   round: {
     borderRadius: 15,
