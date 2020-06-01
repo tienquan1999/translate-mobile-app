@@ -4,12 +4,10 @@ import CardWord from "./CardWord"
 
 export default function ListrecentWords(props) {
   const [recentWords, setrecentWords] = useState(
-    [{ word: "face", proper: "danh tu", mean: "khuôn mặt ", key: "1" },
+    [{ word: "face", proper: "danh tu", mean: "khuôn mặt aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakhuôn mặt aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakhuôn mặt aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakhuôn mặt aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakhuôn mặt aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakhuôn mặt aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakhuôn mặt aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakhuôn mặt aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakhuôn mặt aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakhuôn mặt aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakhuôn mặt aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakhuôn mặt aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakhuôn mặt aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakhuôn mặt aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakhuôn mặt aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakhuôn mặt aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa ", key: "1" },
     { word: "cat", proper: "danh tu", mean: "mèo", key: "2" },
     { word: "dog", proper: "danh tu", mean: "chó", key: "3" },
-    { word: "book", proper: "danh tu", mean: "sách", key: "4" },
-    { word: "house", proper: "danh tu", mean: "nhà", key: "5" },
-    { word: "sky", proper: "danh tu", mean: "bầu trời", key: "6" }
+   
     ]
   );
   return (
@@ -17,8 +15,7 @@ export default function ListrecentWords(props) {
       <FlatList
         data={recentWords}
         renderItem={({ item }) => (
-          <CardWord item={item} />
-
+          <CardWord item={item} nav={props.navigation}/>
         )}
       />
     </View>

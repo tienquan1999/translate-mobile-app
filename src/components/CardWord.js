@@ -1,12 +1,13 @@
 import React from "react";
-import { View, StyleSheet, Image } from "react-native"
-import { Icon, Card, CardItem, Text, Body } from "native-base"
+
+import { View, StyleSheet, Image , TouchableOpacity} from "react-native"
+import { Card, CardItem, Text, Body } from "native-base"
 
 export default function CardWord(props) {
   const item = props.item;
 
   return (
-    <View>
+    <TouchableOpacity onPress={()=> props.nav.navigate('Word', {word: item.word,proper: item.proper, mean: item.mean})}>
       <Card style={styles.round}>
         <CardItem header style={styles.cardWord}>
           <Text style={styles.word}>{item.word}</Text>
@@ -27,7 +28,7 @@ export default function CardWord(props) {
           </Body>
         </CardItem>
       </Card>
-    </View>
+    </TouchableOpacity>
   );
 }
 const styles = StyleSheet.create({
@@ -46,7 +47,8 @@ const styles = StyleSheet.create({
   cardWord: {
     borderRadius: 15,
     backgroundColor: "#0088cc",
-    height: 70
+    height: 70,
+    
   },
   word: {
     fontSize: 40,
@@ -55,7 +57,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   meaning: {
-    color: "#ffffff"
+    color: "#ffffff",
+    height:25
   },
   boxTypeWord: {
     flexDirection: "row",
