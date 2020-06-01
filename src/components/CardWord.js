@@ -17,7 +17,7 @@ export default function CardWord(props) {
               <Text style={styles.typeWord}>
                 {item.proper}
               </Text>
-              <Image  style={styles.images} source={require('/home/diepnh/translate-mobile-app/src/icon/listen.png')}/>
+              <Image  style={styles.images} source={require('../icon/listen.png')}/>
             </View>
             <View >
               <Text style={styles.meaning}>
