@@ -2,11 +2,11 @@ import React, { useState } from "react"
 import {StyleSheet} from "react-native"
 import {Picker,View} from "native-base"
 export default function PickerLanguage(props) {
-
   const listLanguage = ["English", "Japan", "Chinese", "Andian", "VietNam"]
+
   const [language, setLanguageChange] = useState(props.languageDefault)
-  
-  return (
+ 
+    return (
     <View>
       <Picker 
         note

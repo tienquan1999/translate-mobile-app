@@ -1,43 +1,44 @@
-import React from "react";
-import { View, StyleSheet } from "react-native"
-import { Icon, Item, Input } from "native-base"
+import React, {useState} from "react";
+import { StyleSheet } from "react-native"
+import { Icon, Item, Input, Header} from "native-base"
+const {transalteText} = require("../utils/controller");
 
 export default function BoxSearch() {
-  const [textSearch, onChangeText] = React.useState("");
 
+  const [textSearch, onChangeText] = useState("");
+  const handleChangeText = (e) =>{
+    let val = e.target.value;
+    onChangeText(val)
+  }
+  const goToWord = () =>{
+    console.log("text",textSearch)
+    const result = transalteText("en", "vi", textSearch);
+    console.log(result);
+    // //props.nav.navigate('Word', {word: item.word,proper: item.proper, mean: item.mean})
+  }
   return (
-    <View style={styles.viewBoxSearch}>
-      <Item rounded style={styles.boxSearch}>
+    <Header searchBar rounded style={styles.header}>
+      <Item style={styles.boxSearch}>
         <Icon name="search" />
-        <Input
-          onChangeText={text => onChangeText(text)}
-          value={textSearch}
-          placeholder="Gõ từ để tra từ điển" />
-
+        <Input placeholder="Search" value={textSearch} onChange={handleChangeText} onSubmitEditing={goToWord}/>
       </Item>
-      <Icon name="mic" style={styles.styleIcon} />
-    </View>
+      <Icon name="mic" style={styles.iconMic} />
+    </Header>
   )
 }
 const styles = StyleSheet.create({
-  viewBoxSearch: {
-    flexDirection: 'row',
+  header: {
     backgroundColor: "#0077b3",
-    height: 60,
     alignItems: "center",
-    marginTop: 30
+    justifyContent:"space-around"
   },
   boxSearch: {
-    height: 40,
     borderColor: '#0077b3',
     borderRadius: 10,
     backgroundColor: "#ffffff",
-    padding: 10,
-    width: 320,
-
   },
-  styleIcon: {
-    marginHorizontal: 10,
-    color: "#ffffff"
+  iconMic: {
+    color: "#ffffff",
+    paddingLeft:10
   },
 })
