@@ -2,7 +2,7 @@ let {connectToDatabase} = require("./database/index");
 let {findOne} = require("./database/query");
 let {translateWithGoogleApi} = require("./google-api/translate-api");
 
-async function translate({from, to, word}){
+async function translateText({from, to, word}){
     try{
         word = word.replace(/\s\s+/g, ' ');
         let result
@@ -53,5 +53,5 @@ async function translateViToEn(word){
 
 
 module.exports = {
-    translate
+    translateText
 }
