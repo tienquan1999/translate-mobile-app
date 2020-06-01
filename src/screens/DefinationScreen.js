@@ -1,13 +1,17 @@
 import React from "react";
-import { View, Text } from "react-native"
+ 
 
-export default function DefinationScreen(props) {
-  const word = props.navigation.getParam('word', 'NO-ID');
-  const meaning = props.navigation.getParam('mean', 'some default value');
+ import DetailWord from "../components/DetailWord";
+ 
+ 
 
+export default function DefinationScreen({navigation}) {
+  
   return (
-    <View>
-      <Text>{word}</Text>
-      <Text>{meaning}</Text>
-    </View>)
+     
+     <DetailWord navigation={navigation}/>
+  )
+
+   
 }
+ 

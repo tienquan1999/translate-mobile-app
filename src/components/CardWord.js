@@ -7,7 +7,7 @@ export default function CardWord(props) {
   const item = props.item;
 
   return (
-    <TouchableOpacity onPress={()=> props.nav.navigate('Word', {word: item.word, mean: item.mean})}>
+    <TouchableOpacity onPress={()=> props.nav.navigate('Word', {word: item.word,proper: item.proper, mean: item.mean})}>
       <Card style={styles.round}>
         <CardItem header style={styles.cardWord}>
           <Text style={styles.word}>{item.word}</Text>
@@ -47,7 +47,8 @@ const styles = StyleSheet.create({
   cardWord: {
     borderRadius: 15,
     backgroundColor: "#0088cc",
-    height: 70
+    height: 70,
+    
   },
   word: {
     fontSize: 40,
@@ -56,7 +57,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   meaning: {
-    color: "#ffffff"
+    color: "#ffffff",
+    height:25
   },
   boxTypeWord: {
     flexDirection: "row",
