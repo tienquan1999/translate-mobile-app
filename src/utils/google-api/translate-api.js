@@ -1,17 +1,24 @@
-// const {projectId, apiKey} = require("../../../key.json");
-// const {Translate} = require("@google-cloud/translate").v2;
+const {projectId, apiKey} = require("../../../key.json");
+import axios from 'axios';
 
-// async function translateWithGoogleApi({from, to, word}){
-//     try{
-//         // const translate = new Translate({projectId, key: apiKey});
-//         // const result = await translate.translate(word, to);
-//         // return result;
-//     }
-//     catch(e){
-//         throw e;
-//     }
-// }
 
-// module.exports = {
-//     translateWithGoogleApi
-// }
+async function translateWithGoogleApi({from, to, word}){
+    try{
+        let result = await axios.post('https://translation.googleapis.com/language/translate/v2', null, {
+            params: {
+                q: word,
+                target: to,
+                source: from,
+                key: apiKey
+            }
+        })
+        return result.data.data.translations;
+    }
+    catch(e){
+        throw e;
+    }
+}
+
+module.exports = {
+    translateWithGoogleApi
+}

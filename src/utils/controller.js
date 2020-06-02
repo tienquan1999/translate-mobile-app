@@ -4,17 +4,18 @@ let {translateWithGoogleApi} = require("./google-api/translate-api");
 
 async function translateText({from, to, word}){
     try{
-        console.log("here")
         word = word.replace(/\s\s+/g, ' ');
         let result
         if(from === "en" && to === "vi"){
+            console.log("offline en-vi")
             result = await translateEnToVi(word);
         } else if(from === "vi" && to === "en"){
             result = await translateViToEn(word);
         }
-        // if(result === undefined){
-        //     result = await translateWithGoogleApi({from, to, word});
-        // }
+        if(result._array.length === 0){
+            result = await translateWithGoogleApi({from, to, word});
+        }
+        console.log(result)
         return result;
     }
     catch(e){
@@ -24,10 +25,10 @@ async function translateText({from, to, word}){
 
 async function translateEnToVi(word){
     try{
-        console.log("oke")
         let db = await connectToDatabase("enToVi.db");
         let query = "select * from word where word = ?";
         let result = await findOne({db, query, params: [word]});
+        console.log("query done")
         result = JSON.parse(result);
         return result;
     }

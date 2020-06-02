@@ -11,6 +11,7 @@ async function connectToDatabase(dbName) {
         const asset = Asset.fromModule(module);
         await FileSystem.downloadAsync(asset.uri, sqlDir + internalDbName);
     }
+    console.log("connect success")
     return SQLite.openDatabase(internalDbName);
 }
 
