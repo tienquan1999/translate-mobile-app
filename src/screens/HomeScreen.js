@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View , Button} from 'react-native';
 import BoxSwitchLanguage from "../components/BoxSwitchLanguage"
 import ListrecentWords from "../components/ListrecentWords"
 

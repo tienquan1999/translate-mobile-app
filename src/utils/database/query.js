@@ -3,13 +3,13 @@
 
 function findOne({db, query, params}){
     return new Promise((resolve, reject) => {
-        db.get(query, params, (err, row) => {
-            if(err){
-                reject(err);
+        db.transaction(
+            tx => {
+              tx.executeSql(query, params, (_, { rows }) =>
+                resolve(JSON.stringify(rows))
+              );
             }
-            db.close();
-            resolve(row);
-        });
+          );
     })
 }
 

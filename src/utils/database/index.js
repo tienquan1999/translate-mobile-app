@@ -1,14 +1,18 @@
 import * as SQLite from 'expo-sqlite';
+import * as FileSystem from 'expo-file-system';
+import {Asset} from "expo-asset";
 
-function connectToDatabase(dbName){
-    return new Promise((resolve, reject) => {
-        let db = SQLite.openDatabase(dbName);
-        resolve(db);
-    })
+async function connectToDatabase(dbName) {
+    const internalDbName = dbName; // Call whatever you want
+    const sqlDir = FileSystem.documentDirectory + "SQLite/";
+    if (!(await FileSystem.getInfoAsync(sqlDir + internalDbName)).exists) {
+        await FileSystem.makeDirectoryAsync(sqlDir, {intermediates: true});
+        let module = dbName === "enToVi.db" ? require("../../assets/databases/enToVi.db") : require("../../assets/databases/viToEn.db");
+        const asset = Asset.fromModule(module);
+        await FileSystem.downloadAsync(asset.uri, sqlDir + internalDbName);
+    }
+    return SQLite.openDatabase(internalDbName);
 }
-
-let data = connectToDatabase("en_vi_full_json.db");
-console.log(data);
 
 module.exports = {
     connectToDatabase

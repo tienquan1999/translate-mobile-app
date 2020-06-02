@@ -7,6 +7,7 @@ import DefinationScreen from './src/screens/DefinationScreen';
 import BoxSearch from './src/components/BoxSearch';
 import HeaderDefinitionWord from "./src/components/HeaderDefinitionWord"
 import 'react-native-gesture-handler';
+import * as MetroConfig from "./metro.config"
 
 const stack  = createStackNavigator({
   Home: {
