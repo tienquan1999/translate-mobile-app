@@ -1,18 +1,14 @@
-const sqlite3 = require('sqlite3').verbose();
-const path = require('path');
+import * as SQLite from 'expo-sqlite';
 
 function connectToDatabase(dbName){
-    const dbPath = path.resolve(__dirname, dbName)
     return new Promise((resolve, reject) => {
-        let db = new sqlite3.Database(dbPath, (err) => {
-            if(err){
-                reject(err)
-            }
-            resolve(db);
-        })
+        let db = SQLite.openDatabase(dbName);
+        resolve(db);
     })
 }
 
+let data = connectToDatabase("en_vi_full_json.db");
+console.log(data);
 
 module.exports = {
     connectToDatabase
