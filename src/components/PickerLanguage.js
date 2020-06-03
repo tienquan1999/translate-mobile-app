@@ -1,9 +1,8 @@
 import React, { useState } from "react"
 import {StyleSheet} from "react-native"
 import {Picker,View} from "native-base"
+import {LANGUAGE} from "../constants/languages"
 export default function PickerLanguage(props) {
-  const listLanguage = ["English", "Japan", "Chinese", "Andian", "VietNam"]
-
   const [language, setLanguageChange] = useState(props.languageDefault)
  
     return (
@@ -16,8 +15,8 @@ export default function PickerLanguage(props) {
         onValueChange={(value) => setLanguageChange(value)}
       >
         {
-          (listLanguage || []).map((e, index)=>{
-            return <Picker.Item label={e} value={e} key={index}/>
+          (LANGUAGE || []).map((e, index)=>{
+            return <Picker.Item label={e.label} value={e.value} key={index}/>
           })
         }
         
