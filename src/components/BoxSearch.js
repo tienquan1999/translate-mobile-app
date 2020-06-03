@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { StyleSheet } from "react-native"
 import { Icon, Item, Input, Header} from "native-base"
-const {transalteText} = require("../utils/controller");
+import {transalteText} from "../utils/controller"
 
 export default function BoxSearch() {
 
@@ -12,7 +12,12 @@ export default function BoxSearch() {
   }
   const goToWord = () =>{
     console.log("text",textSearch)
-    const result = transalteText("en", "vi", textSearch);
+    const data={
+      from: "en",
+      to:"vi",
+      word: textSearch || "hello"
+    }
+    const result = transalteText(data);
     console.log(result);
     // //props.nav.navigate('Word', {word: item.word,proper: item.proper, mean: item.mean})
   }

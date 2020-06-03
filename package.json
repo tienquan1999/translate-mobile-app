@@ -8,10 +8,14 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "@google-cloud/translate": "^5.3.0",
     "@react-native-community/masked-view": "^0.1.6",
     "@react-navigation/native": "^5.4.2",
+    "axios": "^0.19.2",
     "expo": "~37.0.3",
+    "expo-asset": "^8.1.5",
+    "expo-file-system": "^8.1.0",
+    "expo-sqlite": "^8.1.0",
+    "metro-config": "^0.59.0",
     "native-base": "2.13.8",
     "react": "~16.9.0",
     "react-devtools": "^4.7.0",
@@ -24,8 +28,7 @@
     "react-native-screens": "^2.2.0",
     "react-native-web": "~0.11.7",
     "react-navigation": "^4.3.9",
-    "react-navigation-stack": "^2.5.1",
-    "sqlite3": "^4.2.0"
+    "react-navigation-stack": "^2.5.1"
   },
   "devDependencies": {
     "babel-preset-expo": "~8.1.0",

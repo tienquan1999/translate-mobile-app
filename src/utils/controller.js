@@ -7,13 +7,15 @@ async function translateText({from, to, word}){
         word = word.replace(/\s\s+/g, ' ');
         let result
         if(from === "en" && to === "vi"){
+            console.log("offline en-vi")
             result = await translateEnToVi(word);
         } else if(from === "vi" && to === "en"){
             result = await translateViToEn(word);
         }
-        if(result === undefined){
+        if(result._array.length === 0){
             result = await translateWithGoogleApi({from, to, word});
         }
+        console.log(result)
         return result;
     }
     catch(e){
@@ -23,9 +25,11 @@ async function translateText({from, to, word}){
 
 async function translateEnToVi(word){
     try{
-        let db = await connectToDatabase("en_vi_full_json.db");
+        let db = await connectToDatabase("enToVi.db");
         let query = "select * from word where word = ?";
         let result = await findOne({db, query, params: [word]});
+        console.log("query done")
+        result = JSON.parse(result);
         return result;
     }
     catch(e){
@@ -35,7 +39,7 @@ async function translateEnToVi(word){
 
 async function translateViToEn(word){
     try{
-        let db = await connectToDatabase("vi_en_full_2.db");
+        let db = await connectToDatabase("viToEn.db");
         let query = "select * from word where word = ? or word_ko_dau = ?";
         db.get(query, [word, word], (err, row) => {
             if(err){
