@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet,Text} from "react-native"
-import {Header, Left, Body, Right, Button, Icon, Title, View } from 'native-base';
+import {Header, Left, Body, Right, Button, Icon } from 'native-base';
 
 export default function HeaderDefinitionWord(props) {
   const {title, handleBack} = props;
@@ -13,7 +13,7 @@ export default function HeaderDefinitionWord(props) {
           </Button>
         </Left>
         <Body>
-          <Text>{title}</Text>
+          <Text style={styles.title}>{title}</Text>
         </Body>
         <Right>
           <Button transparent>
@@ -30,5 +30,10 @@ export default function HeaderDefinitionWord(props) {
 const styles = StyleSheet.create({
   headerTab:{
     backgroundColor: "#0077b3",
+  },
+  title: {
+    fontWeight : "bold",
+    fontSize : 20,
+    color : "#ffffff"
   }
 })
