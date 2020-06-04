@@ -25,7 +25,7 @@ export default function App() {
             component={HomeScreen}
             options={{
               title: 'Welcome',
-              header: () => <BoxSearch />
+              header: ({navigation}) => <BoxSearch navigation={navigation}/>
             }}
           />
           <Stack.Screen
@@ -33,8 +33,9 @@ export default function App() {
             component={DefinitionScreen}
             options={{
               title: 'Word',
-              header: ({ navigation}) => {
-                const title = "Word"
+              header: ({ navigation, route}) => {
+                console.log("navigation: ",navigation)
+                const title = "hello";
                 return <HeaderDefinitionWord title={title} handleBack={() => navigation.goBack()} />
               }
             }}

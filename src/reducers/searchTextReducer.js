@@ -1,13 +1,13 @@
 import { SEARCH_TEXT } from "../constants/action-types"
 const initialState = {
-    wordMeaning: ""
+    data:[]
 }
-export const searchTextReducer = (state = initialState, action) => {
+export const searchTextReducer = (state=initialState, action) => {
     switch (action.type) {
         case SEARCH_TEXT.SUCCESS:
-            return { ...state, wordMeaning: action.payload }
+            return {...state, data: action.payload}
         case SEARCH_TEXT.ERROR:
-            return { ...state, wordMeaning: "No result!", errorMessage }
+            return {...state, data: action.message}
         default:
             return state;
     }

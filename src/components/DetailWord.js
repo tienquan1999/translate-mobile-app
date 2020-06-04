@@ -1,12 +1,12 @@
 import React from "react";
-import { View,StyleSheet, Image, ScrollView } from "react-native";
+import { View,StyleSheet, Image, ScrollView} from "react-native";
 import { Text} from "native-base";
 
 export default function DetailWord(props) {
-  console.log()
-  const word = props.navigation.getParam('word', 'NO-ID');
-  const propering = props.navigation.getParam('proper', 'some');
-  const meaning = props.navigation.getParam('mean', 'some default value');
+  
+  const word = props.route.params.word
+  const propering = props.route.params.proper
+  const meaning = props.route.params.mean
 
   return (
 

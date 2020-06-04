@@ -2,9 +2,9 @@ import React, { useState } from "react"
 import {StyleSheet} from "react-native"
 import {Picker,View} from "native-base"
 import {LANGUAGE} from "../constants/languages"
+
 export default function PickerLanguage(props) {
   const [language, setLanguageChange] = useState(props.languageDefault)
- 
     return (
     <View>
       <Picker 
@@ -29,6 +29,5 @@ const styles = StyleSheet.create({
     width: 130, 
     height:40,
     color: "#66a3ff",
-    
   }
 })

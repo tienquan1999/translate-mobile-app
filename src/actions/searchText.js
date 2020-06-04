@@ -1,4 +1,4 @@
-import SEARCH_TEXT from "../constants/action-types"
+import {SEARCH_TEXT} from "../constants/action-types"
 import { translateText } from "../utils/controller"
 
 const searchTextSuccess = (data) => ({
@@ -10,14 +10,14 @@ const searchTextError = (message) => ({
   message: message
 })
 
-export const searchText = (from, to, textSearch) => {
+export const searchText = (from, to, word) => {
   return dispatch => {
     const result = translateText({
       from: from,
       to: to,
-      word: textSearch
+      word: word
     })
+    console.log("result: ", result)
     dispatch(searchTextSuccess(result))
   }
-
 }
