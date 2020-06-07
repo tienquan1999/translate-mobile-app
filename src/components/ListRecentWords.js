@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { View, StyleSheet, FlatList } from "react-native";
-import CardWord from "./CardWord"
+import { View, StyleSheet, FlatList, Button } from "react-native";
+import CardWord from "./CardWord";
+import {translateText} from "../utils/controller";
 
 export default function ListRecentWords(props) {
   const [recentWords, setRecentWords] = useState([
@@ -16,6 +17,14 @@ export default function ListRecentWords(props) {
           <CardWord item={item} nav={props.navigation}/>
         )}
       />
+      <Button title="Click me" onPress={async () => {
+        let result = await translateText({
+          from: "en",
+          to: "vi",
+          word: "hello"
+        });
+        console.log(result);
+      }}/>
     </View>
 
   )
