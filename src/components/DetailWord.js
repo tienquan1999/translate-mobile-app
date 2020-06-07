@@ -1,26 +1,29 @@
 import React from "react";
 import { View,StyleSheet, Image, ScrollView } from "react-native";
-import { Text} from "native-base";
+ 
+import {Header, Left, Body, Right, Button, Icon ,Text} from 'native-base';
 
 export default function DetailWord(props) {
   const word = props.navigation.getParam('word', 'NO-ID');
-  const propering = props.navigation.getParam('proper', 'some');
+  const proper  = props.navigation.getParam('proper', 'some');
   const meaning = props.navigation.getParam('mean', 'some default value');
 
   return (
 
     <View style={styles.body}>
       <ScrollView>
-        <Text style={styles.wordheader}>{word}</Text>
+        <Text style={styles.wordHeader}>{word}</Text>
         <View>
           <Image style={styles.image} source={require('../icon/listen.png')} />
         </View>
         <View>
-          <Text style={styles.proper}>{propering}</Text>
+          <Text style={styles.proper}>{proper }</Text>
           <Text style={styles.means}>{meaning}</Text>
         </View>
       </ScrollView>
     </View>
+     
+     
   )
 }
 const styles = StyleSheet.create({
@@ -29,7 +32,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     height: "100%"
   },
-  wordheader: {
+  wordHeader: {
     fontSize: 40,
     fontWeight: "bold",
     color: "#000077",
