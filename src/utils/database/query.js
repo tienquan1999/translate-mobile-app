@@ -1,7 +1,5 @@
 
-
-
-function findOne({db, query, params}){
+function querySQLite({db, query, params}){
     return new Promise((resolve, reject) => {
         db.transaction(
             tx => {
@@ -12,18 +10,19 @@ function findOne({db, query, params}){
               );
             }, 
             (e) => {
-              console.log(e)
+              console.log(e);
+              reject(e);
             },
             () => {
-              console.log("done")
+              // console.log("done")
             }
           );
     })
 }
 
 
-module.exports = {
-    findOne
+module.exports =  {
+  querySQLite
 }
 
 

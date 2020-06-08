@@ -1,6 +1,7 @@
-let {connectToDatabase} = require("./database/index");
-let {findOne} = require("./database/query");
-let {translateWithGoogleApi} = require("./google-api/translate-api");
+const {connectToDatabase} = require("./database/index");
+const {querySQLite} = require("./database/query");
+const {translateWithGoogleApi} = require("./google-api/translate-api");
+const formatResult = require("./format-result-translate");
 
 async function translateText({from, to, word}){
     try{
@@ -10,14 +11,14 @@ async function translateText({from, to, word}){
         if(from === "en" && to === "vi"){
             console.log("offline en-vi")
             result = await translateEnToVi(word);
-            console.log("result controller: ", result) //k in ra j ca
         } else if(from === "vi" && to === "en"){
             result = await translateViToEn(word);
         }
         if(result._array.length === 0){
             result = await translateWithGoogleApi({from, to, word});
         }
-        return result;
+
+        return formatResult(result);
     }
     catch(e){
         throw e;
@@ -26,10 +27,8 @@ async function translateText({from, to, word}){
 async function translateEnToVi(word){    
     try{
         let db = await connectToDatabase("enToVi.db");
-        console.log(db);
         let query = "select * from word where word = ?";
-        let result = await findOne({db, query, params: [word]});
-        console.log("query done")
+        let result = await querySQLite({db, query, params: [word]});
         result = JSON.parse(result);
         return result;
     }
@@ -57,6 +56,6 @@ async function translateViToEn(word){
 }
 
 
-module.exports = {
+export {
     translateText
-}
+};

@@ -19,6 +19,6 @@ async function translateWithGoogleApi({from, to, word}){
     }
 }
 
-module.exports = {
+module.exports =  {
     translateWithGoogleApi
 }

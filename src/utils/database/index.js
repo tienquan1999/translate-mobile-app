@@ -16,6 +16,6 @@ async function connectToDatabase(dbName) {
     return SQLite.openDatabase(internalDbName);
 }
 
-module.exports = {
+export {
     connectToDatabase
 };
