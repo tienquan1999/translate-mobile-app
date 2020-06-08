@@ -9,10 +9,7 @@ export default function BoxSwitchLanguage() {
   const [toText, setToText] = useState("VietNam");
 ``
   const handleSwap = () => {
-    let params1 = fromText;
-    let params2 = toText;
-    setToText(params1)
-    setFromText(params2);
+    
   }
   return (
     <View style={styles.boxTranslate}>

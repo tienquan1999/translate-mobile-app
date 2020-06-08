@@ -2,8 +2,9 @@ import React from "react";
 
 import { View, StyleSheet, Image , TouchableOpacity} from "react-native"
 import { Card, CardItem, Text, Body } from "native-base"
+import { connect } from "react-redux";
 
-export default function CardWord(props) {
+function CardWord(props) {
   const item = props.item;
 
   return (
@@ -72,3 +73,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   }
 })
+
+const mapStateToProps = (state) =>({
+  wordMeaning: state.wordMeaning.wordMeaning
+})
+const mapDispatchToProps = (dispatch) =>({
+
+})
+export default connect(mapStateToProps, mapDispatchToProps)(CardWord)

@@ -6,8 +6,16 @@ function findOne({db, query, params}){
         db.transaction(
             tx => {
               tx.executeSql(query, params, (_, { rows }) =>
-                resolve(JSON.stringify(rows))
+                {
+                  resolve(JSON.stringify(rows))
+                }
               );
+            }, 
+            (e) => {
+              console.log(e)
+            },
+            () => {
+              console.log("done")
             }
           );
     })
