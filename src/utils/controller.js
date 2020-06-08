@@ -6,26 +6,27 @@ async function translateText({from, to, word}){
     try{
         word = word.replace(/\s\s+/g, ' ');
         let result
+        console.log(from, to, word, "_________");
         if(from === "en" && to === "vi"){
             console.log("offline en-vi")
             result = await translateEnToVi(word);
+            console.log("result controller: ", result) //k in ra j ca
         } else if(from === "vi" && to === "en"){
             result = await translateViToEn(word);
         }
         if(result._array.length === 0){
             result = await translateWithGoogleApi({from, to, word});
         }
-        console.log(result)
         return result;
     }
     catch(e){
         throw e;
     }
 }
-
-async function translateEnToVi(word){
+async function translateEnToVi(word){    
     try{
         let db = await connectToDatabase("enToVi.db");
+        console.log(db);
         let query = "select * from word where word = ?";
         let result = await findOne({db, query, params: [word]});
         console.log("query done")

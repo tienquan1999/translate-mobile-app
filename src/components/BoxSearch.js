@@ -1,30 +1,22 @@
 import React, {useState} from "react";
 import { StyleSheet } from "react-native"
 import { Icon, Item, Input, Header} from "native-base"
-import {translateText} from "../utils/controller";
+import {searchText} from "../actions/searchText"
+import { connect } from "react-redux";
 
-export default function BoxSearch() {
+function BoxSearch(props) {
 
   const [textSearch, onChangeText] = useState("");
-  const handleChangeText = (e) =>{
-    let val = e.target.value;
-    onChangeText(val)
-  }
-  const goToWord = async () =>{
-    console.log("text",textSearch)
-    const result = await translateText({
-      from: "en",
-      to: "vi",
-      word: textSearch || "hello"
-    });
-    console.log(result);
-    // //props.nav.navigate('Word', {word: item.word,proper: item.proper, mean: item.mean})
+  
+  const goToWord = () =>{
+    props.searchText("en", "vi", textSearch);
+    //props.navigation.navigate('Word', {word: props.wordMeaning})
   }
   return (
     <Header searchBar rounded style={styles.header}>
       <Item style={styles.boxSearch}>
         <Icon name="search" />
-        <Input placeholder="Search" value={textSearch} onChange={handleChangeText} onSubmitEditing={goToWord}/>
+        <Input placeholder="Search" value={textSearch} onChangeText={(text) => onChangeText(text)} onSubmitEditing={goToWord}/>
       </Item>
       <Icon name="mic" style={styles.iconMic} />
     </Header>
@@ -46,3 +38,12 @@ const styles = StyleSheet.create({
     paddingLeft:10
   },
 })
+
+const mapStateToProps = (state) =>{
+  console.log("state: ", state)
+  return {wordMeaning: state.wordMeaning.wordMeaning}
+}
+const mapDispatchToProps = (dispatch) =>({
+  searchText: (from, to, word) => dispatch(searchText(from, to, word))
+})
+export default connect(mapStateToProps, mapDispatchToProps)(BoxSearch)
