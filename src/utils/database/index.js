@@ -5,6 +5,8 @@ import {Asset} from "expo-asset";
 async function connectToDatabase(dbName) {
     const internalDbName = dbName; // Call whatever you want
     const sqlDir = FileSystem.documentDirectory + "SQLite/";
+    let db = await FileSystem.getInfoAsync(sqlDir + internalDbName);
+    console.log(db);
     if (!(await FileSystem.getInfoAsync(sqlDir + internalDbName)).exists) {
         console.log("load file ");
         await FileSystem.makeDirectoryAsync(sqlDir, {intermediates: true});
@@ -13,7 +15,7 @@ async function connectToDatabase(dbName) {
         await FileSystem.downloadAsync(asset.uri, sqlDir + internalDbName);
     }
     console.log("connect success")
-    return SQLite.openDatabase(internalDbName);
+    return await SQLite.openDatabase(internalDbName);
 }
 
 export {

@@ -3,6 +3,6 @@ import {searchTextReducer} from "./searchTextReducer"
 import {switchLanguageReducer} from "./switchLanguageReducer"
 
 export const rootReducer = combineReducers({
-    wordMeaning: searchTextReducer,
+    words: searchTextReducer,
     languages: switchLanguageReducer
 })

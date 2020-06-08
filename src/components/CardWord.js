@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) =>({
-  wordMeaning: state.wordMeaning.wordMeaning
+  
 })
 const mapDispatchToProps = (dispatch) =>({
 

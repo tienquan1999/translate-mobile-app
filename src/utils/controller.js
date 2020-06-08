@@ -27,7 +27,7 @@ async function translateText({from, to, word}){
 async function translateEnToVi(word){    
     try{
         let db = await connectToDatabase("enToVi.db");
-        let query = "select * from word where word = ?";
+        let query = "select * from word where word = ?;";
         let result = await querySQLite({db, query, params: [word]});
         result = JSON.parse(result);
         return result;

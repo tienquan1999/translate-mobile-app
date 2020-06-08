@@ -17,14 +17,14 @@ export default function ListRecentWords(props) {
           <CardWord item={item} nav={props.navigation}/>
         )}
       />
-      <Button title="Click me" onPress={async () => {
+      {/* <Button title="Click me" onPress={async () => {
         let result = await translateText({
           from: "en",
           to: "vi",
           word: "fuck"
         });
         console.log(result);
-      }}/>
+      }}/> */}
     </View>
 
   )
