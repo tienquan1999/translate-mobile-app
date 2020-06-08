@@ -7,7 +7,7 @@ export default function BoxSwitchLanguage() {
 
   const [fromText, setFromText] = useState("English");
   const [toText, setToText] = useState("VietNam");
-
+``
   const handleSwap = () => {
     
   }

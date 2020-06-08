@@ -11,8 +11,8 @@ const searchTextError = (message) => ({
 })
 
 export const searchText = (from, to, word) => {
-  return dispatch => {
-    const result = translateText({
+  return async dispatch => {
+    const result = await translateText({
       from: from,
       to: to,
       word: word
