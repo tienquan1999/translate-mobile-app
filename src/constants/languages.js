@@ -1,4 +1,4 @@
-export const LANGUAGE = [
+const LANGUAGE = [
     {
         label:"Vietnamese",
         value:"vi"
@@ -8,7 +8,7 @@ export const LANGUAGE = [
         value:"en"
     },
     {
-        label:"Javanese",
+        label:"Japanese",
         value:"ja"
     },
     {
@@ -16,3 +16,16 @@ export const LANGUAGE = [
         value:"ko"
     }
 ]
+const TYPE_LANGUAGE={
+    FROM: 'from',
+    TO:'to'
+}
+const ACTION_LANGUAGE = {
+    SWITCH:'switch',
+    CHANGE:'change'
+}
+export{
+    TYPE_LANGUAGE,
+    ACTION_LANGUAGE,
+    LANGUAGE
+}

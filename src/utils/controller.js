@@ -10,7 +10,6 @@ async function translateText({from, to, word}){
         if(from === "en" && to === "vi"){
             console.log("offline en-vi")
             result = await translateEnToVi(word);
-            console.log("result controller: ", result) //k in ra j ca
         } else if(from === "vi" && to === "en"){
             result = await translateViToEn(word);
         }
