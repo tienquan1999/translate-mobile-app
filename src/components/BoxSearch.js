@@ -41,7 +41,9 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) =>{
   console.log("state: ", state)
-  return {wordMeaning: state.wordMeaning.wordMeaning}
+  return {
+    
+  }
 }
 const mapDispatchToProps = (dispatch) =>({
   searchText: (from, to, word) => dispatch(searchText(from, to, word))

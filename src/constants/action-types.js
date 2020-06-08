@@ -4,3 +4,5 @@ const asyncActionType = (type) => ({
   });
 
 export const SEARCH_TEXT = asyncActionType('SEARCH_TEXT');
+export const SWITCH_LANGUAGE = asyncActionType('SWITCH_LANGUAGE');
+export const CHANGE_LANGUAGE = asyncActionType('CHANGE_lANGUAGE')
