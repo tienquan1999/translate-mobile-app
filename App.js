@@ -34,7 +34,6 @@ export default function App() {
             options={{
               title: 'Word',
               header: ({ navigation, route}) => {
-                console.log("navigation: ",navigation)
                 const title = "hello";
                 return <HeaderDefinitionWord title={title} handleBack={() => navigation.goBack()} />
               }
