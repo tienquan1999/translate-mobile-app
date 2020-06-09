@@ -10,7 +10,7 @@ function BoxSearch(props) {
   
   const goToWord = () =>{
     props.searchText("en", "vi", textSearch);
-    //props.navigation.navigate('Word', {word: props.wordMeaning})
+    props.navigation.navigate('Word', {word: props.wordMeaning})
   }
   const handleClear = () =>{
     onChangeText("")
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) =>{
   console.log("state: ", state)
   return {
-    
+    wordMeaning: state.wordMeaning.data
   }
 }
 const mapDispatchToProps = (dispatch) =>({

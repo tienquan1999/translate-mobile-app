@@ -17,7 +17,6 @@ export const searchText = (from, to, word) => {
       to: to,
       word: word
     })
-    console.log("result: ", result)
     dispatch(searchTextSuccess(result))
   }
 }
