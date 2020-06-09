@@ -7,7 +7,7 @@ async function connectToDatabase(dbName) {
     const sqlDir = FileSystem.documentDirectory + "SQLite/";
     let db = await FileSystem.getInfoAsync(sqlDir + internalDbName);
     console.log(db);
-    if (!(await FileSystem.getInfoAsync(sqlDir + internalDbName)).exists) {
+    if (!db.exists) {
         console.log("load file ");
         await FileSystem.makeDirectoryAsync(sqlDir, {intermediates: true});
         let module = dbName === "enToVi.db" ? require("../../assets/databases/enToVi.db") : require("../../assets/databases/viToEn.db");

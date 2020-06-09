@@ -15,6 +15,7 @@ async function translateText({from, to, word}){
             result = await translateViToEn(word);
         }
         if(result._array.length === 0){
+            console.log("use api")
             result = await translateWithGoogleApi({from, to, word});
         }
 

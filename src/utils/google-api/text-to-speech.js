@@ -1,27 +1,35 @@
-// const textToSpeech = require('@google-cloud/text-to-speech');
-// const fs = require('fs');
-// const util = require('util');
-// const client = new textToSpeech.TextToSpeechClient();
+import {apiKey} from "../../../key.json";
+import axios from 'axios';
+// var RNFS = require('react-native-fs');
 
-// async function textToSpeechWithApiGoogle(text, language) {
+async function textToSpeechWithApiGoogle(text){
+    try{
+        let url = `https://texttospeech.googleapis.com/v1/text:synthesize?key=${apiKey}`;
+        let body = {
+          "input":{
+            "text":"Android"
+          },
+          "voice":{
+            "languageCode":"en-US",
+            // "name":"en-GB-Standard-A",
+            // "ssmlGender":"FEMALE"
+          },
+          "audioConfig":{
+            "audioEncoding":"MP3"
+          }
+        }
+        let result = await axios.post(url, body); 
+        console.log(">>>>>>>>>>>>>>>>")
+        var path = RNFS.DocumentDirectoryPath + '/test.mp3';
+        // await RNFS.writeFile(path, result.data.audioContent, "base64");
+        console.log("done");
+    }
+    catch(e){
+        console.warn(e.message)
+    }
+}
 
-//     const request = {
-//         input: {text: text},
-//         // Select the language and SSML voice gender (optional)
-//         voice: {languageCode: language, ssmlGender: 'NEUTRAL'},
-//         // select the type of audio encoding
-//         audioConfig: {audioEncoding: 'MP3'},
-//     };
-//     let path = `../../assets/audio/${language}/` + Math.random().toString(36).substring(8) + ".mp3";
-//     // Performs the text-to-speech request
-//     const [response] = await client.synthesizeSpeech(request);
-//     // Write the binary audio content to a local file
-//     const writeFile = util.promisify(fs.writeFile);
-//     await writeFile(path, response.audioContent, 'binary');
-//     console.log('Audio content written to file: output.mp3');
-//     return path;
-// }
 
-// module.exports = {
-//     textToSpeechWithApiGoogle
-// }
+module.exports = {
+    textToSpeechWithApiGoogle
+}

@@ -1,7 +1,6 @@
 
 function querySQLite({db, query, params}){
     return new Promise((resolve, reject) => {
-      console.log(query, params);
         db.transaction(
             tx => {
               tx.executeSql(query, params, (_, { rows }) =>
