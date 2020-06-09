@@ -22,7 +22,7 @@ export default function ListRecentWords(props) {
         let result = await translateText({
           from: "en",
           to: "vi",
-          word: "hello"
+          word: "hello what do you mine."
         });
         console.log(result)
       }}/>
