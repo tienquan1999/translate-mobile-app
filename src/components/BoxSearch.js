@@ -10,7 +10,7 @@ function BoxSearch(props) {
   
   const goToWord = () =>{
     props.searchText("en", "vi", textSearch);
-    props.navigation.navigate('Word', {word: props.wordMeaning})
+    props.navigation.navigate('Word')
   }
   const handleClear = () =>{
     onChangeText("")

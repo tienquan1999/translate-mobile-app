@@ -6,6 +6,7 @@ function querySQLite({db, query, params}){
             tx => {
               tx.executeSql(query, params, (_, { rows }) =>
                 {
+                 console.log(rows)
                   resolve(JSON.stringify(rows))
                 }
               );
