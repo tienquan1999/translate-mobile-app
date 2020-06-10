@@ -14,9 +14,11 @@ async function translateText({from, to, word}){
         } else if(from === "vi" && to === "en"){
             result = await translateViToEn(word);
         }
+        
         if(result._array.length === 0){
             console.log("use api")
             result = await translateWithGoogleApi({from, to, word});
+            console.log("result 1: ",result)
         }
         return formatResult(result);
     }
