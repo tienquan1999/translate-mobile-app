@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/AntDesign'
 
 function BoxSwitchLanguage(props) {
   const {from, to} = props.languages;
+
   return (
     <View style={styles.boxTranslate}>
       <PickerLanguage languageDefault={from} typeLanguage={TYPE_LANGUAGE.FROM}/>

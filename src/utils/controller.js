@@ -15,11 +15,9 @@ async function translateText({from, to, word}){
         }else{
             result._array = [];
         }
-        
         if(result._array.length === 0){
             console.log("use api")
             result = await translateWithGoogleApi({from, to, word});
-            console.log("result 1: ",result)
         }
         return formatResult(result);
     }

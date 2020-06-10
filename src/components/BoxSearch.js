@@ -10,7 +10,13 @@ function BoxSearch(props) {
 
   const goToWord = async() =>{
     await props.searchText(from, to, textSearch);
-    props.navigation.navigate('Word')
+    if(props.wordMeaning.type === "online")
+    {
+      const {word, mean} = props.wordMeaning;
+      props.navigation.navigate('SearchOnline', {word: word, mean:mean});
+    }
+    else
+      props.navigation.navigate('Word')
   }
   const handleClear = () =>{
     onChangeText("")

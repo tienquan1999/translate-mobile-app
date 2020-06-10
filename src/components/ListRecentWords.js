@@ -26,6 +26,7 @@ export default function ListRecentWords(props) {
         });
         console.log(result);
       }}/>
+      <Button title="online" onPress={() =>  props.navigation.navigate('SearchOnline')}/>
     </View>
 
   )
