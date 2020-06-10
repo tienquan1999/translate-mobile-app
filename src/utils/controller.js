@@ -6,13 +6,14 @@ const formatResult = require("./format-result-translate");
 async function translateText({from, to, word}){
     try{
         word = word.replace(/\s\s+/g, ' ');
-        let result
+        let result = {};
         console.log(from, to, word, "_________");
         if(from === "en" && to === "vi"){
-            console.log("offline en-vi")
             result = await translateEnToVi(word);
         } else if(from === "vi" && to === "en"){
             result = await translateViToEn(word);
+        }else{
+            result._array = [];
         }
         if(result._array.length === 0){
             console.log("use api")
