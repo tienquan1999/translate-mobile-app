@@ -20,11 +20,11 @@ export default function ListRecentWords(props) {
       />
       <Button title="Click me" onPress={async () => {
         let result = await translateText({
-          from: "en",
-          to: "vi",
-          word: "hello what do you mine."
+          from: "vi",
+          to: "en",
+          word: "biên giới"
         });
-        console.log(result)
+        console.log(result);
       }}/>
     </View>
 
