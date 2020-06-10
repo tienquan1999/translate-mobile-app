@@ -7,6 +7,7 @@ function DetailWord(props) {
   const {wordMeaning}=props;
 
   const dataWord = wordMeaning.data;
+  console.log(dataWord);
   let arrMean = dataWord.mean ;
    
   
@@ -14,7 +15,7 @@ function DetailWord(props) {
 
     <View style={styles.body}>
       <ScrollView>
-        <Text style={styles.wordHeader}>{dataWord.word }</Text>
+        <Text style={styles.wordHeader}>{ dataWord.word }</Text>
         <View>
           <View style={styles.viewPronunciation}>
             <Image style={styles.image} source={require('../icon/listen.png')} />
@@ -25,9 +26,9 @@ function DetailWord(props) {
         <View>
           {arrMean.map(e => <View key={e.id}>
                 <Text style={styles.proper}>{e.type}</Text>
-                 {e.values.map(en => <View>
+                 {e.values.map(en => <View key={en.type}>
                    <Text style={styles.means}>{en.mean}</Text>
-                   {en.examples.map(em =><View>
+                   {en.examples.map(em =><View key={em.mean}>
                      <Text style={styles.exmEng}>{em.word}</Text>
                      <Text style={styles.exmVie}><Image style={styles.image2} source={require('../icon/circle-gray.png')}/>{em.mean}</Text>
                    </View>)}
