@@ -33,9 +33,8 @@ export default function App() {
             component={DefinitionScreen}
             options={{
               title: 'Word',
-              header: ({ navigation, route}) => {
-                const title = "hello";
-                return <HeaderDefinitionWord title={title} handleBack={() => navigation.goBack()} />
+              header: ({ navigation}) => {
+                return <HeaderDefinitionWord handleBack={() => navigation.goBack()} />
               }
             }}
           />
