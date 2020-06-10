@@ -1,10 +1,11 @@
 import React from 'react';
 import {StyleSheet,Text} from "react-native"
 import {Header, Left, Body, Right, Button, Icon } from 'native-base';
+import {connect} from "react-redux";
 
-export default function HeaderDefinitionWord(props) {
-  const {title, handleBack} = props;
-  
+function HeaderDefinitionWord(props) {
+  const {handleBack} = props;
+  const title = props.wordMeaning.data.word;
   return (
       <Header style={styles.headerTab}>
         <Left>
@@ -37,3 +38,11 @@ const styles = StyleSheet.create({
     color : "#ffffff"
   }
 })
+const mapStateToProps = (state) =>{
+  return {
+    wordMeaning: state.wordMeaning.data
+  }
+}
+const mapDispatchToProps = (dispatch) =>({
+})
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderDefinitionWord)

@@ -1,45 +1,44 @@
 import React from "react";
-import { View,StyleSheet, Image, ScrollView } from "react-native";
- 
-import {Header, Left, Body, Right, Button, Icon ,Text} from 'native-base';
-import {connect} from "react-redux"
+import { View, StyleSheet, Image, ScrollView } from "react-native";
+import { Text } from 'native-base';
+import { connect } from "react-redux"
 function DetailWord(props) {
-  const {wordMeaning}=props;
 
+  let { wordMeaning } = props;
   const dataWord = wordMeaning.data;
-  let arrMean = dataWord.mean ;
-   
-  
+  const arrMean = dataWord.mean;
+
   return (
 
     <View style={styles.body}>
       <ScrollView>
-        <Text style={styles.wordHeader}>{dataWord.word }</Text>
-        <View>
-          <View style={styles.viewPronunciation}>
-            <Image style={styles.image} source={require('../icon/listen.png')} />
-            <Text style={styles.pronunciation}>{dataWord.pronunciation  }</Text>
-          </View>
-         
+        <Text style={styles.wordHeader}>{dataWord.word}</Text>
+        <View style={styles.viewPronunciation}>
+          <Image style={styles.image} source={require('../icon/listen.png')} />
+          <Text style={styles.pronunciation}>{dataWord.pronunciation}</Text>
         </View>
-        <View>
-          {arrMean.map(e => <View key={e.id}>
-                <Text style={styles.proper}>{e.type}</Text>
-                 {e.values.map(en => <View>
-                   <Text style={styles.means}>{en.mean}</Text>
-                   {en.examples.map(em =><View>
-                     <Text style={styles.exmEng}>{em.word}</Text>
-                     <Text style={styles.exmVie}><Image style={styles.image2} source={require('../icon/circle-gray.png')}/>{em.mean}</Text>
-                   </View>)}
-                 </View>)}
-                
-              </View>
-              )}
-        </View>
+        {
+          arrMean.map(e =>
+            <View key={e.id}>
+              <Text style={styles.proper}>{e.type}</Text>
+              {
+                e.values.map((en, index) =>
+                  <View key={index}>
+                    <Text style={styles.means}>{en.mean}</Text>
+                    {
+                      en.examples.map((em, keyEx) =>
+                        <View key={keyEx}>
+                          <Text style={styles.exmEng}>{em.word}</Text>
+                          <Text style={styles.exmVie}><Image style={styles.image2} source={require('../icon/circle-gray.png')} />{em.mean}</Text>
+                        </View>)
+                    }
+                  </View>)
+              }
+            </View>
+          )
+        }
       </ScrollView>
     </View>
-     
-     
   )
 }
 const styles = StyleSheet.create({
@@ -47,6 +46,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     paddingLeft: 20,
     height: "100%",
+    paddingBottom: 50
   },
   wordHeader: {
     fontSize: 40,
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     width: 20,
   },
   proper: {
-    color:  "#0077b3",
+    color: "#0077b3",
     fontWeight: "bold",
     marginTop: 20,
     fontSize: 20,
@@ -69,36 +69,35 @@ const styles = StyleSheet.create({
     color: "#000077",
     paddingLeft: 50
   },
-  viewPronunciation :{
-    flexDirection : "row",
-    paddingTop : 20
+  viewPronunciation: {
+    flexDirection: "row",
+    paddingTop: 20
   },
-  pronunciation : {
-    paddingLeft : 20
+  pronunciation: {
+    paddingLeft: 20
   },
-  exmEng : {
-    paddingLeft : 60,
-    fontStyle : "italic",
-    color : "#3E7FC1",
-    paddingTop : 10
+  exmEng: {
+    paddingLeft: 60,
+    fontStyle: "italic",
+    color: "#3E7FC1",
+    paddingTop: 10
   },
-  exmVie:{
+  exmVie: {
     paddingLeft: 60,
     color: "gray",
-    paddingTop : 10,
+    paddingTop: 10,
   },
-  image2 :{
-    width : 10,
+  image2: {
+    width: 10,
     height: 10,
-     
+
   }
 })
-const mapStateToProps = (state) =>{
-  console.log("state: ", state)
+const mapStateToProps = (state) => {
   return {
     wordMeaning: state.wordMeaning.data
   }
 }
-const mapDispatchToProps = (dispatch) =>({
+const mapDispatchToProps = (dispatch) => ({
 })
 export default connect(mapStateToProps, mapDispatchToProps)(DetailWord)

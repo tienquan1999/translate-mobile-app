@@ -17,6 +17,8 @@ export const searchText = (from, to, word) => {
       to: to,
       word: word
     })
+    if(result === [])
+      dispatch(searchTextError("Khong tim thay tu!"))
     dispatch(searchTextSuccess(result))
   }
 }
