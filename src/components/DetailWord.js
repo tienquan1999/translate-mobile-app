@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 function DetailWord(props) {
 
   let { wordMeaning } = props;
+  console.log(wordMeaning);
   const dataWord = wordMeaning.data;
   const arrMean = dataWord.mean;
 

@@ -1,6 +1,8 @@
 import {apiKey} from "../../../key.json";
 import axios from 'axios';
-// var RNFS = require('react-native-fs');
+import * as FileSystem from 'expo-file-system';
+// const Sound = require('react-native-sound')
+
 
 async function textToSpeechWithApiGoogle(text){
     try{
@@ -19,10 +21,27 @@ async function textToSpeechWithApiGoogle(text){
           }
         }
         let result = await axios.post(url, body); 
-        console.log(">>>>>>>>>>>>>>>>")
-        var path = RNFS.DocumentDirectoryPath + '/test.mp3';
-        // await RNFS.writeFile(path, result.data.audioContent, "base64");
-        console.log("done");
+        let audioDir = FileSystem.documentDirectory + "audio/";
+        let folder = await FileSystem.getInfoAsync(audioDir);
+        if(!folder.exists){
+          await FileSystem.makeDirectoryAsync(audioDir, {intermediates: true});
+        }
+        var path = audioDir + 'test.mp3';
+        await FileSystem.writeAsStringAsync(path, result.data.audioContent, {
+          encoding: FileSystem.EncodingType.Base64,
+
+        });
+        // let hello = new Sound(path, Sound.MAIN_BUNDLE, (error) => {
+        //   if (error) {
+        //     console.log(error)
+        //   }
+        // })
+
+        // hello.play((success) => {
+        //   if (!success) {
+        //     console.log('Sound did not play')
+        //   }
+        // })
     }
     catch(e){
         console.warn(e.message)

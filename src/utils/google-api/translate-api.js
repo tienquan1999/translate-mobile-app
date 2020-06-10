@@ -24,6 +24,7 @@ async function translateWithGoogleApi({from, to, word}){
         // let result = await fetch(url, {
         //     method: "POST",
         // })
+        console.log("return data");
         return {
             mean: result.data.data.translations[0].translatedText,
             word: word,
