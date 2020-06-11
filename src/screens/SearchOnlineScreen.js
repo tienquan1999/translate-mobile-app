@@ -1,9 +1,10 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text } from "react-native"
-import { Content, Input, Button } from "native-base"
+import { Content, Input, Button, View, TextInput, Textarea } from "native-base"
 import BoxSwitchLanguage from "../components/BoxSwitchLanguage";
 import { searchOnl } from "../actions/searchOnl"
 import { connect } from "react-redux"
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 function SearchOnlineScreen(props) {
 
@@ -19,21 +20,35 @@ function SearchOnlineScreen(props) {
     await props.searchOnl(from, to, textFrom);
     setChange(true)
   }
-  useEffect(()=>{
-    if(change)
-    {
+  const handleClearFrom = () => {
+    setTextFrom("")
+  }
+  useEffect(() => {
+    if (change) {
       setTextTo(props.wordMeaning.mean);
       setChange(false)
     }
-  },[ props.wordMeaning])
+  }, [props.wordMeaning])
   return (
     <Content padder style={styles.body}>
-      <Input multiline={true} placeholder="Nhập để dịch" value={textFrom} style={styles.inputText} onChangeText={(value) => setTextFrom(value)} />
+      <View style={styles.inputText}>
+        <Textarea multiline={true} placeholder="Nhập để dịch" value={textFrom} style={styles.textarea}
+          onChangeText={(value) => setTextFrom(value)} />
+        <View>
+          {textFrom !== "" && <Icon name="close" size={20} style={styles.iconClose} onPress={handleClearFrom} />}
+          <Icon name="volume-up" size={20} color="#0077b3" style={styles.icon} />
+        </View>
+      </View>
       <BoxSwitchLanguage />
-      <Button style={styles.btnTranslate} onPress={translateOnline}>
-        <Text style={styles.textBtn}>Dịch</Text>
-      </Button>
-      <Input multiline={true} value={textTo} style={styles.inputText} onChangeText={(value) => setTextTo(value)} />
+      <View style={styles.viewBtn}>
+        <Button style={styles.btnTranslate} onPress={translateOnline}>
+          <Text style={styles.textBtn}>Dịch</Text>
+        </Button>
+      </View>
+      <View style={styles.inputText}>
+        <Textarea multiline={true} value={textTo} style={styles.textarea} onChangeText={(value) => setTextTo(value)} />
+        <Icon name="volume-up" size={20} color="#0077b3" style={styles.icon} />
+      </View>
     </Content>
   )
 }
@@ -42,11 +57,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff'
   },
   inputText: {
+    flexDirection: "row",
     borderColor: "#0077b3",
     backgroundColor: "#ffffff",
     borderWidth: 2,
     borderRadius: 10,
-    height: 50,
+    height: 150,
     marginVertical: 10,
     fontSize: 20
   },
@@ -55,11 +71,29 @@ const styles = StyleSheet.create({
     height: 50,
     width: 80,
     padding: 10,
-    borderRadius: 10
+    borderRadius: 10,
+
+    justifyContent: "center"
   },
   textBtn: {
     color: "#ffffff",
     fontSize: 20
+  },
+  icon: {
+    marginTop: 30,
+  },
+  textarea: {
+    width: 330,
+    height: 130,
+    paddingTop: 10, fontSize: 20
+  },
+  iconClose: {
+    color: "#0077b3",
+    marginTop: 10
+  },
+  viewBtn: {
+    flexDirection: "column",
+    alignItems: "center"
   }
 })
 const mapStateToProps = (state) => {

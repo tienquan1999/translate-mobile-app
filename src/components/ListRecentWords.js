@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { View, StyleSheet, FlatList, Button } from "react-native";
+import { View, StyleSheet, FlatList, Button,Text } from "react-native";
 import CardWord from "./CardWord";
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons' 
+import { TouchableOpacity } from "react-native-gesture-handler";
 const {translateText} = require("../utils/controller");
 const {textToSpeechWithApiGoogle} = require("../utils/google-api/text-to-speech");
 
@@ -27,13 +29,40 @@ export default function ListRecentWords(props) {
         // console.log(result);
         await textToSpeechWithApiGoogle("what the fuck");
       }}/>
-      <Button title="online" onPress={() =>  props.navigation.navigate('SearchOnline')}/>
+      <View style={styles.viewAround}>
+        <Icon.Button name="earth" style={styles.viewBtnOnline} onPress={() =>  props.navigation.navigate('SearchOnline')}>
+          
+          <Text style= {styles.text}>Dịch Online</Text>
+        </Icon.Button>
+      
+      </View>
+      
+       
     </View>
 
   )
 }
 const styles = StyleSheet.create({
   list: {
-    marginBottom:100
+    marginBottom:100,
+     
+  },
+  viewAround :{
+    flexDirection : "column",
+    alignItems : "center"
+  },
+  viewBtnOnline : {
+    flexDirection : "row",
+    backgroundColor :"#0088cc",
+    height : 45,
+    width : 250,
+    alignContent :"center",
+    textAlign :"center",
+    borderRadius : 10
+  },
+  text :{
+    color: "#ffffff",
+    fontSize : 15,
+    justifyContent : "center"
   }
 })
