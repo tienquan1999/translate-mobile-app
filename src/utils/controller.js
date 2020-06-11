@@ -7,16 +7,14 @@ async function translateText({from, to, word}){
     try{
         word = word.replace(/\s\s+/g, ' ');
         let result = {};
-        console.log(from, to, word, "_________");
-        if(from === "en" && to === "vi"){
+        if(from === "en" && to === "vi" && word.split(" ").length <= 2){
             result = await translateEnToVi(word);
-        } else if(from === "vi" && to === "en"){
+        } else if(from === "vi" && to === "en" && word.split(" ").length <= 2){
             result = await translateViToEn(word);
         }else{
             result._array = [];
         }
         if(result._array.length === 0){
-            console.log("use api")
             result = await translateWithGoogleApi({from, to, word});
         }
         return formatResult(result);

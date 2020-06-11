@@ -1,7 +1,7 @@
 import {apiKey} from "../../../key.json";
 import axios from 'axios';
 import * as FileSystem from 'expo-file-system';
-// const Sound = require('react-native-sound')
+import { Audio } from 'expo-av';
 
 
 async function textToSpeechWithApiGoogle(text){
@@ -9,12 +9,12 @@ async function textToSpeechWithApiGoogle(text){
         let url = `https://texttospeech.googleapis.com/v1/text:synthesize?key=${apiKey}`;
         let body = {
           "input":{
-            "text":"Android"
+            "text":text
           },
           "voice":{
-            "languageCode":"en-US",
+            "languageCode":"en-UK",
             // "name":"en-GB-Standard-A",
-            // "ssmlGender":"FEMALE"
+            "ssmlGender":"FEMALE"
           },
           "audioConfig":{
             "audioEncoding":"MP3"
@@ -29,19 +29,20 @@ async function textToSpeechWithApiGoogle(text){
         var path = audioDir + 'test.mp3';
         await FileSystem.writeAsStringAsync(path, result.data.audioContent, {
           encoding: FileSystem.EncodingType.Base64,
-
         });
-        // let hello = new Sound(path, Sound.MAIN_BUNDLE, (error) => {
-        //   if (error) {
-        //     console.log(error)
-        //   }
-        // })
-
-        // hello.play((success) => {
-        //   if (!success) {
-        //     console.log('Sound did not play')
-        //   }
-        // })
+        const soundObject = new Audio.Sound();
+        try {
+          console.log(path);
+          await soundObject.loadAsync({
+            uri: path
+          });
+          await soundObject.setVolumeAsync(1.0)
+          await soundObject.playAsync();
+          // Your sound is playing!
+        } catch (error) {
+          console.log("err  play soud ", error.message);
+        }
+        console.log("Done");
     }
     catch(e){
         console.warn(e.message)
