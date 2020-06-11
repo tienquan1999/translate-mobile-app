@@ -12,9 +12,9 @@ async function translateText({from, to, word}){
         } else if(from === "vi" && to === "en" && word.split(" ").length <= 2){
             result = await translateViToEn(word);
         }else{
-            result._array = [];
+            result.length = 0;
         }
-        if(result._array.length === 0){
+        if(result.length === 0){
             result = await translateWithGoogleApi({from, to, word});
         }
         return formatResult(result);

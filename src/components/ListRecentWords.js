@@ -27,7 +27,7 @@ export default function ListRecentWords(props) {
         //   word: "Minh ten la Quan"
         // });
         // console.log(result);
-        await textToSpeechWithApiGoogle("what the fuck");
+        await textToSpeechWithApiGoogle("Javascript array search example.", "en");
       }}/>
       <View style={styles.viewAround}>
         <Icon.Button name="earth" style={styles.viewBtnOnline} onPress={() =>  props.navigation.navigate('SearchOnline')}>
