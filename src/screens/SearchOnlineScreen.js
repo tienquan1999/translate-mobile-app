@@ -32,8 +32,7 @@ function SearchOnlineScreen(props) {
   return (
     <Content padder style={styles.body}>
       <View style={styles.boxText}>
-        <Textarea placeholder="Nhập để dịch" value={textFrom} style={styles.textarea}
-          onChangeText={(value) => setTextFrom(value)} />
+        <Textarea placeholder="Nhập để dịch" value={textFrom} style={styles.textarea} onChangeText={(value) => setTextFrom(value)}/>
         <View style={styles.boxMedia}>
           {textFrom !== "" && <Icon name="close" size={25} style={styles.iconClose} onPress={handleClearFrom} />}
           <Icon name="volume-up" size={25} color="#0077b3" style={styles.iconSound} />
