@@ -1,16 +1,22 @@
 import React, {useState} from "react";
 import { StyleSheet } from "react-native"
-import { Icon, Item, Input, Header, Button} from "native-base"
+import { Icon, Item, Input, Header} from "native-base"
 import {searchText} from "../actions/searchText"
 import { connect } from "react-redux";
-
 function BoxSearch(props) {
 
   const [textSearch, onChangeText] = useState("");
-  
-  const goToWord = () =>{
-    props.searchText("en", "vi", textSearch);
-    props.navigation.navigate('Word')
+  let {from, to} = props.languages;
+
+  const goToWord = async() =>{
+    await props.searchText(from, to, textSearch);
+    if(props.wordMeaning.type === "online")
+    {
+      const {word, mean} = props.wordMeaning;
+      props.navigation.navigate('SearchOnline', {word: word, mean:mean});
+    }
+    else
+      props.navigation.navigate('Word')
   }
   const handleClear = () =>{
     onChangeText("")
@@ -20,7 +26,7 @@ function BoxSearch(props) {
       <Item style={styles.boxSearch}>
         <Icon name="search" />
         <Input placeholder="Search" value={textSearch} onChangeText={(text) => onChangeText(text)} onSubmitEditing={goToWord}/>
-        {textSearch !== "" && <Button style={styles.buttonClose} onPress={handleClear}><Icon name="close" style={styles.iconClose}/></Button>}
+        {textSearch !== "" &&  <Icon name="close" style={styles.iconClose} onPress={handleClear}/>}
       </Item>
       <Icon name="mic" style={styles.iconMic} />
     </Header>
@@ -44,19 +50,12 @@ const styles = StyleSheet.create({
   iconClose:{
     color: "#0077b3",
   },
-  buttonClose:{
-    borderRadius: 50,
-    borderWidth:2,
-    borderStyle:"solid",
-    borderColor:"#0077b3",
-    backgroundColor:"#ffffff",
-    
-  }
 })
 
 const mapStateToProps = (state) =>{
   return {
-    wordMeaning: state.wordMeaning.data
+    wordMeaning: state.wordMeaning.data,
+    languages :state.languages,
   }
 }
 const mapDispatchToProps = (dispatch) =>({

@@ -6,7 +6,6 @@ async function connectToDatabase(dbName) {
     const internalDbName = dbName; // Call whatever you want
     const sqlDir = FileSystem.documentDirectory + "SQLite/";
     let db = await FileSystem.getInfoAsync(sqlDir + internalDbName);
-    console.log(db);
     if (!db.exists) {
         console.log("load file ");
         await FileSystem.makeDirectoryAsync(sqlDir, {intermediates: true});
@@ -14,7 +13,6 @@ async function connectToDatabase(dbName) {
         const asset = Asset.fromModule(module);
         await FileSystem.downloadAsync(asset.uri, sqlDir + internalDbName);
     }
-    console.log("connect success")
     return await SQLite.openDatabase(internalDbName);
 }
 

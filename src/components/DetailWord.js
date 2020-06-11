@@ -1,105 +1,103 @@
 import React from "react";
-import { View,StyleSheet, Image, ScrollView } from "react-native";
- 
-import {Header, Left, Body, Right, Button, Icon ,Text} from 'native-base';
-import {connect} from "react-redux"
+import { View, StyleSheet, Image, ScrollView } from "react-native";
+import { Text, Content } from 'native-base';
+import { connect } from "react-redux"
+import Icon from 'react-native-vector-icons/MaterialIcons'
+
 function DetailWord(props) {
-  const {wordMeaning}=props;
 
+  let { wordMeaning } = props;
+  console.log(wordMeaning);
   const dataWord = wordMeaning.data;
-  console.log(dataWord);
-  let arrMean = dataWord.mean ;
-   
-  
-  return (
+  const arrMean = dataWord.mean;
 
-    <View style={styles.body}>
+  return (
+    <Content padder>
       <ScrollView>
-        <Text style={styles.wordHeader}>{ dataWord.word }</Text>
-        <View>
-          <View style={styles.viewPronunciation}>
-            <Image style={styles.image} source={require('../icon/listen.png')} />
-            <Text style={styles.pronunciation}>{dataWord.pronunciation  }</Text>
-          </View>
-         
+        <Text style={styles.wordHeader}>{dataWord.word}</Text>
+        <View style={styles.viewPronunciation}>
+          <Icon name="volume-up" size={25} color="#0077b3" />
+          <Text style={styles.pronunciation}>{dataWord.pronunciation}</Text>
         </View>
-        <View>
-          {arrMean.map(e => <View key={e.id}>
-                <Text style={styles.proper}>{e.type}</Text>
-                 {e.values.map(en => <View key={en.type}>
-                   <Text style={styles.means}>{en.mean}</Text>
-                   {en.examples.map(em =><View key={em.mean}>
-                     <Text style={styles.exmEng}>{em.word}</Text>
-                     <Text style={styles.exmVie}><Image style={styles.image2} source={require('../icon/circle-gray.png')}/>{em.mean}</Text>
-                   </View>)}
-                 </View>)}
-                
-              </View>
-              )}
-        </View>
+        {
+          arrMean.map(e =>
+            <View key={e.id}>
+              <Text style={styles.proper}><Icon name="chevron-right" size={15} />{e.type}</Text>
+              {
+                e.values.map((type, index) =>
+                  <View key={index}>
+                    <Text style={styles.means}>
+                      <Text style={styles.indexMean}>{index + 1}.</Text>
+                      {type.mean}
+                    </Text>
+                    {
+                      type.examples.map((ex, keyEx) =>
+                        <View key={keyEx}>
+                          <Text style={styles.exmEng}>{ex.word}</Text>
+                          <Text style={styles.exmVie}><Icon name="chevron-right" />{ex.mean}</Text>
+                        </View>)
+                    }
+                  </View>)
+              }
+            </View>
+          )
+        }
       </ScrollView>
-    </View>
-     
-     
+    </Content>
   )
 }
 const styles = StyleSheet.create({
-  body: {
-    backgroundColor: "#ffffff",
-    paddingLeft: 20,
-    height: "100%",
-  },
   wordHeader: {
     fontSize: 40,
     fontWeight: "bold",
-    color: "#000077",
-    paddingTop: 30,
+    color: "#005580"
   },
-  image: {
-    height: 20,
-    width: 20,
+  viewPronunciation: {
+    flexDirection: "row",
+    paddingTop: 18,
+    alignItems: "center"
+  },
+  pronunciation: {
+    paddingLeft: 20,
+    fontSize: 18
   },
   proper: {
-    color:  "#0077b3",
+    color: "#0077b3",
     fontWeight: "bold",
     marginTop: 20,
-    fontSize: 20,
+    fontSize: 18,
+    alignContent: "center"
+  },
+  indexMean: {
+    fontSize: 17,
+    color: "#bfbfbf"
   },
   means: {
     marginTop: 20,
-    color: "#000077",
-    paddingLeft: 50
+    color: "#004466",
+    fontSize: 17,
+    paddingLeft: 15
   },
-  viewPronunciation :{
-    flexDirection : "row",
-    paddingTop : 20
+  exmEng: {
+    fontStyle: "italic",
+    color: "#007acc",
+    paddingTop: 10,
+    fontSize: 17,
+    paddingLeft: 40
   },
-  pronunciation : {
-    paddingLeft : 20
-  },
-  exmEng : {
-    paddingLeft : 60,
-    fontStyle : "italic",
-    color : "#3E7FC1",
-    paddingTop : 10
-  },
-  exmVie:{
-    paddingLeft: 60,
-    color: "gray",
-    paddingTop : 10,
-  },
-  image2 :{
-    width : 10,
-    height: 10,
-     
+  exmVie: {
+    color: "#595959",
+    paddingTop: 10,
+    fontSize: 17,
+    paddingLeft: 40
   }
 })
-const mapStateToProps = (state) =>{
-  console.log("state: ", state)
+const mapStateToProps = (state) => {
+  console.log("state in detail word", state);
   return {
     wordMeaning: state.wordMeaning.data
   }
 }
-const mapDispatchToProps = (dispatch) =>({
+const mapDispatchToProps = (dispatch) => ({
 })
 export default connect(mapStateToProps, mapDispatchToProps)(DetailWord)

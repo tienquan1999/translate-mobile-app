@@ -19,13 +19,15 @@ export default function ListRecentWords(props) {
         )}
       />
       <Button title="Click me" onPress={async () => {
-        let result = await translateText({
-          from: "en",
-          to: "vi",
-          word: "hello what do you mine."
-        });
-        console.log(result)
+        // let result = await translateText({
+        //   from: "vi",
+        //   to: "en",
+        //   word: "Minh ten la Quan"
+        // });
+        // console.log(result);
+        await textToSpeechWithApiGoogle("what the fuck");
       }}/>
+      <Button title="online" onPress={() =>  props.navigation.navigate('SearchOnline')}/>
     </View>
 
   )

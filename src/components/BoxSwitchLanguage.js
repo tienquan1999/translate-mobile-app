@@ -1,20 +1,18 @@
-import React, { useState } from "react";
-import { View, StyleSheet, Text } from "react-native"
-import { Icon, Button, Body } from "native-base"
+import React from "react";
+import { View, StyleSheet } from "react-native"
 import PickerLanguage from "./PickerLanguage";
 import { switchLanguage } from "../actions/switchLanguage";
 import { connect } from "react-redux";
 import { TYPE_LANGUAGE, ACTION_LANGUAGE } from "../constants/languages";
+import Icon from 'react-native-vector-icons/AntDesign'
 
 function BoxSwitchLanguage(props) {
   const {from, to} = props.languages;
-  
+
   return (
     <View style={styles.boxTranslate}>
       <PickerLanguage languageDefault={from} typeLanguage={TYPE_LANGUAGE.FROM}/>
-      <Button onPress={()=>props.switchLanguage(from, to, ACTION_LANGUAGE.SWITCH)}>
-        <Icon name="swap" style={styles.iconSwap} />
-      </Button>
+      <Icon name="swap"size={30} onPress={()=>props.switchLanguage(from, to, ACTION_LANGUAGE.SWITCH)}/>
       <PickerLanguage languageDefault={to} typeLanguage={TYPE_LANGUAGE.TO}/>
     </View>
   );
