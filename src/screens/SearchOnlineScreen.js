@@ -1,57 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { StyleSheet, Text } from "react-native"
-import { Content, Input, Button, View,TextInput, Textarea } from "native-base"
+import { Content, Button, View, Textarea } from "native-base"
 import BoxSwitchLanguage from "../components/BoxSwitchLanguage";
 import { searchOnl } from "../actions/searchOnl"
 import { connect } from "react-redux"
-import Icon from 'react-native-vector-icons/MaterialIcons' 
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 function SearchOnlineScreen(props) {
 
-    const { wordMeaning } = props
-    const { from, to } = props.languages;
-    const { params } = props.route;
+  let { wordMeaning } = props
+  let { from, to } = props.languages;
+  let { params } = props.route;
 
-    const [textFrom, setTextFrom] = useState(params ? params.word : "");
-    const [textTo, setTextTo] = useState(params ? params.mean : "");
-     
+  const [textFrom, setTextFrom] = useState(params ? params.word : "");
+  const [textTo, setTextTo] = useState(params ? params.mean : "");
+  const [change, setChange] = useState(false);
 
-    const translateOnline = async() => {
-        await props.searchOnl(from, to, textFrom);
-        setTextTo(wordMeaning.mean);
-    }
-    const handleClearFrom = () =>{
-        setTextFrom("")
-      }
-    return (
-        <Content padder style={styles.body}>
-            <View style={styles.inputText}>
-                    <Textarea multiline={true} placeholder="Nhập để dịch" value={textFrom} style={styles.textarea} 
-                      onChangeText={(value) => setTextFrom(value)} />
-                      <View>
-                        {textFrom !== "" &&  <Icon name="close"  size={20} style={styles.iconClose} onPress={handleClearFrom}/>}
-                        <Icon name="volume-up" size={20} color="#0077b3" style ={styles.icon}/>
-    
-                      </View>
-                      
-            </View>
-            
-               
-            <BoxSwitchLanguage />
-            <View style={styles.viewBtn}>
-                <Button style={styles.btnTranslate} onPress={translateOnline}>
-                    <Text style={styles.textBtn}>Dịch</Text>
-                </Button>
-            </View>
-           
-            <View style={styles.inputText}>
-                <Textarea multiline={true} value={textTo} style={styles.textarea}  onChangeText={(value) => setTextTo(value)} />
-                
-                <Icon name="volume-up" size={20} color="#0077b3" style ={styles.icon}/>
-            </View>
-            
-        </Content>
-    )
+  const translateOnline = async () => {
+    await props.searchOnl(from, to, textFrom);
+    setChange(true)
+  }
+  const handleClearFrom = () => {
+    setTextFrom("")
+    setTextTo("")
+  }
+  useMemo(() => {
+    change && setTextTo(wordMeaning.mean);
+    setChange(false)
+  }, [wordMeaning])
+
+  return (
+    <Content padder style={styles.body}>
+      <View style={styles.boxText}>
+        <Textarea placeholder="Nhập để dịch" value={textFrom} style={styles.textarea}
+          onChangeText={(value) => setTextFrom(value)} />
+        <View style={styles.boxMedia}>
+          {textFrom !== "" && <Icon name="close" size={25} style={styles.iconClose} onPress={handleClearFrom} />}
+          <Icon name="volume-up" size={25} color="#0077b3" style={styles.iconSound} />
+        </View>
+      </View>
+      <BoxSwitchLanguage />
+      <View style={styles.viewBtn}>
+        <Button style={styles.btnTranslate} onPress={translateOnline}>
+          <Text style={styles.textBtn}>Dịch</Text>
+        </Button>
+      </View>
+      <View style={styles.boxText}>
+        <Text multiline={true} style={styles.textarea}>{textTo}</Text>
+        <View>
+          <Icon name="volume-up" size={25} color="#0077b3" style={styles.iconSound} />
+        </View>
+      </View>
+    </Content>
+  )
 }
 const styles = StyleSheet.create({
     body: {
@@ -101,12 +102,12 @@ const styles = StyleSheet.create({
     }
 })
 const mapStateToProps = (state) => {
-    return {
-        wordMeaning: state.wordMeaning.data,
-        languages: state.languages,
-    }
+  return {
+    wordMeaning: state.wordMeaning.data,
+    languages: state.languages,
+  }
 }
 const mapDispatchToProps = (dispatch) => ({
-    searchOnl: (from, to, word) => dispatch(searchOnl(from, to, word))
+  searchOnl: (from, to, word) => dispatch(searchOnl(from, to, word))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(SearchOnlineScreen);

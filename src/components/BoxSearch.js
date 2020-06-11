@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useMemo} from "react";
 import { StyleSheet } from "react-native"
 import { Icon, Item, Input, Header} from "native-base"
 import {searchText} from "../actions/searchText"
@@ -7,17 +7,29 @@ function BoxSearch(props) {
 
   const [textSearch, onChangeText] = useState("");
   let {from, to} = props.languages;
+  const [change, setChange] = useState(false);
 
-  const goToWord = async() =>{
-    await props.searchText(from, to, textSearch);
-    if(props.wordMeaning.type === "online")
-    {
-      const {word, mean} = props.wordMeaning;
-      props.navigation.navigate('SearchOnline', {word: word, mean:mean});
-    }
-    else
-      props.navigation.navigate('Word')
+  let {wordMeaning} = props;
+
+  const goToWord = () =>{
+    props.searchText(from, to, textSearch);
+    setChange(true)
   }
+  useMemo(()=>{
+    if(change)
+    {
+      if(wordMeaning.type === "online")
+      {
+        const {word, mean} = wordMeaning;
+        props.navigation.navigate('SearchOnline', {word: word, mean:mean});
+      }
+      else
+        props.navigation.navigate('Word')
+      
+      setChange(false)
+    }
+  }, [props.wordMeaning])
+
   const handleClear = () =>{
     onChangeText("")
   }
