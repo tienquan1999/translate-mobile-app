@@ -87,8 +87,8 @@ const styles = StyleSheet.create({
         
     },
     textarea : {
-        width : 330,
-        height : 130,
+         width : "90%",
+        height : "80%",
         paddingTop : 10, fontSize : 20
     },
     iconClose:{
