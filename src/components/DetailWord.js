@@ -19,8 +19,8 @@ function DetailWord(props) {
           <Text style={styles.pronunciation}>{dataWord.pronunciation}</Text>
         </View>
         {
-          arrMean.map(e =>
-            <View key={e.id}>
+          arrMean.map((e, index)=>
+            <View key={index}>
               <Text style={styles.proper}><Icon name="chevron-right" size={15} />{e.type}</Text>
               {
                 e.values.map((type, index) =>

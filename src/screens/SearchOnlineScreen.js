@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import { StyleSheet, Text } from "react-native"
-import { Content, Input, Button, View, TextInput, Textarea } from "native-base"
+import { Content, Button, View, Textarea } from "native-base"
 import BoxSwitchLanguage from "../components/BoxSwitchLanguage";
 import { searchOnl } from "../actions/searchOnl"
 import { connect } from "react-redux"
@@ -22,21 +22,21 @@ function SearchOnlineScreen(props) {
   }
   const handleClearFrom = () => {
     setTextFrom("")
+    setTextTo("")
   }
-  useEffect(() => {
-    if (change) {
-      setTextTo(props.wordMeaning.mean);
-      setChange(false)
-    }
-  }, [props.wordMeaning])
+  useMemo(() => {
+    change && setTextTo(wordMeaning.mean);
+    setChange(false)
+  }, [wordMeaning])
+
   return (
     <Content padder style={styles.body}>
-      <View style={styles.inputText}>
-        <Textarea multiline={true} placeholder="Nhập để dịch" value={textFrom} style={styles.textarea}
+      <View style={styles.boxText}>
+        <Textarea placeholder="Nhập để dịch" value={textFrom} style={styles.textarea}
           onChangeText={(value) => setTextFrom(value)} />
-        <View>
-          {textFrom !== "" && <Icon name="close" size={20} style={styles.iconClose} onPress={handleClearFrom} />}
-          <Icon name="volume-up" size={20} color="#0077b3" style={styles.icon} />
+        <View style={styles.boxMedia}>
+          {textFrom !== "" && <Icon name="close" size={25} style={styles.iconClose} onPress={handleClearFrom} />}
+          <Icon name="volume-up" size={25} color="#0077b3" style={styles.iconSound} />
         </View>
       </View>
       <BoxSwitchLanguage />
@@ -45,9 +45,11 @@ function SearchOnlineScreen(props) {
           <Text style={styles.textBtn}>Dịch</Text>
         </Button>
       </View>
-      <View style={styles.inputText}>
-        <Textarea multiline={true} value={textTo} style={styles.textarea} onChangeText={(value) => setTextTo(value)} />
-        <Icon name="volume-up" size={20} color="#0077b3" style={styles.icon} />
+      <View style={styles.boxText}>
+        <Text multiline={true} style={styles.textarea}>{textTo}</Text>
+        <View>
+          <Icon name="volume-up" size={25} color="#0077b3" style={styles.iconSound} />
+        </View>
       </View>
     </Content>
   )
@@ -56,15 +58,20 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: '#ffffff'
   },
-  inputText: {
+  boxText: {
     flexDirection: "row",
     borderColor: "#0077b3",
     backgroundColor: "#ffffff",
     borderWidth: 2,
     borderRadius: 10,
-    height: 150,
+    height: 100,
     marginVertical: 10,
-    fontSize: 20
+    paddingVertical: 10,
+    flex: 1
+  },
+  boxMedia: {
+    flexDirection: "column",
+    justifyContent: "space-between"
   },
   btnTranslate: {
     backgroundColor: "#0077b3",
@@ -72,20 +79,18 @@ const styles = StyleSheet.create({
     width: 80,
     padding: 10,
     borderRadius: 10,
-
     justifyContent: "center"
   },
   textBtn: {
     color: "#ffffff",
     fontSize: 20
   },
-  icon: {
-    marginTop: 30,
+  iconSound: {
+    flex: 1
   },
   textarea: {
-    width: 330,
-    height: 130,
-    paddingTop: 10, fontSize: 20
+    fontSize: 20,
+    flex: 3
   },
   iconClose: {
     color: "#0077b3",

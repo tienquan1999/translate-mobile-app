@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useMemo} from "react";
 import { StyleSheet } from "react-native"
 import { Icon, Item, Input, Header} from "native-base"
 import {searchText} from "../actions/searchText"
@@ -15,20 +15,21 @@ function BoxSearch(props) {
     props.searchText(from, to, textSearch);
     setChange(true)
   }
-  useEffect(()=>{
+  useMemo(()=>{
     if(change)
     {
       if(wordMeaning.type === "online")
       {
         const {word, mean} = wordMeaning;
         props.navigation.navigate('SearchOnline', {word: word, mean:mean});
-        
       }
       else
         props.navigation.navigate('Word')
+      
       setChange(false)
     }
   }, [props.wordMeaning])
+
   const handleClear = () =>{
     onChangeText("")
   }
