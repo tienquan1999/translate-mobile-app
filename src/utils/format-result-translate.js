@@ -1,5 +1,4 @@
-
-module.exports = (result) => {
+module.exports = (result, from, to) => {
     if(Array.isArray(result._array)){
         result.data = result._array[0];
         delete result._array;
