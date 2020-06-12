@@ -8,6 +8,7 @@ const voiceData = require("../../assets/voices.json");
 
 async function textToSpeechWithApiGoogle(text, languageCode, gender){
     try{
+      console.log(text, languageCode)
       let path = "";
       let db = await connectToDatabase("translate.db");
       let query = "select * from audio where word = ?;"
@@ -34,6 +35,7 @@ async function textToSpeechWithApiGoogle(text, languageCode, gender){
         let response;
         try{
           response = await axios.post(url, body); 
+          console.log("down load audio done")
         }
         catch(e){
           console.log(e);
@@ -66,6 +68,7 @@ async function textToSpeechWithApiGoogle(text, languageCode, gender){
           });
           await soundObject.setVolumeAsync(1.0)
           await soundObject.playAsync();
+          console.log("play audio done")
           // Your sound is playing!
         } catch (error) {
           console.log("err  play soud ", error.message);
