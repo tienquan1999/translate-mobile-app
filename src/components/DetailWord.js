@@ -6,10 +6,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 
 function DetailWord(props) {
   let { wordMeaning } = props;
-  console.log(wordMeaning);
   const dataWord = wordMeaning.data;
   const arrMean = dataWord.mean;
-
+  console.log("Time start render:", Date.now() % 10000)
   return (
     <Content padder>
       <ScrollView>

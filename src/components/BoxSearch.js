@@ -12,6 +12,7 @@ function BoxSearch(props) {
   let {wordMeaning} = props;
 
   const goToWord = () =>{
+    console.log("Time start:", Date.now() % 10000);
     props.searchText(from, to, textSearch);
     setChange(true)
   }

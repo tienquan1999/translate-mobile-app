@@ -5,6 +5,7 @@ const formatResult = require("./format-result-translate");
 
 async function translateText({from, to, word}){
     try{
+        let start = Date.now();
         let db = await connectToDatabase("translate.db");
         word = word.replace(/\s\s+/g, ' ');
         let result = {};
@@ -37,6 +38,7 @@ async function translateText({from, to, word}){
             console.log("Get data from cache");
             result = JSON.parse(result._array[0].result);
         }
+        console.log(Date.now() - start);
         return result;
     }
     catch(e){
