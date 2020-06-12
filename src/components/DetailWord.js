@@ -92,7 +92,6 @@ const styles = StyleSheet.create({
   }
 })
 const mapStateToProps = (state) => {
-  console.log("state in detail word", state);
   return {
     wordMeaning: state.wordMeaning.data
   }

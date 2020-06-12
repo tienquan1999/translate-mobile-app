@@ -1,47 +1,78 @@
 import {apiKey} from "../../../key.json";
 import axios from 'axios';
 import * as FileSystem from 'expo-file-system';
-// const Sound = require('react-native-sound')
+import { Audio } from 'expo-av';
+const {connectToDatabase} = require("../database/index");
+const {querySQLite} = require("../database/query");
+const voiceData = require("../../assets/voices.json");
 
-
-async function textToSpeechWithApiGoogle(text){
+async function textToSpeechWithApiGoogle(text, languageCode, gender){
     try{
+      let path = "";
+      let db = await connectToDatabase("translate.db");
+      let query = "select * from audio where word = ?;"
+      let result = await querySQLite({db, query, params: [text]});
+      result = JSON.parse(result);
+      if(result.length == 0){
+        let voice = voiceData.voices.find((e) => {
+          return e.languageCodes[0].split("-")[0] === languageCode;
+        })
         let url = `https://texttospeech.googleapis.com/v1/text:synthesize?key=${apiKey}`;
         let body = {
           "input":{
-            "text":"Android"
+            "text": text
           },
-          "voice":{
-            "languageCode":"en-US",
-            // "name":"en-GB-Standard-A",
-            // "ssmlGender":"FEMALE"
+          "voice": {
+            "languageCode": voice.languageCodes[0],
+            "name": voice.name,
+            "ssmlGender": voice.ssmlGender
           },
           "audioConfig":{
             "audioEncoding":"MP3"
           }
         }
-        let result = await axios.post(url, body); 
+        let response;
+        try{
+          response = await axios.post(url, body); 
+        }
+        catch(e){
+          console.log(e);
+        }
         let audioDir = FileSystem.documentDirectory + "audio/";
         let folder = await FileSystem.getInfoAsync(audioDir);
         if(!folder.exists){
           await FileSystem.makeDirectoryAsync(audioDir, {intermediates: true});
         }
-        var path = audioDir + 'test.mp3';
-        await FileSystem.writeAsStringAsync(path, result.data.audioContent, {
-          encoding: FileSystem.EncodingType.Base64,
-
-        });
-        // let hello = new Sound(path, Sound.MAIN_BUNDLE, (error) => {
-        //   if (error) {
-        //     console.log(error)
-        //   }
-        // })
-
-        // hello.play((success) => {
-        //   if (!success) {
-        //     console.log('Sound did not play')
-        //   }
-        // })
+        if(response !== undefined){
+          path = audioDir + Math.random().toString(36).substring(8) + ".mp3";
+          await FileSystem.writeAsStringAsync(path, response.data.audioContent, {
+            encoding: FileSystem.EncodingType.Base64,
+          });
+          query = "insert into audio(word, path) values(?, ?);";
+          await querySQLite({
+            db,
+            query,
+            params: [text, path]
+          })
+        }
+      }else{
+        path = result._array[0].path;
+      }
+      if(path){
+        const soundObject = new Audio.Sound();
+        try {
+          await soundObject.loadAsync({
+            uri: path
+          });
+          await soundObject.setVolumeAsync(1.0)
+          await soundObject.playAsync();
+          // Your sound is playing!
+        } catch (error) {
+          console.log("err  play soud ", error.message);
+        }
+      }
+      
+        console.log("Done");
     }
     catch(e){
         console.warn(e.message)
