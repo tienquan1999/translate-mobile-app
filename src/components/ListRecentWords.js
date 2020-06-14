@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { View, StyleSheet, FlatList, Button,Text } from "react-native";
+import { View, StyleSheet, FlatList, Button, Text} from "react-native";
+
+import IconEarth from 'react-native-vector-icons/MaterialCommunityIcons'
+import IconTime from 'react-native-vector-icons/Entypo'
+
 import CardWord from "./CardWord";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons' 
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -11,14 +15,17 @@ export default function ListRecentWords(props) {
   const [recentWords, setRecentWords] = useState([
     { word: "cat", proper: "danh tu", mean: "mèo", key: "2" },
     { word: "dog", proper: "danh tu", mean: "chó", key: "3" },
-    ]
+    { word: "dog", proper: "danh tu", mean: "chó", key: "4" },
+  ]
   );
   return (
-    <View style={styles.list}>
+    <View style={styles.body}>
+      <Text style={styles.titleList}>Từ tìm kiếm gần đây</Text>
       <FlatList
+        horizontal={true}
         data={recentWords}
         renderItem={({ item }) => (
-          <CardWord item={item} nav={props.navigation}/>
+          <CardWord item={item} nav={props.navigation} />
         )}
       />
       <View style={styles.viewAround}>
@@ -47,30 +54,26 @@ export default function ListRecentWords(props) {
         await startRecording();
       }}/>  
     </View>
-
   )
 }
 const styles = StyleSheet.create({
-  list: {
-    marginBottom:100,
-     
+  body: {
+    margin: 5
   },
-  viewAround :{
-    flexDirection : "column",
-    alignItems : "center"
+  titleList: {
+    color: "#004466",
+    fontSize: 17,
+    fontWeight: "bold"
   },
-  viewBtnOnline : {
-    flexDirection : "row",
-    backgroundColor :"#0088cc",
-    height : 45,
-    width : 250,
-    alignContent :"center",
-    textAlign :"center",
-    borderRadius : 10
+  viewBtn:{
+    marginVertical:5
   },
-  text :{
-    color: "#ffffff",
-    fontSize : 15,
-    justifyContent : "center"
-  }
+  btn:{
+    backgroundColor:"#ffffff",
+    textAlign:"left"
+  },
+  btnText: {
+    fontSize: 16,
+    color:"#000000"
+  },
 })

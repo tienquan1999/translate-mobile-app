@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Image, ScrollView } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import { Text, Content } from 'native-base';
 import { connect } from "react-redux"
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -7,9 +7,8 @@ import {textToSpeechWithApiGoogle} from "../utils/google-api/text-to-speech"
 
 function DetailWord(props) {
   let { wordMeaning } = props;
-  let {from, to} = props.languages;
+  let {from} = props.languages;
 
-  console.log(wordMeaning);
   const dataWord = wordMeaning.data;
   const arrMean = dataWord.mean;
 
@@ -47,6 +46,7 @@ function DetailWord(props) {
             </View>
           )
         }
+        
       </ScrollView>
     </Content>
   )
