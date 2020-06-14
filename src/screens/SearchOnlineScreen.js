@@ -1,13 +1,13 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { StyleSheet, Text } from "react-native"
-import { Content, Button, View, Textarea } from "native-base"
+import { StyleSheet, Text, } from "react-native"
+import { Content, View, Textarea, Button } from "native-base"
 import BoxSwitchLanguage from "../components/BoxSwitchLanguage";
 import { switchLanguage } from "../actions/switchLanguage";
 import { ACTION_LANGUAGE } from "../constants/languages";
 import { searchOnl } from "../actions/searchOnl"
 import { connect } from "react-redux"
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import {textToSpeechWithApiGoogle} from "../utils/google-api/text-to-speech"
+import { textToSpeechWithApiGoogle } from "../utils/google-api/text-to-speech"
 
 function SearchOnlineScreen(props) {
 
@@ -27,9 +27,9 @@ function SearchOnlineScreen(props) {
     setTextFrom("")
     setTextTo("")
   }
-  const speechText = async(type) =>{
+  const speechText = async (type) => {
     console.log("text from: ", textFrom, "text to: ", textTo, from, to)
-    if(type === "from")
+    if (type === "from")
       await textToSpeechWithApiGoogle(textFrom, from)
     else
       await textToSpeechWithApiGoogle(textTo, to)
@@ -38,22 +38,22 @@ function SearchOnlineScreen(props) {
     change && setTextTo(wordMeaning.mean);
     setChange(false)
   }, [wordMeaning])
-  useEffect(()=>{
-    props.switchLanguage("en","vi", ACTION_LANGUAGE.CHANGE);
-  },[])
+  useEffect(() => {
+    props.switchLanguage("en", "vi", ACTION_LANGUAGE.CHANGE);
+  }, [])
   return (
     <Content padder style={styles.body}>
       <View style={styles.boxText}>
-        <Textarea placeholder="Nhập để dịch" value={textFrom} style={styles.textarea} onChangeText={(value) => setTextFrom(value)}/>
+        <Textarea placeholder="Nhập để dịch" value={textFrom} style={styles.textarea} onChangeText={(value) => setTextFrom(value)} />
         <View style={styles.boxMedia}>
           {textFrom !== "" && <Icon name="close" size={25} style={styles.iconClose} onPress={handleClearFrom} />}
-          <Icon name="volume-up" size={25} color="#0077b3" style={styles.iconSound} onPress={() => speechText("from")}/>
+          <Icon name="volume-up" size={25} color="#0077b3" style={styles.iconSound} onPress={() => speechText("from")} />
         </View>
       </View>
-      <BoxSwitchLanguage />
-      <View style={styles.viewBtn}>
-        <Button style={styles.btnTranslate} onPress={translateOnline}>
-          <Text style={styles.textBtn}>Dịch</Text>
+      <View style={styles.boxBtn}>
+        <BoxSwitchLanguage />
+        <Button style={styles.btnTranslate}>
+          <Text style={styles.textBtn}>{"Dịch"}</Text>
         </Button>
       </View>
       <View style={styles.boxText}>
@@ -85,16 +85,15 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   btnTranslate: {
-    backgroundColor: "#0077b3",
-    height: 50,
-    width: 80,
-    padding: 10,
+    backgroundColor: "#3385ff",
+    color:"#ffffff",
     borderRadius: 10,
-    justifyContent: "center"
+    paddingHorizontal: 10,
+    paddingVertical: 25,
   },
   textBtn: {
     color: "#ffffff",
-    fontSize: 20
+    fontSize: 18
   },
   iconSound: {
     flex: 1
@@ -107,9 +106,10 @@ const styles = StyleSheet.create({
     color: "#0077b3",
     marginTop: 10
   },
-  viewBtn: {
-    flexDirection: "column",
-    alignItems: "center"
+  boxBtn: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems:"center"
   }
 })
 const mapStateToProps = (state) => {
