@@ -14,6 +14,8 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HeaderSearchOnline from './src/components/HeaderSearchOnline';
+import SearchScreen from './src/screens/SearchScreen';
+import HeaderSearch from './src/components/HeaderSearch';
 
 const Stack = createStackNavigator();
 
@@ -28,6 +30,14 @@ export default function App() {
             options={{
               title: 'Welcome',
               header: ({ navigation }) => <BoxSearch navigation={navigation} />
+            }}
+          />
+          <Stack.Screen
+            name="BoxSearch"
+            component={SearchScreen}
+            options={{
+              title: 'BoxSearch',
+              header: ({ navigation }) => <HeaderSearch handleBack={() => navigation.goBack()} />
             }}
           />
           <Stack.Screen
@@ -49,7 +59,6 @@ export default function App() {
                 return <HeaderSearchOnline handleBack={() => navigation.goBack()} title="Dịch online" />
               }
             }}
-
           />
         </Stack.Navigator>
       </NavigationContainer>
