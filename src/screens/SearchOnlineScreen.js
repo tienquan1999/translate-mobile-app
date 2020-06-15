@@ -55,51 +55,51 @@ function SearchOnlineScreen(props) {
   )
 }
 const styles = StyleSheet.create({
-    body: {
-        backgroundColor: '#ffffff'
-    },
-    inputText: {
-        flexDirection: "row",
-        borderColor: "#0077b3",
-        backgroundColor: "#ffffff",
-        borderWidth: 2,
-        borderRadius: 10,
-        height: 150,
-        marginVertical: 10,
-        fontSize: 20
-    },
-    btnTranslate: {
-        backgroundColor: "#0077b3",
-        height: 50,
-        width: 80,
-        padding: 10,
-        borderRadius: 10,
-        
-        justifyContent : "center"
-    },
-    textBtn: {
-        color: "#ffffff",
-        fontSize: 20
-    },
-    icon :{
-        
-        marginTop: 30,
-         
-        
-    },
-    textarea : {
-         width : "90%",
-        height : "80%",
-        paddingTop : 10, fontSize : 20
-    },
-    iconClose:{
-        color: "#0077b3",
-        marginTop: 10
-      },
-    viewBtn :{
-        flexDirection : "column",
-        alignItems : "center"
-    }
+  body: {
+    backgroundColor: '#ffffff'
+  },
+  boxText: {
+    flexDirection: "row",
+    borderColor: "#0077b3",
+    backgroundColor: "#ffffff",
+    borderWidth: 2,
+    borderRadius: 10,
+    height: 100,
+    marginVertical: 10,
+    paddingVertical: 10,
+    flex: 1
+  },
+  boxMedia: {
+    flexDirection: "column",
+    justifyContent: "space-between"
+  },
+  btnTranslate: {
+    backgroundColor: "#0077b3",
+    height: 50,
+    width: 80,
+    padding: 10,
+    borderRadius: 10,
+    justifyContent: "center"
+  },
+  textBtn: {
+    color: "#ffffff",
+    fontSize: 20
+  },
+  iconSound: {
+    flex: 1
+  },
+  textarea: {
+    fontSize: 20,
+    flex: 3
+  },
+  iconClose: {
+    color: "#0077b3",
+    marginTop: 10
+  },
+  viewBtn: {
+    flexDirection: "column",
+    alignItems: "center"
+  }
 })
 const mapStateToProps = (state) => {
   return {
