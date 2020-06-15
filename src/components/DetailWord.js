@@ -1,21 +1,26 @@
 import React from "react";
-import { View, StyleSheet, Image, ScrollView } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import { Text, Content } from 'native-base';
 import { connect } from "react-redux"
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import {textToSpeechWithApiGoogle} from "../utils/google-api/text-to-speech"
 
 function DetailWord(props) {
   let { wordMeaning } = props;
-  console.log(wordMeaning);
+  let {from} = props.languages;
+
   const dataWord = wordMeaning.data;
   const arrMean = dataWord.mean;
 
+  const speechText = async() =>{
+    await textToSpeechWithApiGoogle(dataWord.word, from)
+  }
   return (
     <Content padder>
       <ScrollView>
         <Text style={styles.wordHeader}>{dataWord.word}</Text>
         <View style={styles.viewPronunciation}>
-          <Icon name="volume-up" size={25} color="#0077b3" />
+          <Icon name="volume-up" size={25} color="#0077b3" onPress={speechText} />
           <Text style={styles.pronunciation}>{dataWord.pronunciation}</Text>
         </View>
         {
@@ -41,6 +46,7 @@ function DetailWord(props) {
             </View>
           )
         }
+        
       </ScrollView>
     </Content>
   )
@@ -93,7 +99,8 @@ const styles = StyleSheet.create({
 })
 const mapStateToProps = (state) => {
   return {
-    wordMeaning: state.wordMeaning.data
+    wordMeaning: state.wordMeaning.data,
+    languages :state.languages
   }
 }
 const mapDispatchToProps = (dispatch) => ({
