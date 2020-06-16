@@ -15,7 +15,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HeaderSearchOnline from './src/components/HeaderSearchOnline';
 
-
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -36,8 +35,9 @@ export default function App() {
             component={DefinitionScreen}
             options={{
               title: 'Word',
-              header: ({ navigation }) => {
-                return <HeaderDefinitionWord handleBack={() => navigation.goBack()} />
+              header: ({ navigation, scene }) => {
+                const title = scene.route.params.wordMeaning.data.word;
+                return <HeaderDefinitionWord handleBack={() => navigation.goBack()} navigation={navigation} title={title} />
               }
             }}
           />

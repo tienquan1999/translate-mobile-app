@@ -5,16 +5,20 @@ import { View, StyleSheet} from "react-native"
 import { Card, CardItem, Text, Body } from "native-base"
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
-import {searchText} from "../actions/searchText"
 import {textToSpeechWithApiGoogle} from"../utils/google-api/text-to-speech";
+import { translateText } from "../utils/controller"
 
 function CardWord(props) {
   const {from, to} = props.languages;
   const {word, proper} = props.item;
   
   const handleGoToWord = async() =>{
-    await props.searchText(from, to, word)
-    props.nav.navigate('Word');
+    const mean = await translateText({
+      from: from,
+      to: to,
+      word: word
+    })
+    props.nav.navigate("Word", {wordMeaning: mean});
   }
   const speechText = async() =>{
     await textToSpeechWithApiGoogle(word, from)
@@ -68,6 +72,5 @@ const mapStateToProps = (state) => ({
   languages :state.languages
 })
 const mapDispatchToProps = (dispatch) => ({
-  searchText: (from, to, word) => dispatch(searchText(from, to, word))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(CardWord)

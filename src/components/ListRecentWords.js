@@ -10,7 +10,7 @@ import * as Permissions from 'expo-permissions';
 import * as FileSystem from "expo-file-system";
 const {apiKey} = require("../../key.json");
 const axios = require("axios");
-
+import { textToSpeechWithApiGoogle } from "../utils/google-api/text-to-speech"
 
 const recordingOptions = {
   // android not currently in use. Not getting results from speech to text with .m4a
@@ -140,7 +140,6 @@ export default function ListRecentWords(props) {
         // console.log(result);
         await textToSpeechWithApiGoogle("Javascript array search example.", "en");
       }} />
-      <Button title="box search" onPress={() => props.navigation.navigate('BoxSearch')} />
       <View style={styles.viewBtn}>
         <IconEarth.Button name="earth" color="#0088cc" backgroundColor="#ffffff" size={30}
           onPress={() => props.navigation.navigate('SearchOnline')}>
