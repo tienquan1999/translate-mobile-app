@@ -6,7 +6,7 @@ const {querySQLite} = require("./query");
 async function connectToDatabase(dbName) {
     const internalDbName = dbName; // Call whatever you want
     const sqlDir = FileSystem.documentDirectory + "SQLite/";
-    //await FileSystem.deleteAsync(sqlDir + internalDbName);
+    // await FileSystem.deleteAsync(sqlDir + internalDbName);
     let db = await FileSystem.getInfoAsync(sqlDir + internalDbName);
     if (!db.exists && (dbName === "enToVi.db" || dbName === "viToEn.db")) {
         console.log("load file ");

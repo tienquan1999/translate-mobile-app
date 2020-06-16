@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import { View, StyleSheet, FlatList, Button, Text} from "react-native";
 
 import IconEarth from 'react-native-vector-icons/MaterialCommunityIcons'
-import IconTime from 'react-native-vector-icons/Entypo'
 
 import CardWord from "./CardWord";
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons' 
 import { TouchableOpacity } from "react-native-gesture-handler";
 import {Audio} from "expo-av";
 import * as Permissions from 'expo-permissions';
@@ -148,11 +146,6 @@ export default function ListRecentWords(props) {
           onPress={() => props.navigation.navigate('SearchOnline')}>
           <Text style={styles.btnText}>Dịch Online</Text>
         </IconEarth.Button>
-      </View>
-      <View style={styles.viewBtn}>  
-        <IconTime.Button style={styles.btn} name="back-in-time" color="red" backgroundColor="#ffffff" size={30}>
-          <Text style={styles.btnText}>Từ đã tra </Text>
-        </IconTime.Button>
       </View>
       <TouchableOpacity style={styles.button} onPressIn={handleOnPressIn} onPressOut={handleOnPressOut}>
         <Text>Press on and Hold to start recording</Text>
