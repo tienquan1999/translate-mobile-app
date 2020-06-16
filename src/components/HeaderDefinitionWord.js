@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from "react-native"
-import { Header, Left, Body, Right, Button, Icon, Input } from 'native-base';
-import { connect } from "react-redux";
+import { StyleSheet, Text , ToastAndroid} from "react-native"
+import { Header, Left, Body, Right, Button, Icon } from 'native-base';
 import IconCustom from "react-native-vector-icons/FontAwesome"
-import BoxSearch from "../components/BoxSearch"
 
-function HeaderDefinitionWord(props) {
-  const { handleBack } = props;
-  const title = props.wordMeaning.data.word;
-  const [toggle, setToggle] = useState(false)
-  const showBoxSearch = () => {
-    setToggle(true)
-  }
+export default function HeaderDefinitionWord(props) {
+  const { navigation, title, handleBack} = props;
+  const [nameIconStar, setNameIconStar] = useState("star-o");
+  
+  const showToastWithGravity = () => {
+    setNameIconStar("star")
+    ToastAndroid.showWithGravity(
+      "Đã thêm vào danh sách từ vựng của bạn",
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER
+    );
+  };
   return (
     <Header style={styles.headerTab}>
       <Left>
@@ -23,12 +26,11 @@ function HeaderDefinitionWord(props) {
         <Text style={styles.title}>{title}</Text>
       </Body>
       <Right>
-        <Button transparent>
-          <Icon name='search' onPress={showBoxSearch} />
+        <Button transparent onPress={() => navigation.navigate('Home')}>
+          <Icon name='search'/>
         </Button>
-        <Button transparent>
-          <IconCustom name='star-o' color="#ffffff" backgroundColor="#ffffff" size={25} />
-          {/* <IconCustom name='star' color="#ffffff" backgroundColor="#ffffff" size={25}/> */}
+        <Button transparent onPress={showToastWithGravity}>
+          <IconCustom name={nameIconStar} color={nameIconStar === 'star' ? "#e6e600" : "#ffffff"} backgroundColor="#ffffff" size={25} />
         </Button>
       </Right>
     </Header>
@@ -49,11 +51,3 @@ const styles = StyleSheet.create({
     color: "#ffffff"
   }
 })
-const mapStateToProps = (state) => {
-  return {
-    wordMeaning: state.wordMeaning.data
-  }
-}
-const mapDispatchToProps = (dispatch) => ({
-})
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderDefinitionWord)

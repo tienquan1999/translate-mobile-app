@@ -4,9 +4,8 @@ import BoxSwitchLanguage from "../components/BoxSwitchLanguage"
 import ListRecentWords from "../components/ListRecentWords"
 
 export default function HomeScreen(props) {
-  console.log("props in home screen: ", props)
   const {navigation} = props;
-  
+  console.log("render home")
   return (
     <View>
       <BoxSwitchLanguage nav={navigation}/>
