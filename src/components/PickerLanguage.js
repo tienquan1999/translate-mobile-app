@@ -42,9 +42,10 @@ function PickerLanguage(props) {
 }
 const styles = StyleSheet.create({
   picker: {
-    width: 130,
+    width : 100,
     height: 40,
     color: "#66a3ff",
+     
   }
 })
 const mapStateToProps = (state) =>{
