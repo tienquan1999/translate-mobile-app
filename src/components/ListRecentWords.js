@@ -5,9 +5,6 @@ import IconEarth from 'react-native-vector-icons/MaterialCommunityIcons'
 import IconTime from 'react-native-vector-icons/Entypo'
 
 import CardWord from "./CardWord";
-<<<<<<< HEAD
-const { textToSpeechWithApiGoogle } = require("../utils/google-api/text-to-speech");
-=======
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons' 
 import { TouchableOpacity } from "react-native-gesture-handler";
 import {Audio} from "expo-av";
@@ -39,7 +36,6 @@ const recordingOptions = {
       linearPCMIsFloat: false,
   },
 };
->>>>>>> 05f342db3c1adf2740363db15f5cbcec8e43a086
 
 export default function ListRecentWords(props) {
   const [recentWords, setRecentWords] = useState([
@@ -137,7 +133,6 @@ export default function ListRecentWords(props) {
           <CardWord item={item} nav={props.navigation} />
         )}
       />
-<<<<<<< HEAD
       <Button title="Click me" onPress={async () => {
         // let result = await translateText({
         //   from: "vi",
@@ -159,15 +154,6 @@ export default function ListRecentWords(props) {
           <Text style={styles.btnText}>Từ đã tra </Text>
         </IconTime.Button>
       </View>
-=======
-      <View style={styles.viewAround}>
-        <Icon.Button name="earth" style={styles.viewBtnOnline} onPress={() =>  props.navigation.navigate('SearchOnline')}>
-          
-          <Text style= {styles.text}>Dịch Online</Text>
-        </Icon.Button>
-      
-      </View>
-
       <TouchableOpacity style={styles.button} onPressIn={handleOnPressIn} onPressOut={handleOnPressOut}>
         <Text>Press on and Hold to start recording</Text>
       </TouchableOpacity>
@@ -176,31 +162,12 @@ export default function ListRecentWords(props) {
         <Text>This is text from speech: {textFromSpeech}</Text>
       </View>
 
->>>>>>> 05f342db3c1adf2740363db15f5cbcec8e43a086
     </View>
   )
 }
 const styles = StyleSheet.create({
   body: {
     margin: 5
-<<<<<<< HEAD
-  },
-  titleList: {
-    color: "#004466",
-    fontSize: 17,
-    fontWeight: "bold"
-  },
-  viewBtn:{
-    marginVertical:5
-  },
-  btn:{
-    backgroundColor:"#ffffff",
-    textAlign:"left"
-  },
-  btnText: {
-    fontSize: 16,
-    color:"#000000"
-=======
   },
   titleList: {
     color: "#004466",
@@ -222,6 +189,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#DDDDDD",
     padding: 10
->>>>>>> 05f342db3c1adf2740363db15f5cbcec8e43a086
   },
 })
