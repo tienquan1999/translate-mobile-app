@@ -12,7 +12,6 @@ function CardWord(props) {
   const {from, to} = props.languages;
   const item = props.item;
   const {word, proper} = props.item;
-  console.log(item.result.pronunciation);
   const handleGoToWord = async() =>{
     // const mean = await translateText({
     //   from: from,
@@ -20,7 +19,6 @@ function CardWord(props) {
     //   word: word
     // })
     let mean = item.result;
-    console.log(mean.type);
     if(item.result.type === "offline")
       props.nav.navigate("Word", {wordMeaning: mean});
     else
