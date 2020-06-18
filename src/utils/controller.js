@@ -50,6 +50,13 @@ async function translateText({from, to, word}){
                 })
             }
         }else {
+            query = "update historyTranslate set time_update = ? where id = ?;";
+            await querySQLite({
+                db,
+                query,
+                params: [Date.now(), result._array[0].id]
+            })
+            console.log(result._array[0]);
             result = JSON.parse(result._array[0].result);
         }
         console.log(Date.now() - start);

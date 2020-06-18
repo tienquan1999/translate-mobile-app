@@ -5,7 +5,7 @@ import ListRecentWords from "../components/ListRecentWords"
 
 export default function HomeScreen(props) {
   const {navigation} = props;
-
+  console.log("Goto home screen");
   return (
     <View>
       <BoxSwitchLanguage nav={navigation}/>

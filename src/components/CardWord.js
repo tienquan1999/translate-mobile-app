@@ -20,7 +20,10 @@ function CardWord(props) {
     //   word: word
     // })
     let mean = item.result;
-    props.nav.navigate("Word", {wordMeaning: mean});
+    if(item.result.type === "offline")
+      props.nav.navigate("Word", {wordMeaning: mean});
+    else
+      props.nav.navigate("SearchOnline", {wordMeaning: mean})
   }
   const speechText = async() =>{
     await textToSpeechWithApiGoogle(word, from)
