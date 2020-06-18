@@ -1,45 +1,49 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, } from "react-native"
 import { Content, View, Textarea, Button } from "native-base"
 import BoxSwitchLanguage from "../components/BoxSwitchLanguage";
 import { switchLanguage } from "../actions/switchLanguage";
 import { ACTION_LANGUAGE } from "../constants/languages";
-import { searchOnl } from "../actions/searchOnl"
 import { connect } from "react-redux"
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { textToSpeechWithApiGoogle } from "../utils/google-api/text-to-speech"
+import { translateWithGoogleApi } from "../utils/google-api/translate-api"
 
 function SearchOnlineScreen(props) {
 
-  let { wordMeaning } = props
   let { from, to } = props.languages;
   let { params } = props.route;
 
-  const [textFrom, setTextFrom] = useState(params ? params.word : "");
-  const [textTo, setTextTo] = useState(params ? params.mean : "");
-  const [change, setChange] = useState(false);
+  const [textFrom, setTextFrom] = useState(params ? params.wordMeaning.word : "");
+  const [textTo, setTextTo] = useState(params ? params.wordMeaning.mean : "");
 
   const translateOnline = async () => {
-    await props.searchOnl(from, to, textFrom);
-    setChange(true)
+    const result = await translateWithGoogleApi({
+      from: from,
+      to: to,
+      word: textFrom
+    })
+    setTextTo(result.mean)
   }
   const handleClearFrom = () => {
     setTextFrom("")
     setTextTo("")
   }
   const speechText = async (type) => {
-    console.log("text from: ", textFrom, "text to: ", textTo, from, to)
     if (type === "from")
       await textToSpeechWithApiGoogle(textFrom, from)
     else
       await textToSpeechWithApiGoogle(textTo, to)
   }
-  useMemo(() => {
-    change && setTextTo(wordMeaning.mean);
-    setChange(false)
-  }, [wordMeaning])
+  
   useEffect(() => {
-    props.switchLanguage("en", "vi", ACTION_LANGUAGE.CHANGE);
+    if(params)
+    {
+      const {from, to} = params.wordMeaning;
+      props.switchLanguage(from, to, ACTION_LANGUAGE.CHANGE)
+    }
+    else
+      props.switchLanguage("en", "vi", ACTION_LANGUAGE.CHANGE);
   }, [])
   return (
     <Content padder style={styles.body}>
@@ -52,7 +56,7 @@ function SearchOnlineScreen(props) {
       </View>
       <View style={styles.boxBtn}>
         <BoxSwitchLanguage />
-        <Button style={styles.btnTranslate}>
+        <Button style={styles.btnTranslate} onPress={translateOnline}>
           <Text style={styles.textBtn}>{"Dịch"}</Text>
         </Button>
       </View>
@@ -114,12 +118,10 @@ const styles = StyleSheet.create({
 })
 const mapStateToProps = (state) => {
   return {
-    wordMeaning: state.wordMeaning.data,
     languages: state.languages,
   }
 }
 const mapDispatchToProps = (dispatch) => ({
-  searchOnl: (from, to, word) => dispatch(searchOnl(from, to, word)),
   switchLanguage: (from, to, action) => dispatch(switchLanguage(from, to, action))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(SearchOnlineScreen);

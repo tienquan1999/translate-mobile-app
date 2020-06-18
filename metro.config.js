@@ -3,3 +3,4 @@ module.exports = {
       assetExts: ["db", "ttf", "png", "jpg"]
     }
   }
+

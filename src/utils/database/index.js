@@ -6,7 +6,7 @@ const {querySQLite} = require("./query");
 async function connectToDatabase(dbName) {
     const internalDbName = dbName; // Call whatever you want
     const sqlDir = FileSystem.documentDirectory + "SQLite/";
-    //await FileSystem.deleteAsync(sqlDir + internalDbName);
+    // await FileSystem.deleteAsync(sqlDir + internalDbName, {idempotent: true});
     let db = await FileSystem.getInfoAsync(sqlDir + internalDbName);
     if (!db.exists && (dbName === "enToVi.db" || dbName === "viToEn.db")) {
         console.log("load file ");
@@ -15,11 +15,10 @@ async function connectToDatabase(dbName) {
         const asset = Asset.fromModule(module);
         await FileSystem.downloadAsync(asset.uri, sqlDir + internalDbName);
     }else if(!db.exists){
-        console.log("init");
         let db = await SQLite.openDatabase(internalDbName);
         let query = "create table if not exists audio (id integer primary key AUTOINCREMENT, word text, path text);"
         await createTable({db, query})
-        query = "create table if not exists historyTranslate (id integer primary key AUTOINCREMENT, word text, fromLanguage text, toLanguage text, result text);"
+        query = "create table if not exists historyTranslate (id integer primary key AUTOINCREMENT, word text, fromLanguage text, toLanguage text, result text, time_update text);"
         await createTable({db, query});
         query = "create index audioIndex on audio(word); create index historyIndex on historyTranslate(word);"
         await querySQLite({

@@ -35,8 +35,9 @@ export default function App() {
             component={DefinitionScreen}
             options={{
               title: 'Word',
-              header: ({ navigation }) => {
-                return <HeaderDefinitionWord handleBack={() => navigation.goBack()} />
+              header: ({ navigation, scene }) => {
+                const title = scene.route.params.wordMeaning.data.word;
+                return <HeaderDefinitionWord handleBack={() => navigation.goBack()} navigation={navigation} title={title} />
               }
             }}
           />
@@ -49,7 +50,6 @@ export default function App() {
                 return <HeaderSearchOnline handleBack={() => navigation.goBack()} title="Dịch online" />
               }
             }}
-
           />
         </Stack.Navigator>
       </NavigationContainer>

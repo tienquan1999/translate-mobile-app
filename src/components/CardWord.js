@@ -5,16 +5,21 @@ import { View, StyleSheet} from "react-native"
 import { Card, CardItem, Text, Body } from "native-base"
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
-import {searchText} from "../actions/searchText"
 import {textToSpeechWithApiGoogle} from"../utils/google-api/text-to-speech";
+import { translateText } from "../utils/controller"
 
 function CardWord(props) {
   const {from, to} = props.languages;
+  const item = props.item;
   const {word, proper} = props.item;
-  
   const handleGoToWord = async() =>{
-    await props.searchText(from, to, word)
-    props.nav.navigate('Word');
+    // const mean = await translateText({
+    //   from: from,
+    //   to: to,
+    //   word: word
+    // })
+    let mean = item.result;
+    props.nav.navigate("Word", {wordMeaning: mean});
   }
   const speechText = async() =>{
     await textToSpeechWithApiGoogle(word, from)
@@ -23,11 +28,16 @@ function CardWord(props) {
     <Card style={styles.card}>
       <CardItem style={styles.cardItem} button onPress={handleGoToWord}>
         <Body>
-          <Text style={styles.word}>{word}</Text>
+          {/* Todo
+              check xem console.log(item.result.type) là online hay offline.
+              Nếu là online thì nội dung của cả ô đấy là text + cái biểu tượng phát âm thôi
+              Còn nếu là offline thì nội dung của cả ô đấy giống như cái đã có. nhưng thay vì hiển thị loại từ thì sẽ hiển thị phiên âm của từ đó
+          */}
+          {/* <Text style={styles.word}>{item.word}</Text>
           <View style={styles.bottomCard}>
-            <Text style={styles.proper}>{proper}</Text>
+            <Text style={styles.proper}>{item.result.pronunciation}</Text>
             <Icon name="volume-up" size={25} color="#0077b3" onPress={speechText}/>
-          </View>
+          </View> */}
         </Body>
       </CardItem>
     </Card>);
@@ -68,6 +78,5 @@ const mapStateToProps = (state) => ({
   languages :state.languages
 })
 const mapDispatchToProps = (dispatch) => ({
-  searchText: (from, to, word) => dispatch(searchText(from, to, word))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(CardWord)
