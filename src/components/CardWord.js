@@ -12,7 +12,7 @@ function CardWord(props) {
   const {from, to} = props.languages;
   const item = props.item;
   const {word, proper} = props.item;
-  console.log(item.result.pronunciation);
+  
   const handleGoToWord = async() =>{
     // const mean = await translateText({
     //   from: from,
@@ -39,14 +39,18 @@ function CardWord(props) {
             <View>
               <Text style={styles.word}>{item.word}</Text>
               <View style={styles.bottomCard}>
-                <Text style={styles.proper}>{item.result.pronunciation}</Text>
-                <Icon name="volume-up" size={25} color="#0077b3" onPress={speechText}/>
+                <Text style={styles.proper}>{item.result.data.pronunciation}</Text>
+                  <Icon name="volume-up" size={25} color="#0077b3" onPress={speechText}/>
+                 
               </View>
             </View>
              :  
-             <View style={styles.onlineCard}>
+             <View >
                 <Text style={styles.word}>{item.word}</Text>
-                <Icon name="volume-up" size={25} color="#0077b3" onPress={speechText}/>
+                <View style={styles.bottomCard}>
+                  <Icon name="volume-up" size={25} color="#0077b3" onPress={speechText}/>
+                </View>
+                
              </View> 
           }
           
@@ -60,7 +64,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     elevation: 3,
     backgroundColor: "#ffffff",
-    width: 160,
+    width: 180,
     marginRight:15
   },
   cardItem: {
@@ -75,7 +79,7 @@ const styles = StyleSheet.create({
     height: 50,
     fontWeight: "bold",
     color:"#004466"
-  },
+  },  
   bottomCard:{
     flexDirection:"row",
     justifyContent:"space-between",
@@ -85,15 +89,10 @@ const styles = StyleSheet.create({
   proper: {
     color: "#007acc",
     fontWeight: "bold",
+    height : 20,
+    width : 100
   },
-  onlineCard: {
-    flexDirection:"row",
-    justifyContent:"space-between",
-    width: 120,
-    marginVertical:0,
-    height : 76,
-    paddingTop : 18
-  }
+   
 })
 
 const mapStateToProps = (state) => ({
