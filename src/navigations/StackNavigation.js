@@ -14,10 +14,10 @@ const Stack = createStackNavigator();
 function StackNavigation() {
   return (
     <Stack.Navigator>
-      <Stack.Screen
+      {/* <Stack.Screen
         name="Tabs"
         component={BottomNavigation}
-      />
+      /> */}
 
       <Stack.Screen
         name="Home"

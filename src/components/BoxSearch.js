@@ -47,10 +47,10 @@ function BoxSearch(props) {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <View style={styles.modalHeader}>
+            <View>
               <IconClose name="close" size={25} color="red" onPress={hideModal} />
             </View>
-            <View style={styles.modalBody}>
+            <View>
               <Text>hello</Text>
             </View>
           </View>
@@ -97,8 +97,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    flex:1,
-    flexDirection:"column"
+    
   },
   modalHeader: {
     flex: 1,

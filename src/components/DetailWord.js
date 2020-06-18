@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import { Text, Content } from 'native-base';
 import { connect } from "react-redux"
@@ -17,6 +17,7 @@ function DetailWord(props) {
   const speechText = async() =>{
     await textToSpeechWithApiGoogle(dataWord.word, from)
   }
+  
   return (
     <Content padder>
       <ScrollView>

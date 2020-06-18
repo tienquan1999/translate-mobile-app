@@ -22,27 +22,45 @@ async function translateText({from, to, word}){
             } else if(from === "vi" && to === "en" && word.split(" ").length <= 2){
                 result = await translateViToEn(word);
             }else{
+                console.log("Online search");
                 result.length = 0;
             }
             if(result.length === 0){
                 result = await translateWithGoogleApi({from, to, word});
             }
             result = formatResult(result);
-            query = "insert into historyTranslate(word, fromLanguage, toLanguage, result) values(?, ?, ?, ?);";
+            query = "insert into historyTranslate(word, fromLanguage, toLanguage, result, time_update) values(?, ?, ?, ?, ?);";
             await querySQLite({
                 db,
                 query,
-                params: [word, from, to, JSON.stringify(result)]
+                params: [word, from, to, JSON.stringify(result), Date.now()]
             })
+            query = "select count(*) as countWord from historyTranslate;"
+            let countData = await querySQLite({
+                db,
+                query,
+                params: []
+            })
+            if(JSON.parse(countData)._array[0].countWord >= 50){
+                query = "DELETE FROM historyTranslate where id in (select id from historyTranslate ORDER BY time_update ASC limit 25);";
+                await querySQLite({
+                    db,
+                    query,
+                    params: []
+                })
+            }
         }else {
-            console.log("Get data from cache");
             result = JSON.parse(result._array[0].result);
         }
         console.log(Date.now() - start);
         return result;
     }
     catch(e){
-        throw e;
+        console.log(e);
+        return {
+            success: false,
+            message: e.message
+        }
     }
 }
 async function translateEnToVi(word){    
@@ -54,7 +72,11 @@ async function translateEnToVi(word){
         return result;
     }
     catch(e){
-        throw e;
+        console.log(e);
+        return {
+            success: false,
+            message: e.message
+        }
     }
 }
 
@@ -67,11 +89,41 @@ async function translateViToEn(word){
         return result;
     }
     catch(e){
-        throw e;
+        console.log(e);
+        return {
+            success: false,
+            message: e.message
+        }
     }
 }
 
+async function getHistoryTranslate(){
+    try{
+        let db = await connectToDatabase("translate.db");
+        let query = "select * from historyTranslate order by time_update DESC limit 5;"
+        let result = await querySQLite({
+            db,
+            query,
+            params: []
+        })
+        result = JSON.parse(result)._array;
+        result = result.map(e => {
+            e.result = JSON.parse(e.result);
+            e.result.id = parseInt(e.result.id);
+            return e;
+        })
+        return result;
+    }
+    catch(e){
+        console.log(e);
+        return {
+            success: false,
+            message: e.message
+        }
+    }
+}
 
 export {
-    translateText
+    translateText,
+    getHistoryTranslate
 };

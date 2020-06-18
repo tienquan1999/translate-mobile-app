@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet, FlatList, Button, Text} from "react-native";
 
 import IconEarth from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -11,6 +11,7 @@ import * as FileSystem from "expo-file-system";
 const {apiKey} = require("../../key.json");
 const axios = require("axios");
 import { textToSpeechWithApiGoogle } from "../utils/google-api/text-to-speech"
+import {getHistoryTranslate} from "../utils/controller"
 
 const recordingOptions = {
   // android not currently in use. Not getting results from speech to text with .m4a
@@ -36,17 +37,24 @@ const recordingOptions = {
 };
 
 export default function ListRecentWords(props) {
+  console.log("props in list: ", props)
   const [recentWords, setRecentWords] = useState([
-    { word: "cat", proper: "danh tu", mean: "mèo", key: "2" },
-    { word: "dog", proper: "danh tu", mean: "chó", key: "3" },
-    { word: "dog", proper: "danh tu", mean: "chó", key: "4" },
+    // { word: "cat", proper: "danh tu", mean: "mèo", id: "2" },
+    // { word: "dog", proper: "danh tu", mean: "chó", id: "3" },
+    // { word: "dog", proper: "danh tu", mean: "chó", id: "4" },
   ]
   );
   const [textFromSpeech, updateTextFromSpeech] = useState("");
   const [recording, updateRecording] = useState(null);
   const [isRecording, updateIsRecording] = useState(false);
   const [isFetching, updateIsFetching] = useState(false);
-
+  useEffect(() => {
+    async function getRecentWords(){
+      let words = await getHistoryTranslate();
+      setRecentWords(words);
+    }
+    getRecentWords();
+  }, [])
   async function startRecording(){
     console.log("Start recording");
     const { status } = await Permissions.askAsync(Permissions.AUDIO_RECORDING);
@@ -103,7 +111,7 @@ export default function ListRecentWords(props) {
         }
         let response = await axios.post(url, body);
         console.log(response.data.results);
-        updateTextFromSpeech(response.data.results[0].alternatives[0].transcript)
+        updateTextFromSpeech(response.data.results[0].alternatives[0].transcript || "Something when wrong.")
     } catch(error) {
         console.log('There was an error reading file', error);
         // this.stopRecording();
@@ -113,12 +121,12 @@ export default function ListRecentWords(props) {
 }
 
   async function handleOnPressIn(){
-    await startRecording();
+    //await startRecording();
   }
 
   async function handleOnPressOut(){
-    await stopRecording();
-    await getTranscription();
+    //await stopRecording();
+    //await getTranscription();
   }
 
   return (
@@ -128,17 +136,13 @@ export default function ListRecentWords(props) {
         horizontal={true}
         data={recentWords}
         renderItem={({ item }) => (
-          <CardWord item={item} nav={props.navigation} />
+          <CardWord item={item} nav={props.navigation} key/>
         )}
+        keyExtractor={(item, index) => index.toString()}
       />
       <Button title="Click me" onPress={async () => {
-        // let result = await translateText({
-        //   from: "vi",
-        //   to: "en",
-        //   word: "Minh ten la Quan"
-        // });
-        // console.log(result);
-        await textToSpeechWithApiGoogle("Javascript array search example.", "en");
+        console.log("Click me");
+        await getHistoryTranslate();
       }} />
       <View style={styles.viewBtn}>
         <IconEarth.Button name="earth" color="#0088cc" backgroundColor="#ffffff" size={30}
