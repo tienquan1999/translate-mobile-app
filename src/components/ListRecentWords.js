@@ -10,6 +10,7 @@ import * as Permissions from 'expo-permissions';
 import * as FileSystem from "expo-file-system";
 const {apiKey} = require("../../key.json");
 const axios = require("axios");
+import { textToSpeechWithApiGoogle } from "../utils/google-api/text-to-speech"
 import {getHistoryTranslate} from "../utils/controller"
 
 const recordingOptions = {
@@ -36,6 +37,7 @@ const recordingOptions = {
 };
 
 export default function ListRecentWords(props) {
+  console.log("props in list: ", props)
   const [recentWords, setRecentWords] = useState([
     // { word: "cat", proper: "danh tu", mean: "mèo", id: "2" },
     // { word: "dog", proper: "danh tu", mean: "chó", id: "3" },

@@ -1,10 +1,20 @@
-import React from 'react';
-import { StyleSheet, Text } from "react-native"
-import { Header, Left, Body, Right, Button, Icon, Input } from 'native-base';
+import React, { useState } from 'react';
+import { StyleSheet, Text , ToastAndroid} from "react-native"
+import { Header, Left, Body, Right, Button, Icon } from 'native-base';
 import IconCustom from "react-native-vector-icons/FontAwesome"
 
 export default function HeaderDefinitionWord(props) {
   const { navigation, title, handleBack} = props;
+  const [nameIconStar, setNameIconStar] = useState("star-o");
+  
+  const showToastWithGravity = () => {
+    setNameIconStar("star")
+    ToastAndroid.showWithGravity(
+      "Đã thêm vào danh sách từ vựng của bạn",
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER
+    );
+  };
   return (
     <Header style={styles.headerTab}>
       <Left>
@@ -19,9 +29,8 @@ export default function HeaderDefinitionWord(props) {
         <Button transparent onPress={() => navigation.navigate('Home')}>
           <Icon name='search'/>
         </Button>
-        <Button transparent>
-          <IconCustom name='star-o' color="#ffffff" backgroundColor="#ffffff" size={25} />
-          {/* <IconCustom name='star' color="#ffffff" backgroundColor="#ffffff" size={25}/> */}
+        <Button transparent onPress={showToastWithGravity}>
+          <IconCustom name={nameIconStar} color={nameIconStar === 'star' ? "#e6e600" : "#ffffff"} backgroundColor="#ffffff" size={25} />
         </Button>
       </Right>
     </Header>

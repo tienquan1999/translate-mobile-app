@@ -9,7 +9,7 @@ export default function HomeScreen(props) {
   return (
     <View>
       <BoxSwitchLanguage nav={navigation}/>
-      <ListRecentWords navigation={navigation} />
+      <ListRecentWords navigation={navigation}/>
     </View>
   );
 }
