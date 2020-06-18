@@ -6,14 +6,13 @@ const {querySQLite} = require("./query");
 async function connectToDatabase(dbName) {
     const internalDbName = dbName; // Call whatever you want
     const sqlDir = FileSystem.documentDirectory + "SQLite/";
-    // await FileSystem.deleteAsync(sqlDir + internalDbName);
+    // await FileSystem.deleteAsync(sqlDir + internalDbName, {idempotent: true});
     let db = await FileSystem.getInfoAsync(sqlDir + internalDbName);
     if (!db.exists && (dbName === "enToVi.db" || dbName === "viToEn.db")) {
         console.log("load file ");
         await FileSystem.makeDirectoryAsync(sqlDir, {intermediates: true});
         let module = dbName === "enToVi.db" ? require("../../assets/databases/enToVi.db") : require("../../assets/databases/viToEn.db");
         const asset = Asset.fromModule(module);
-        console.log(asset);
         await FileSystem.downloadAsync(asset.uri, sqlDir + internalDbName);
     }else if(!db.exists){
         let db = await SQLite.openDatabase(internalDbName);

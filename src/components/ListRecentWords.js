@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet, FlatList, Button, Text} from "react-native";
 
 import IconEarth from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -10,7 +10,6 @@ import * as Permissions from 'expo-permissions';
 import * as FileSystem from "expo-file-system";
 const {apiKey} = require("../../key.json");
 const axios = require("axios");
-import { textToSpeechWithApiGoogle } from "../utils/google-api/text-to-speech";
 import {getHistoryTranslate} from "../utils/controller"
 
 const recordingOptions = {
@@ -38,16 +37,22 @@ const recordingOptions = {
 
 export default function ListRecentWords(props) {
   const [recentWords, setRecentWords] = useState([
-    { word: "cat", proper: "danh tu", mean: "mèo", key: "2" },
-    { word: "dog", proper: "danh tu", mean: "chó", key: "3" },
-    { word: "dog", proper: "danh tu", mean: "chó", key: "4" },
+    // { word: "cat", proper: "danh tu", mean: "mèo", id: "2" },
+    // { word: "dog", proper: "danh tu", mean: "chó", id: "3" },
+    // { word: "dog", proper: "danh tu", mean: "chó", id: "4" },
   ]
   );
   const [textFromSpeech, updateTextFromSpeech] = useState("");
   const [recording, updateRecording] = useState(null);
   const [isRecording, updateIsRecording] = useState(false);
   const [isFetching, updateIsFetching] = useState(false);
-
+  useEffect(() => {
+    async function getRecentWords(){
+      let words = await getHistoryTranslate();
+      setRecentWords(words);
+    }
+    getRecentWords();
+  }, [])
   async function startRecording(){
     console.log("Start recording");
     const { status } = await Permissions.askAsync(Permissions.AUDIO_RECORDING);
@@ -114,12 +119,12 @@ export default function ListRecentWords(props) {
 }
 
   async function handleOnPressIn(){
-    await startRecording();
+    //await startRecording();
   }
 
   async function handleOnPressOut(){
-    await stopRecording();
-    await getTranscription();
+    //await stopRecording();
+    //await getTranscription();
   }
 
   return (
@@ -129,8 +134,9 @@ export default function ListRecentWords(props) {
         horizontal={true}
         data={recentWords}
         renderItem={({ item }) => (
-          <CardWord item={item} nav={props.navigation} />
+          <CardWord item={item} nav={props.navigation} key/>
         )}
+        keyExtractor={(item, index) => index.toString()}
       />
       <Button title="Click me" onPress={async () => {
         console.log("Click me");

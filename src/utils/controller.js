@@ -41,7 +41,6 @@ async function translateText({from, to, word}){
                 query,
                 params: []
             })
-            console.log(JSON.parse(countData));
             if(JSON.parse(countData)._array[0].countWord >= 50){
                 query = "DELETE FROM historyTranslate where id in (select id from historyTranslate ORDER BY time_update ASC limit 25);";
                 await querySQLite({
@@ -58,6 +57,10 @@ async function translateText({from, to, word}){
     }
     catch(e){
         console.log(e);
+        return {
+            success: false,
+            message: e.message
+        }
     }
 }
 async function translateEnToVi(word){    
@@ -69,7 +72,11 @@ async function translateEnToVi(word){
         return result;
     }
     catch(e){
-        throw e;
+        console.log(e);
+        return {
+            success: false,
+            message: e.message
+        }
     }
 }
 
@@ -82,7 +89,11 @@ async function translateViToEn(word){
         return result;
     }
     catch(e){
-        throw e;
+        console.log(e);
+        return {
+            success: false,
+            message: e.message
+        }
     }
 }
 
@@ -94,14 +105,23 @@ async function getHistoryTranslate(){
             db,
             query,
             params: []
-        }) 
-        console.log(JSON.parse(result));
+        })
+        result = JSON.parse(result)._array;
+        result = result.map(e => {
+            e.result = JSON.parse(e.result);
+            e.result.id = parseInt(e.result.id);
+            return e;
+        })
+        return result;
     }
     catch(e){
         console.log(e);
+        return {
+            success: false,
+            message: e.message
+        }
     }
 }
-
 
 export {
     translateText,
