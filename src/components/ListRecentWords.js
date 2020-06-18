@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { View, StyleSheet, FlatList, Button, Text} from "react-native";
 
-import IconEarth from 'react-native-vector-icons/MaterialCommunityIcons'
-import IconTime from 'react-native-vector-icons/Entypo'
-
 import CardWord from "./CardWord";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons' 
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -105,7 +102,7 @@ export default function ListRecentWords(props) {
         }
         let response = await axios.post(url, body);
         console.log(response.data.results);
-        updateTextFromSpeech(response.data.results[0].alternatives[0].transcript)
+        updateTextFromSpeech(response.data.results[0].alternatives[0].transcript || "Something when wrong.")
     } catch(error) {
         console.log('There was an error reading file', error);
         // this.stopRecording();

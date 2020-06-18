@@ -13,6 +13,7 @@ async function connectToDatabase(dbName) {
         await FileSystem.makeDirectoryAsync(sqlDir, {intermediates: true});
         let module = dbName === "enToVi.db" ? require("../../assets/databases/enToVi.db") : require("../../assets/databases/viToEn.db");
         const asset = Asset.fromModule(module);
+        console.log(asset);
         await FileSystem.downloadAsync(asset.uri, sqlDir + internalDbName);
     }else if(!db.exists){
         console.log("init");

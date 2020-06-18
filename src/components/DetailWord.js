@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import { Text, Content } from 'native-base';
 import { connect } from "react-redux"
@@ -15,6 +15,13 @@ function DetailWord(props) {
   const speechText = async() =>{
     await textToSpeechWithApiGoogle(dataWord.word, from)
   }
+  const [word, setWord] = useState(dataWord.word);
+  console.log("Time end: ", Date.now())
+  useEffect(() => {
+    setWord("QuanHT");
+    console.log("Time: ", Date.now());
+  })
+
   return (
     <Content padder>
       <ScrollView>
