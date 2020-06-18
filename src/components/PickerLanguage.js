@@ -45,7 +45,7 @@ function PickerLanguage(props) {
 }
 const styles = StyleSheet.create({
   picker: {
-   width :  '120%',
+   width :  120,
   
     height: 40,
     color: "#66a3ff",
