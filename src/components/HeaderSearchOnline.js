@@ -1,9 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text } from "react-native"
 import { Header, Left, Body, Button, Icon, Right } from 'native-base';
-import { connect } from "react-redux";
 
-function HeaderSearchOnline(props) {
+export default function HeaderSearchOnline(props) {
   const { handleBack, title } = props;
   return (
     <Header style={styles.headerTab}>
@@ -29,11 +28,3 @@ const styles = StyleSheet.create({
     color: "#ffffff"
   }
 })
-const mapStateToProps = (state) => {
-  return {
-
-  }
-}
-const mapDispatchToProps = (dispatch) => ({
-})
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderSearchOnline)

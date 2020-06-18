@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { View, StyleSheet, FlatList, Button, Text} from "react-native";
 
+import IconEarth from 'react-native-vector-icons/MaterialCommunityIcons'
+
 import CardWord from "./CardWord";
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons' 
 import { TouchableOpacity } from "react-native-gesture-handler";
 import {Audio} from "expo-av";
 import * as Permissions from 'expo-permissions';
 import * as FileSystem from "expo-file-system";
 const {apiKey} = require("../../key.json");
 const axios = require("axios");
-
+import { textToSpeechWithApiGoogle } from "../utils/google-api/text-to-speech";
+import {getHistoryTranslate} from "../utils/controller"
 
 const recordingOptions = {
   // android not currently in use. Not getting results from speech to text with .m4a
@@ -130,14 +132,16 @@ export default function ListRecentWords(props) {
           <CardWord item={item} nav={props.navigation} />
         )}
       />
-      <View style={styles.viewAround}>
-        <Icon.Button name="earth" style={styles.viewBtnOnline} onPress={() =>  props.navigation.navigate('SearchOnline')}>
-          
-          <Text style= {styles.text}>Dịch Online</Text>
-        </Icon.Button>
-      
+      <Button title="Click me" onPress={async () => {
+        console.log("Click me");
+        await getHistoryTranslate();
+      }} />
+      <View style={styles.viewBtn}>
+        <IconEarth.Button name="earth" color="#0088cc" backgroundColor="#ffffff" size={30}
+          onPress={() => props.navigation.navigate('SearchOnline')}>
+          <Text style={styles.btnText}>Dịch Online</Text>
+        </IconEarth.Button>
       </View>
-
       <TouchableOpacity style={styles.button} onPressIn={handleOnPressIn} onPressOut={handleOnPressOut}>
         <Text>Press on and Hold to start recording</Text>
       </TouchableOpacity>

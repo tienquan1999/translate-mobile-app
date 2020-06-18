@@ -6,7 +6,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import {textToSpeechWithApiGoogle} from "../utils/google-api/text-to-speech"
 
 function DetailWord(props) {
-  let { wordMeaning } = props;
+  let {route} = props;
+  let {wordMeaning} = route.params;
+
   let {from} = props.languages;
 
   const dataWord = wordMeaning.data;
@@ -15,13 +17,7 @@ function DetailWord(props) {
   const speechText = async() =>{
     await textToSpeechWithApiGoogle(dataWord.word, from)
   }
-  const [word, setWord] = useState(dataWord.word);
-  console.log("Time end: ", Date.now())
-  useEffect(() => {
-    setWord("QuanHT");
-    console.log("Time: ", Date.now());
-  })
-
+  
   return (
     <Content padder>
       <ScrollView>
@@ -106,7 +102,6 @@ const styles = StyleSheet.create({
 })
 const mapStateToProps = (state) => {
   return {
-    wordMeaning: state.wordMeaning.data,
     languages :state.languages
   }
 }
