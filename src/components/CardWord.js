@@ -13,12 +13,16 @@ function CardWord(props) {
   const item = props.item;
   // const {word, proper} = props.item;
   const handleGoToWord = async() =>{
-    const mean = await translateText({
-      from: from,
-      to: to,
-      word: word
-    })
-    props.nav.navigate("Word", {wordMeaning: mean});
+    // const mean = await translateText({
+    //   from: from,
+    //   to: to,
+    //   word: word
+    // })
+    let mean = item.result;
+    if(item.result.type === "offline")
+      props.nav.navigate("Word", {wordMeaning: mean});
+    else
+      props.nav.navigate("SearchOnline", {wordMeaning: mean})
   }
   const speechText = async() =>{
     await textToSpeechWithApiGoogle(word, from)
@@ -32,11 +36,23 @@ function CardWord(props) {
               Nếu là online thì nội dung của cả ô đấy là text + cái biểu tượng phát âm thôi
               Còn nếu là offline thì nội dung của cả ô đấy giống như cái đã có. nhưng thay vì hiển thị loại từ thì sẽ hiển thị phiên âm của từ đó
           */}
-          <Text style={styles.word}>{item.word}</Text>
-          <View style={styles.bottomCard}>
-            <Text style={styles.proper}>{item.result.pronunciation}</Text>
-            <Icon name="volume-up" size={25} color="#0077b3" onPress={speechText}/>
-          </View>
+          {
+            item.result.type ==='offline' ? 
+            <View>
+              <Text style={styles.word}>{item.word}</Text>
+              <View style={styles.bottomCard}>
+                <Text style={styles.proper}>{item.result.pronunciation}</Text>
+                <Icon name="volume-up" size={25} color="#0077b3" onPress={speechText}/>
+              </View>
+            </View>
+             :  
+             <View style={styles.onlineCard}>
+                <Text style={styles.word}>{item.word}</Text>
+                <Icon name="volume-up" size={25} color="#0077b3" onPress={speechText}/>
+             </View> 
+          }
+          
+         
         </Body>
       </CardItem>
     </Card>);
@@ -55,6 +71,7 @@ const styles = StyleSheet.create({
     borderColor:"#007acc",
     borderWidth:1
   },
+   
   word: {
     fontSize: 25,
     height: 50,
@@ -70,6 +87,14 @@ const styles = StyleSheet.create({
   proper: {
     color: "#007acc",
     fontWeight: "bold",
+  },
+  onlineCard: {
+    flexDirection:"row",
+    justifyContent:"space-between",
+    width: 120,
+    marginVertical:0,
+    height : 76,
+    paddingTop : 18
   }
 })
 

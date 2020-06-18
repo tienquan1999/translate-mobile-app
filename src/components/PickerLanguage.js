@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react"
 import { StyleSheet } from "react-native"
-import { Picker, View } from "native-base"
+import { Picker, View  } from "native-base"
 import { LANGUAGE, TYPE_LANGUAGE, ACTION_LANGUAGE } from "../constants/languages"
 import { connect } from "react-redux";
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons' 
 import {switchLanguage} from "../actions/switchLanguage"
 
 function PickerLanguage(props) {
@@ -35,14 +36,17 @@ function PickerLanguage(props) {
             return <Picker.Item label={e.label} value={e.value} key={index}  />
           })
         }
+        
 
       </Picker>
+      
     </View>
   );
 }
 const styles = StyleSheet.create({
   picker: {
    width :  120,
+  
     height: 40,
     color: "#66a3ff",
     
