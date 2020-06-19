@@ -5,7 +5,10 @@ import SearchOnlineScreen from "../screens/SearchOnlineScreen";
 import HomeScreen from '../screens/HomeScreen';
 import 'react-native-gesture-handler';
 import StackNavigation from "../navigations/StackNavigation"
+<<<<<<< HEAD
 import { createStackNavigator } from '@react-navigation/stack';
+=======
+>>>>>>> 2d01438547081c2be4f75ebafc34c860d59572f9
 
 const Tab = createBottomTabNavigator();
 
@@ -15,10 +18,11 @@ function BottomNavigation() {
       tabBarOptions={{
         activeTintColor: '#0077b3',
       }}
+      options={{headerShown: false}}
     >
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={StackNavigation}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (

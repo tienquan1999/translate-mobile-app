@@ -86,6 +86,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
+<<<<<<< HEAD
         <Stack.Navigator>
           <Stack.Screen name="Tabs" component={TabsNavigation} options={{ headerShown: false }} />
           <Stack.Screen
@@ -113,6 +114,10 @@ export default function App() {
             }}
           />
         </Stack.Navigator>
+=======
+        <BottomNavigation />
+       
+>>>>>>> 2d01438547081c2be4f75ebafc34c860d59572f9
       </NavigationContainer>
     </Provider>
   )
