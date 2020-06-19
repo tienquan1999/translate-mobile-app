@@ -148,7 +148,7 @@ async function handleOnPressOut(){
     <Header searchBar rounded style={styles.header}>
       <Item style={styles.boxSearch}>
         <Icon name="search" />
-        <Input autoFocus={true} placeholder="Search" value={textSearch} onChangeText={(text) => onChangeText(text)} onSubmitEditing={goToWord} />
+        <Input autoFocus={false}  placeholder="Search" value={textSearch} onChangeText={(text) => onChangeText(text)} onSubmitEditing={goToWord} />
         {textSearch !== "" && <Icon name="close" style={styles.iconClose} onPress={handleClear} />}
       </Item>
       <Icon name="mic" style={styles.iconMic} onPress={showModal}></Icon>
