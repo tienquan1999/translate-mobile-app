@@ -15,10 +15,11 @@ function BottomNavigation() {
       tabBarOptions={{
         activeTintColor: '#0077b3',
       }}
+      options={{headerShown: false}}
     >
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={StackNavigation}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
