@@ -13,7 +13,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <StackNavigation />
+        <BottomNavigation />
        
       </NavigationContainer>
     </Provider>
