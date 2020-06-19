@@ -7,6 +7,7 @@ import 'react-native-gesture-handler';
 import StackNavigation from "../navigations/StackNavigation"
 import { createStackNavigator } from '@react-navigation/stack';
 
+
 const Tab = createBottomTabNavigator();
 
 function BottomNavigation() {
