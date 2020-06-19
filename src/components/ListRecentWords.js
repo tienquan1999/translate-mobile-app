@@ -10,12 +10,9 @@ import * as Permissions from 'expo-permissions';
 import * as FileSystem from "expo-file-system";
 const {apiKey} = require("../../key.json");
 const axios = require("axios");
-import { textToSpeechWithApiGoogle } from "../utils/google-api/text-to-speech"
 import {getHistoryTranslate} from "../utils/controller"
 
 const recordingOptions = {
-  // android not currently in use. Not getting results from speech to text with .m4a
-  // but parameters are required
   android: {
     extension: '.mp3',
     outputFormat: Audio.RECORDING_OPTION_ANDROID_OUTPUT_FORMAT_MPEG_4,
@@ -37,11 +34,7 @@ const recordingOptions = {
 };
 
 export default function ListRecentWords(props) {
-  console.log("props in list: ", props)
   const [recentWords, setRecentWords] = useState([
-    // { word: "cat", proper: "danh tu", mean: "mèo", id: "2" },
-    // { word: "dog", proper: "danh tu", mean: "chó", id: "3" },
-    // { word: "dog", proper: "danh tu", mean: "chó", id: "4" },
   ]
   );
   const [textFromSpeech, updateTextFromSpeech] = useState("");
