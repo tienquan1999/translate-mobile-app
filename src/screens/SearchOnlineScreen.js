@@ -13,7 +13,7 @@ function SearchOnlineScreen(props) {
 
   let { from, to } = props.languages;
   let { params } = props.route;
-
+  console.log("navigation to search online: ", props)
   const [textFrom, setTextFrom] = useState(params ? params.wordMeaning.word : "");
   const [textTo, setTextTo] = useState(params ? params.wordMeaning.mean : "");
 

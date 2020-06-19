@@ -47,11 +47,11 @@ function BoxSearch(props) {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <View>
-              <IconClose name="close" size={25} color="red" onPress={hideModal} />
+            <View style={styles.modalHeader}>
+              <IconClose name="close" size={25} color="#bfbfbf" onPress={hideModal} />
             </View>
-            <View>
-              <Text>hello</Text>
+            <View style={styles.modalBody}>
+              
             </View>
           </View>
         </View>
@@ -88,7 +88,9 @@ const styles = StyleSheet.create({
     margin: 10,
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 100,
+    
+    height: 250,
+    width:250,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -96,16 +98,24 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5,
-    
+    elevation: 5
   },
   modalHeader: {
-    flex: 1,
-    justifyContent: "flex-end"
+    padding:10,
+    height: 50,
+    position:"absolute",
+    top:0,
+    right:0,
+    left:0,
+    flexDirection:"row",
+    justifyContent:"flex-end"
   },
   modalBody:{
-    flex:4,
-    justifyContent:"center"
+    position:"absolute",
+    top:60,
+    right:0,
+    left:0,
+    bottom:0
   }
 })
 

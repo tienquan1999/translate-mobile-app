@@ -4,15 +4,16 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 import SearchOnlineScreen from "../screens/SearchOnlineScreen";
 import HomeScreen from '../screens/HomeScreen';
 import 'react-native-gesture-handler';
+import StackNavigation from "../navigations/StackNavigation"
+import { createStackNavigator } from '@react-navigation/stack';
 
 const Tab = createBottomTabNavigator();
 
 function BottomNavigation() {
   return (
     <Tab.Navigator
-      initialRouteName="Home"
       tabBarOptions={{
-        activeTintColor: '#e91e63',
+        activeTintColor: '#0077b3',
       }}
     >
       <Tab.Screen
