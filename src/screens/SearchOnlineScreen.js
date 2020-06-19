@@ -8,12 +8,13 @@ import { connect } from "react-redux"
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { textToSpeechWithApiGoogle } from "../utils/google-api/text-to-speech"
 import { translateWithGoogleApi } from "../utils/google-api/translate-api"
+import { useFocusEffect } from '@react-navigation/native';
 
 function SearchOnlineScreen(props) {
 
   let { from, to } = props.languages;
   let { params } = props.route;
-  console.log("navigation to search online: ", props)
+  
   const [textFrom, setTextFrom] = useState(params ? params.wordMeaning.word : "");
   const [textTo, setTextTo] = useState(params ? params.wordMeaning.mean : "");
 
@@ -35,7 +36,17 @@ function SearchOnlineScreen(props) {
     else
       await textToSpeechWithApiGoogle(textTo, to)
   }
-  
+  useFocusEffect(
+    React.useCallback(() => {
+      
+
+      return () => {
+        //handleClearFrom();
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      };
+    }, [])
+  );
   useEffect(() => {
     if(params)
     {

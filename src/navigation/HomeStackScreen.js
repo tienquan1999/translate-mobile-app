@@ -1,20 +1,19 @@
 import React from "react"
 import { createStackNavigator } from '@react-navigation/stack';
-import HeaderSearchOnline from '../components/HeaderSearchOnline';
+
 import BoxSearch from '../components/BoxSearch';
 import HeaderDefinitionWord from "../components/HeaderDefinitionWord"
+import SearchOnlineScreen from "../screens/SearchOnlineScreen";
+
 import HomeScreen from '../screens/HomeScreen';
 import DefinitionScreen from "../screens/DefinitionScreen"
-import SearchOnlineScreen from "../screens/SearchOnlineScreen"
-import 'react-native-gesture-handler';
-import BottomNavigation from "./BottomNavigation";
 
-const Stack = createStackNavigator();
+const HomeStack = createStackNavigator();
 
-function StackNavigation() {
+export default function HomeStackScreen(props) {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
+    <HomeStack.Navigator>
+      <HomeStack.Screen
         name="Home"
         component={HomeScreen}
         options={{
@@ -22,7 +21,7 @@ function StackNavigation() {
           header: ({ navigation }) => <BoxSearch navigation={navigation} />
         }}
       />
-      <Stack.Screen
+      <HomeStack.Screen
         name="Word"
         component={DefinitionScreen}
         options={{
@@ -33,17 +32,6 @@ function StackNavigation() {
           }
         }}
       />
-      <Stack.Screen
-        name="SearchOnline"
-        component={SearchOnlineScreen}
-        options={{
-          title: "Dịch online",
-          header: ({ navigation }) => {
-            return <HeaderSearchOnline handleBack={() => navigation.goBack()} title="Dịch online" />
-          }
-        }}
-      />
-    </Stack.Navigator>
-  );
+    </HomeStack.Navigator>
+  )
 }
-export default StackNavigation;
