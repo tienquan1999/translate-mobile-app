@@ -4,6 +4,7 @@ import { Icon, Item, Input, Header } from "native-base"
 import { connect } from "react-redux";
 import { translateText } from "../utils/controller"
 import IconClose from "react-native-vector-icons/FontAwesome"
+import { useFocusEffect } from '@react-navigation/native';
 
 function BoxSearch(props) {
 
@@ -31,11 +32,23 @@ function BoxSearch(props) {
   const hideModal = () => {
     setModalVisible(false);
   }
+  useFocusEffect(
+    React.useCallback(() => {
+      
+     // Do something when the screen is focused
+     
+      return () => {
+       handleClear();
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      };
+    }, [])
+  );
   return (
     <Header searchBar rounded style={styles.header}>
       <Item style={styles.boxSearch}>
         <Icon name="search" />
-        <Input autoFocus={true} placeholder="Search" value={textSearch} onChangeText={(text) => onChangeText(text)} onSubmitEditing={goToWord} />
+        <Input autoFocus={false}  placeholder="Search" value={textSearch} onChangeText={(text) => onChangeText(text)} onSubmitEditing={goToWord} />
         {textSearch !== "" && <Icon name="close" style={styles.iconClose} onPress={handleClear} />}
       </Item>
       <Icon name="mic" style={styles.iconMic} onPress={showModal}></Icon>
