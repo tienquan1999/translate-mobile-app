@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import { Text, Content } from 'native-base';
 import { connect } from "react-redux"
-import Icon from 'react-native-vector-icons/MaterialIcons'
+// import Icon from 'react-native-vector-icons/MaterialIcons'
 import {textToSpeechWithApiGoogle} from "../utils/google-api/text-to-speech"
 
 function DetailWord(props) {
@@ -17,37 +17,42 @@ function DetailWord(props) {
   const speechText = async() =>{
     await textToSpeechWithApiGoogle(dataWord.word, from)
   }
-  
+  let mean = arrMean.map((e, index)=>
+  <View key={index}>
+    <Text style={styles.proper}>
+      {/* <Icon name="chevron-right" size={15} /> */}
+      {e.type}</Text>
+    {
+      e.values.map((type, index) =>
+        <View key={index}>
+          <Text style={styles.means}>
+            <Text style={styles.indexMean}>{index + 1}.</Text>
+            {type.mean}
+          </Text>
+          {
+            type.examples.map((ex, keyEx) =>
+              <View key={keyEx}>
+                <Text style={styles.exmEng}>{ex.word}</Text>
+                <Text style={styles.exmVie}>
+                  {/* <Icon name="chevron-right" /> */}
+                  {ex.mean}</Text>
+              </View>)
+          }
+        </View>)
+    }
+  </View>
+);
+
   return (
     <Content padder>
       <ScrollView>
         <Text style={styles.wordHeader}>{dataWord.word}</Text>
         <View style={styles.viewPronunciation}>
-          <Icon name="volume-up" size={25} color="#0077b3" onPress={speechText} />
+          {/* <Icon name="volume-up" size={25} color="#0077b3" onPress={speechText} /> */}
           <Text style={styles.pronunciation}>{dataWord.pronunciation}</Text>
         </View>
         {
-          arrMean.map((e, index)=>
-            <View key={index}>
-              <Text style={styles.proper}><Icon name="chevron-right" size={15} />{e.type}</Text>
-              {
-                e.values.map((type, index) =>
-                  <View key={index}>
-                    <Text style={styles.means}>
-                      <Text style={styles.indexMean}>{index + 1}.</Text>
-                      {type.mean}
-                    </Text>
-                    {
-                      type.examples.map((ex, keyEx) =>
-                        <View key={keyEx}>
-                          <Text style={styles.exmEng}>{ex.word}</Text>
-                          <Text style={styles.exmVie}><Icon name="chevron-right" />{ex.mean}</Text>
-                        </View>)
-                    }
-                  </View>)
-              }
-            </View>
-          )
+          mean
         }
         
       </ScrollView>

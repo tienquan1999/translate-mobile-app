@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text , ToastAndroid} from "react-native"
 import { Header, Left, Body, Right, Button, Icon } from 'native-base';
-import IconCustom from "react-native-vector-icons/FontAwesome"
+// import IconCustom from "react-native-vector-icons/FontAwesome"
 
 export default function HeaderDefinitionWord(props) {
   const { navigation, title, handleBack} = props;
@@ -30,7 +30,7 @@ export default function HeaderDefinitionWord(props) {
           <Icon name='search'/>
         </Button>
         <Button transparent onPress={showToastWithGravity}>
-          <IconCustom name={nameIconStar} color={nameIconStar === 'star' ? "#e6e600" : "#ffffff"} backgroundColor="#ffffff" size={25} />
+          {/* <IconCustom name={nameIconStar} color={nameIconStar === 'star' ? "#e6e600" : "#ffffff"} backgroundColor="#ffffff" size={25} /> */}
         </Button>
       </Right>
     </Header>
