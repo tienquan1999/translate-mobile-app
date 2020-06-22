@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { View, StyleSheet} from "react-native"
 import { Card, CardItem, Text, Body } from "native-base"
-import Icon from 'react-native-vector-icons/MaterialIcons'
+import {MaterialIcons} from "@expo/vector-icons"
 
 import {textToSpeechWithApiGoogle} from"../utils/google-api/text-to-speech";
 import { translateText } from "../utils/controller"
@@ -43,7 +43,7 @@ function CardWord(props) {
               <Text style={styles.word}>{item.word}</Text>
               <View style={styles.bottomCard}>
                 <Text style={styles.proper}>{item.result.data.pronunciation}</Text>
-                  <Icon name="volume-up" size={25} color="#0077b3" onPress={speechText}/>
+                  <MaterialIcons name="volume-up" size={25} color="#0077b3" onPress={speechText}/>
                  
               </View>
             </View>
@@ -51,7 +51,7 @@ function CardWord(props) {
              <View >
                 <Text style={styles.word}>{item.word}</Text>
                 <View style={styles.bottomCard}>
-                  <Icon name="volume-up" size={25} color="#0077b3" onPress={speechText}/>
+                  <MaterialIcons name="volume-up" size={25} color="#0077b3" onPress={speechText}/>
                 </View>
                 
              </View> 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, FlatList, Button, Text} from "react-native";
 
-import IconEarth from 'react-native-vector-icons/MaterialCommunityIcons'
+import {MaterialCommunityIcons} from "@expo/vector-icons"
 
 import CardWord from "./CardWord";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -138,10 +138,10 @@ export default function ListRecentWords(props) {
         await getHistoryTranslate();
       }} />
       <View style={styles.viewBtn}>
-        <IconEarth.Button name="earth" color="#0088cc" backgroundColor="#ffffff" size={30}
+        <MaterialCommunityIcons.Button name="earth" color="#0088cc" backgroundColor="#ffffff" size={30}
           onPress={() => props.navigation.navigate('SearchOnline')}>
           <Text style={styles.btnText}>Dịch Online</Text>
-        </IconEarth.Button>
+        </MaterialCommunityIcons.Button>
       </View>
       <TouchableOpacity style={styles.button} onPressIn={handleOnPressIn} onPressOut={handleOnPressOut}>
         <Text>Press on and Hold to start recording</Text>

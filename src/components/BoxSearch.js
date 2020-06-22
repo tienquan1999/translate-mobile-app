@@ -3,8 +3,14 @@ import { StyleSheet, TouchableHighlight, TouchableWithoutFeedback, View, Modal, 
 import { Icon, Item, Input, Header } from "native-base"
 import { connect } from "react-redux";
 import { translateText } from "../utils/controller"
+<<<<<<< HEAD
 import IconClose from "react-native-vector-icons/FontAwesome";
 import { Audio } from "expo-av";
+=======
+ 
+import { FontAwesome5,Ionicons } from '@expo/vector-icons'; 
+import {Audio} from "expo-av";
+>>>>>>> 30611539e91024587fadcd20cdb8fdb48293ee56
 import * as Permissions from 'expo-permissions';
 import * as FileSystem from "expo-file-system";
 const { apiKey } = require("../../key.json");
@@ -162,11 +168,11 @@ function BoxSearch(props) {
   return (
     <Header searchBar rounded style={styles.header}>
       <Item style={styles.boxSearch}>
-        <Icon name="search" />
-        <Input autoFocus={searchFocus} placeholder="Search" value={textSearch} onChangeText={(text) => setText(text)} onSubmitEditing={goToWord} />
-        {textSearch !== "" && <Icon name="close" style={styles.iconClose} onPress={handleClear} />}
+        <Ionicons name="md-search" size={25} color="gray" style={{paddingLeft :10}}/>
+        <Input autoFocus={false}  placeholder="Search" value={textSearch} onChangeText={(text) => onChangeText(text)} onSubmitEditing={goToWord} />
+        {textSearch !== "" && <Ionicons name="ios-close" size={25} style={styles.iconClose} onPress={handleClear} />}
       </Item>
-      <Icon name="mic" style={styles.iconMic} onPress={showModal}></Icon>
+      <FontAwesome5 name="microphone" size={25} style={styles.iconMic} onPress={showModal}></FontAwesome5>
       <Modal
         animationType="slide"
         transparent={true}
@@ -176,12 +182,12 @@ function BoxSearch(props) {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <View style={styles.modalHeader}>
-              <IconClose name="close" size={25} color="#bfbfbf" onPress={hideModal} />
+              <Ionicons name="ios-close" size={25} color="#bfbfbf" onPress={hideModal} />
             </View>
             <View style={styles.modalBody}>
-              <TouchableOpacity onPressIn={handleOnPressIn} onPressOut={handleOnPressOut}>
-                <Icon name="mic" style={{ fontSize: 100 }}></Icon>
-              </TouchableOpacity>
+            <TouchableOpacity onPressIn={handleOnPressIn} onPressOut={handleOnPressOut}>
+              <FontAwesome5 name="microphone" size={100}></FontAwesome5>
+            </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -206,6 +212,7 @@ const styles = StyleSheet.create({
   },
   iconClose: {
     color: "#0077b3",
+    paddingRight : 15
   },
   centeredView: {
     flex: 1,

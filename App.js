@@ -7,11 +7,12 @@ import { store } from "./store"
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import BottomTab from "./src/navigation/BottomTab";
-import Loading from "./src/components/Loading"
+import Loading from "./src/components/Loading";
+ 
 
 export default function App() {
 
-  // const[isLoading ,setLoading]= useState(true);
+  const[isLoading ,setLoading]= useState(false);
 
   // performTimeConsuming = async() =>{
   //   return new Promise((resolve) =>
@@ -21,12 +22,8 @@ export default function App() {
   //       2000
   //   ));
   // }
-  //  useEffect( async() =>{
-  //    const data = await performTimeConsuming();
-  //    if(data !== null)
-  //    {
-  //      setLoading(false);
-  //    }
+  //  useEffect(() =>{
+  //    SplashScreen.preventAutoHideAsync();
   //  })
   
   // if(isLoading){
@@ -41,3 +38,4 @@ export default function App() {
   )
 
 }
+ 

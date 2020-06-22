@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text , ToastAndroid} from "react-native"
 import { Header, Left, Body, Right, Button, Icon } from 'native-base';
-import IconCustom from "react-native-vector-icons/FontAwesome"
+import {FontAwesome,AntDesign} from "@expo/vector-icons"
 
 export default function HeaderDefinitionWord(props) {
   const { navigation, title, handleBack} = props;
@@ -19,7 +19,7 @@ export default function HeaderDefinitionWord(props) {
     <Header style={styles.headerTab}>
       <Left>
         <Button transparent onPress={handleBack}>
-          <Icon name='arrow-back' />
+          <AntDesign name='arrowleft'  size={30} color="#ffffff"/>
         </Button>
       </Left>
       <Body>
@@ -27,10 +27,10 @@ export default function HeaderDefinitionWord(props) {
       </Body>
       <Right>
         <Button transparent onPress={() => navigation.navigate('Home')}>
-          <Icon name='search'/>
+          <AntDesign name='search1' size={25} color="#ffffff"/>
         </Button>
         <Button transparent onPress={showToastWithGravity}>
-          <IconCustom name={nameIconStar} color={nameIconStar === 'star' ? "#e6e600" : "#ffffff"} backgroundColor="#ffffff" size={25} />
+          <FontAwesome name={nameIconStar} color={nameIconStar === 'star' ? "#e6e600" : "#ffffff"} backgroundColor="#ffffff" size={25} />
         </Button>
       </Right>
     </Header>
