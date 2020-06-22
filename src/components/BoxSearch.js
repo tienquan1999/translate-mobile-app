@@ -35,7 +35,7 @@ const recordingOptions = {
 
 function BoxSearch(props) {
 
-  const [textSearch, onChangeText] = useState("");
+  const [textSearch, setText] = useState("");
   let { from, to } = props.languages;
   const [modalVisible, setModalVisible] = useState(false);
   const [recording, updateRecording] = useState(null);
@@ -48,16 +48,14 @@ function BoxSearch(props) {
       to: to,
       word: textSearch
     })
-    // console.log("from: ", from)
-    // console.log("to: ", to)
-    // console.log("text: ", textSearch)
+    
     if (result.type === "offline")
       props.navigation.navigate("Word", { wordMeaning: result });
     else
       props.navigation.navigate("SearchOnline", { wordMeaning: result })
   }
   const handleClear = () => {
-    onChangeText("")
+    setText("")
   }
   const showModal = () => {
     setModalVisible(true);
@@ -130,11 +128,9 @@ function BoxSearch(props) {
         }
       }
       let response = await axios.post(url, body);
-      const word = response.data.results[0].alternatives[0].transcript;
-
-      onChangeText(word);
+      let word = response.data.results[0].alternatives[0].transcript
+      setText(word);
       goToWord();
-
     } catch (error) {
       console.log('There was an error reading file', error);
       // this.stopRecording();
@@ -167,7 +163,7 @@ function BoxSearch(props) {
     <Header searchBar rounded style={styles.header}>
       <Item style={styles.boxSearch}>
         <Icon name="search" />
-        <Input autoFocus={searchFocus} placeholder="Search" value={textSearch} onChangeText={(text) => onChangeText(text)} onSubmitEditing={goToWord} />
+        <Input autoFocus={searchFocus} placeholder="Search" value={textSearch} onChangeText={(text) => setText(text)} onSubmitEditing={goToWord} />
         {textSearch !== "" && <Icon name="close" style={styles.iconClose} onPress={handleClear} />}
       </Item>
       <Icon name="mic" style={styles.iconMic} onPress={showModal}></Icon>
