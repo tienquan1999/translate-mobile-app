@@ -5,7 +5,7 @@ import BoxSwitchLanguage from "../components/BoxSwitchLanguage";
 import { switchLanguage } from "../actions/switchLanguage";
 import { ACTION_LANGUAGE } from "../constants/languages";
 import { connect } from "react-redux"
-import Icon from 'react-native-vector-icons/MaterialIcons'
+import {MaterialIcons} from "@expo/vector-icons"
 import { textToSpeechWithApiGoogle } from "../utils/google-api/text-to-speech"
 import { translateWithGoogleApi } from "../utils/google-api/translate-api"
 import { useFocusEffect } from '@react-navigation/native';
@@ -62,7 +62,7 @@ function SearchOnlineScreen(props) {
         <Textarea placeholder="Nhập để dịch" value={textFrom} style={styles.textarea} onChangeText={(value) => setTextFrom(value)} />
         <View style={styles.boxMedia}>
           {textFrom !== "" && <Icon name="close" size={25} style={styles.iconClose} onPress={handleClearFrom} />}
-          <Icon name="volume-up" size={25} color="#0077b3" style={styles.iconSound} onPress={() => speechText("from")} />
+          <MaterialIcons name="volume-up" size={25} color="#0077b3" style={styles.iconSound} onPress={() => speechText("from")} />
         </View>
       </View>
       <View style={styles.boxBtn}>
@@ -74,7 +74,7 @@ function SearchOnlineScreen(props) {
       <View style={styles.boxText}>
         <Text multiline={true} style={styles.textarea}>{textTo}</Text>
         <View>
-          <Icon name="volume-up" size={25} color="#0077b3" style={styles.iconSound} onPress={() => speechText("to")} />
+          <MaterialIcons name="volume-up" size={25} color="#0077b3" style={styles.iconSound} onPress={() => speechText("to")} />
         </View>
       </View>
     </Content>

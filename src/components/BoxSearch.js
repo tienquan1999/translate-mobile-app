@@ -3,7 +3,8 @@ import { StyleSheet, TouchableHighlight, TouchableWithoutFeedback, View, Modal, 
 import { Icon, Item, Input, Header } from "native-base"
 import { connect } from "react-redux";
 import { translateText } from "../utils/controller"
-import IconClose from "react-native-vector-icons/FontAwesome";
+ 
+import { FontAwesome5,Ionicons } from '@expo/vector-icons'; 
 import {Audio} from "expo-av";
 import * as Permissions from 'expo-permissions';
 import * as FileSystem from "expo-file-system";
@@ -147,11 +148,11 @@ async function handleOnPressOut(){
   return (
     <Header searchBar rounded style={styles.header}>
       <Item style={styles.boxSearch}>
-        <Icon name="search" />
+        <Ionicons name="md-search" size={25} color="gray" style={{paddingLeft :10}}/>
         <Input autoFocus={false}  placeholder="Search" value={textSearch} onChangeText={(text) => onChangeText(text)} onSubmitEditing={goToWord} />
-        {textSearch !== "" && <Icon name="close" style={styles.iconClose} onPress={handleClear} />}
+        {textSearch !== "" && <Ionicons name="ios-close" size={25} style={styles.iconClose} onPress={handleClear} />}
       </Item>
-      <Icon name="mic" style={styles.iconMic} onPress={showModal}></Icon>
+      <FontAwesome5 name="microphone" size={25} style={styles.iconMic} onPress={showModal}></FontAwesome5>
       <Modal
         animationType="slide"
         transparent={true}
@@ -161,11 +162,11 @@ async function handleOnPressOut(){
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <View style={styles.modalHeader}>
-              <IconClose name="close" size={25} color="#bfbfbf" onPress={hideModal} />
+              <Ionicons name="ios-close" size={25} color="#bfbfbf" onPress={hideModal} />
             </View>
             <View style={styles.modalBody}>
             <TouchableOpacity onPressIn={handleOnPressIn} onPressOut={handleOnPressOut}>
-              <Icon name="mic" style={{fontSize: 100}}></Icon>
+              <FontAwesome5 name="microphone" size={100}></FontAwesome5>
             </TouchableOpacity>
             </View>
           </View>
@@ -191,6 +192,7 @@ const styles = StyleSheet.create({
   },
   iconClose: {
     color: "#0077b3",
+    paddingRight : 15
   },
   centeredView: {
     flex:1,
