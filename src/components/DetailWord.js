@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet, ScrollView ,FlatList} from "react-native";
 import { Text, Content } from 'native-base';
 import { connect } from "react-redux"
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -26,7 +26,7 @@ function DetailWord(props) {
           <Icon name="volume-up" size={25} color="#0077b3" onPress={speechText} />
           <Text style={styles.pronunciation}>{dataWord.pronunciation}</Text>
         </View>
-        {
+        {/* {
           arrMean.map((e, index)=>
             <View key={index}>
               <Text style={styles.proper}><Icon name="chevron-right" size={15} />{e.type}</Text>
@@ -48,8 +48,32 @@ function DetailWord(props) {
               }
             </View>
           )
-        }
-        
+        } */}
+        <FlatList 
+          data={arrMean}
+          renderItem={({item })=>(
+            <View>
+              <Text style={styles.proper}><Icon name="chevron-right" size={15}/>{item.type}</Text>
+              <FlatList
+                data ={item.values}
+                renderItem={({item,index}) =>(
+                  <View>
+                    <Text style={styles.means}><Text style={styles.indexMean}>{index+1}.</Text>{item.mean}</Text>
+                    <FlatList 
+                      data={item.examples}
+                      renderItem ={({item}) =>(
+                        <View>
+                          <Text style={styles.exmEng}>{item.word}</Text>
+                          <Text style={styles.exmVie}><Icon name="chevron-right"/>{item.mean}</Text>
+                        </View>
+                      )}
+                    />
+                  </View>
+                )}
+              />
+            </View>
+          )}
+        />
       </ScrollView>
     </Content>
   )
