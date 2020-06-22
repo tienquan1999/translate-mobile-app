@@ -26,54 +26,35 @@ function DetailWord(props) {
           <Icon name="volume-up" size={25} color="#0077b3" onPress={speechText} />
           <Text style={styles.pronunciation}>{dataWord.pronunciation}</Text>
         </View>
-        {/* {
-          arrMean.map((e, index)=>
-            <View key={index}>
-              <Text style={styles.proper}><Icon name="chevron-right" size={15} />{e.type}</Text>
-              {
-                e.values.map((type, index) =>
-                  <View key={index}>
-                    <Text style={styles.means}>
-                      <Text style={styles.indexMean}>{index + 1}.</Text>
-                      {type.mean}
-                    </Text>
-                    {
-                      type.examples.map((ex, keyEx) =>
-                        <View key={keyEx}>
-                          <Text style={styles.exmEng}>{ex.word}</Text>
-                          <Text style={styles.exmVie}><Icon name="chevron-right" />{ex.mean}</Text>
-                        </View>)
-                    }
-                  </View>)
-              }
-            </View>
-          )
-        } */}
         <FlatList 
           data={arrMean}
-          renderItem={({item })=>(
-            <View>
+          renderItem={({item, index })=>(
+            <View >
               <Text style={styles.proper}><Icon name="chevron-right" size={15}/>{item.type}</Text>
               <FlatList
                 data ={item.values}
                 renderItem={({item,index}) =>(
-                  <View>
+                  <View key={index}>
                     <Text style={styles.means}><Text style={styles.indexMean}>{index+1}.</Text>{item.mean}</Text>
                     <FlatList 
                       data={item.examples}
-                      renderItem ={({item}) =>(
-                        <View>
+                      renderItem ={({item, index}) =>(
+                        <View key={index}>
                           <Text style={styles.exmEng}>{item.word}</Text>
                           <Text style={styles.exmVie}><Icon name="chevron-right"/>{item.mean}</Text>
                         </View>
                       )}
+                      keyExtractor={item =>item.word}
                     />
                   </View>
                 )}
+                keyExtractor ={item=> item.mean}
               />
             </View>
           )}
+          keyExtractor={item => item.type}
         />
+        
       </ScrollView>
     </Content>
   )
