@@ -164,7 +164,7 @@ function BoxSearch(props) {
     <Header searchBar rounded style={styles.header}>
       <Item style={styles.boxSearch}>
         <Ionicons name="md-search" size={25} color="gray" style={{paddingLeft :10}}/>
-        <Input autoFocus={false}  placeholder="Search" value={textSearch} onChangeText={(text) => onChangeText(text)} onSubmitEditing={goToWord} />
+        <Input autoFocus={false}  placeholder="Search" value={textSearch} onChangeText={(text) => setText(text)} onSubmitEditing={goToWord} />
         {textSearch !== "" && <Ionicons name="ios-close" size={25} style={styles.iconClose} onPress={handleClear} />}
       </Item>
       <FontAwesome5 name="microphone" size={25} style={styles.iconMic} onPress={showModal}></FontAwesome5>
