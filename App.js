@@ -12,23 +12,27 @@ import Loading from "./src/components/Loading";
 
 export default function App() {
 
-  const[isLoading ,setLoading]= useState(false);
+  const[isLoading ,setLoading]= useState(true);
 
-  // performTimeConsuming = async() =>{
-  //   return new Promise((resolve) =>
-  //   setTimeout (
-  //     () => {
-  //       resolve('result')},
-  //       2000
-  //   ));
-  // }
-  //  useEffect(() =>{
-  //    SplashScreen.preventAutoHideAsync();
-  //  })
+  performTimeConsuming = async() =>{
+    return new Promise((resolve) =>
+    setTimeout (
+      () => {
+        resolve('result')},
+        2000
+    ));
+  }
+   useEffect(async() =>{
+    const data =  await performTimeConsuming();
+    if(data!== null)
+    {
+      setLoading(false)
+    }
+   })
   
-  // if(isLoading){
-  //   return <Loading/>
-  // }
+  if(isLoading){
+    return <Loading/>
+  }
   return (
     <Provider store={store}>
       <NavigationContainer>
