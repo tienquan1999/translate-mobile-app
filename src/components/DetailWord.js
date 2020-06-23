@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet ,FlatList} from "react-native";
 import { Text, Content } from 'native-base';
 import { connect } from "react-redux"
+<<<<<<< HEAD
 // import Icon from 'react-native-vector-icons/MaterialIcons'
+=======
+import { MaterialIcons, AntDesign} from '@expo/vector-icons';
+>>>>>>> 92ee29df9343a906c30f4e6a994e4921b6ceb1a4
 import {textToSpeechWithApiGoogle} from "../utils/google-api/text-to-speech"
 
 function DetailWord(props) {
@@ -45,17 +49,51 @@ function DetailWord(props) {
 
   return (
     <Content padder>
-      <ScrollView>
+      <View>
         <Text style={styles.wordHeader}>{dataWord.word}</Text>
         <View style={styles.viewPronunciation}>
+<<<<<<< HEAD
           {/* <Icon name="volume-up" size={25} color="#0077b3" onPress={speechText} /> */}
           <Text style={styles.pronunciation}>{dataWord.pronunciation}</Text>
         </View>
         {
           mean
         }
+=======
+          <MaterialIcons name="volume-up" size={25}  color="#0077b3" onPress={speechText} />
+          <Text style={styles.pronunciation}>{dataWord.pronunciation}</Text>
+        </View>
+        <FlatList 
+          data={arrMean}
+          renderItem={({item, index })=>(
+            <View >
+              <Text style={styles.proper}><AntDesign name="right" size={15}/>{item.type}</Text>
+              <FlatList
+                data ={item.values}
+                renderItem={({item,index}) =>(
+                  <View key={index}>
+                    <Text style={styles.means}><Text style={styles.indexMean}>{index+1}.</Text>{item.mean}</Text>
+                    <FlatList 
+                      data={item.examples}
+                      renderItem ={({item, index}) =>(
+                        <View key={index}>
+                          <Text style={styles.exmEng}>{item.word}</Text>
+                          <Text style={styles.exmVie}><AntDesign name="right"/>{item.mean}</Text>
+                        </View>
+                      )}
+                      keyExtractor={item =>item.word}
+                    />
+                  </View>
+                )}
+                keyExtractor ={item=> item.mean}
+              />
+            </View>
+          )}
+          keyExtractor={item => item.type}
+        />
+>>>>>>> 92ee29df9343a906c30f4e6a994e4921b6ceb1a4
         
-      </ScrollView>
+        </View>
     </Content>
   )
 }

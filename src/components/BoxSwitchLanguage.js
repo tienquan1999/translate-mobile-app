@@ -4,7 +4,7 @@ import PickerLanguage from "./PickerLanguage";
 import { switchLanguage } from "../actions/switchLanguage";
 import { connect } from "react-redux";
 import { TYPE_LANGUAGE, ACTION_LANGUAGE } from "../constants/languages";
-import Icon from 'react-native-vector-icons/Ionicons'
+import {Ionicons} from "@expo/vector-icons"
 
 function BoxSwitchLanguage(props) {
   const {from, to} = props.languages;
@@ -12,7 +12,7 @@ function BoxSwitchLanguage(props) {
   return (
     <View style={styles.boxTranslate}>
       <PickerLanguage languageDefault={from} typeLanguage={TYPE_LANGUAGE.FROM}/>
-      <Icon name="md-sync"size={30} onPress={()=>props.switchLanguage(from, to, ACTION_LANGUAGE.SWITCH)}/>
+      <Ionicons name="md-sync"size={30} onPress={()=>props.switchLanguage(from, to, ACTION_LANGUAGE.SWITCH)}/>
       <PickerLanguage languageDefault={to} typeLanguage={TYPE_LANGUAGE.TO}/>
     </View>
   );

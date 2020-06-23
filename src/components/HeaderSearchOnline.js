@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text } from "react-native"
-import { Header, Left, Body, Button, Icon, Right } from 'native-base';
+import { Header, Left, Body, Button, Right } from 'native-base';
+import{AntDesign} from "@expo/vector-icons"
 
 export default function HeaderSearchOnline(props) {
   const { handleBack, title } = props;
@@ -8,7 +9,7 @@ export default function HeaderSearchOnline(props) {
     <Header style={styles.headerTab}>
       <Left>
         <Button transparent onPress={handleBack}>
-          <Icon name='arrow-back' />
+          <AntDesign name='arrowleft' />
         </Button>
       </Left>
       <Body>

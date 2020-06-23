@@ -33,7 +33,7 @@ export default function HomeStackScreen(props) {
           }
         }}
       />
-      <HomeStack.Screen
+      {/* <HomeStack.Screen
         name="SearchOnline"
         component={SearchOnlineScreen}
         options={{
@@ -43,7 +43,7 @@ export default function HomeStackScreen(props) {
             return <HeaderSearchOnline handleBack={() => navigation.goBack()} navigation={navigation} title={title} />
           }
         }}
-      />
+      /> */}
     </HomeStack.Navigator>
   )
 }
