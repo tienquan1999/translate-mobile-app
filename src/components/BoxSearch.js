@@ -8,9 +8,9 @@ import { FontAwesome5,Ionicons } from '@expo/vector-icons';
 import {Audio} from "expo-av";
 import * as Permissions from 'expo-permissions';
 import * as FileSystem from "expo-file-system";
-const {apiKey} = require("../../key.json");
+const { apiKey } = require("../../key.json");
 const axios = require("axios");
-
+import { useFocusEffect } from '@react-navigation/native';
 
 
 const recordingOptions = {
@@ -23,24 +23,25 @@ const recordingOptions = {
     bitRate: 128000,
   },
   ios: {
-      extension: '.wav',
-      audioQuality: Audio.RECORDING_OPTION_IOS_AUDIO_QUALITY_HIGH,
-      sampleRate: 44100,
-      numberOfChannels: 1,
-      bitRate: 128000,
-      linearPCMBitDepth: 16,
-      linearPCMIsBigEndian: false,
-      linearPCMIsFloat: false,
+    extension: '.wav',
+    audioQuality: Audio.RECORDING_OPTION_IOS_AUDIO_QUALITY_HIGH,
+    sampleRate: 44100,
+    numberOfChannels: 1,
+    bitRate: 128000,
+    linearPCMBitDepth: 16,
+    linearPCMIsBigEndian: false,
+    linearPCMIsFloat: false,
   },
 };
 
 function BoxSearch(props) {
 
-  const [textSearch, onChangeText] = useState("");
+  const [textSearch, setText] = useState("");
   let { from, to } = props.languages;
   const [modalVisible, setModalVisible] = useState(false);
   const [recording, updateRecording] = useState(null);
   const [isRecording, updateIsRecording] = useState(false);
+  const [searchFocus, setSearchFocus] = useState(false)
 
   const goToWord = async () => {
     const result = await translateText({
@@ -48,13 +49,14 @@ function BoxSearch(props) {
       to: to,
       word: textSearch
     })
+    
     if (result.type === "offline")
       props.navigation.navigate("Word", { wordMeaning: result });
     else
       props.navigation.navigate("SearchOnline", { wordMeaning: result })
   }
   const handleClear = () => {
-    onChangeText("")
+    setText("")
   }
   const showModal = () => {
     setModalVisible(true);
@@ -63,87 +65,100 @@ function BoxSearch(props) {
     setModalVisible(false);
   }
 
-  async function startRecording(){
+  async function startRecording() {
     console.log("Start recording");
     const { status } = await Permissions.askAsync(Permissions.AUDIO_RECORDING);
-        if (status !== 'granted') return;
+    if (status !== 'granted') return;
 
-        //await updateIsRecording(true);
+    //await updateIsRecording(true);
 
-        await Audio.setAudioModeAsync({
-            shouldDuckAndroid: true,
-            interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
-            playThroughEarpieceAndroid: true,
-        });
-        const data = new Audio.Recording();
-        try {
-            await data.prepareToRecordAsync(recordingOptions);
-            await data.startAsync();
-        } catch (error) {
-            console.log(error);
-            this.stopRecording();
-        }
-        await updateRecording(data);
+    await Audio.setAudioModeAsync({
+      shouldDuckAndroid: true,
+      interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
+      playThroughEarpieceAndroid: true,
+    });
+    const data = new Audio.Recording();
+    try {
+      await data.prepareToRecordAsync(recordingOptions);
+      await data.startAsync();
+    } catch (error) {
+      console.log(error);
+      this.stopRecording();
+    }
+    await updateRecording(data);
   }
 
-  async function stopRecording(){
+  async function stopRecording() {
     console.log("Stop recording");
     await updateIsRecording(false);
     try {
-        await recording.stopAndUnloadAsync();
+      await recording.stopAndUnloadAsync();
     } catch (error) {
-        // Do nothing -- we are already unloaded.
+      // Do nothing -- we are already unloaded.
     }
   }
 
-  async function getTranscription(){
+  async function getTranscription() {
     // this.setState({ isFetching: true });
     try {
-        console.log("Get transcription")
-        const info = await FileSystem.getInfoAsync(recording.getURI());
-        const uri = info.uri;
+      console.log("Get transcription")
+      const info = await FileSystem.getInfoAsync(recording.getURI());
+      const uri = info.uri;
 
-        const soundObject = new Audio.Sound();
-        await soundObject.loadAsync({
-          uri: uri
-        });
-        await soundObject.setVolumeAsync(1.0)
-        await soundObject.playAsync();
-        console.log("play audio done")
+      const soundObject = new Audio.Sound();
+      await soundObject.loadAsync({
+        uri: uri
+      });
+      await soundObject.setVolumeAsync(1.0)
+      await soundObject.playAsync();
+      console.log("play audio done")
 
-        let base64_file = await  FileSystem.readAsStringAsync(uri, {
-          encoding: FileSystem.EncodingType.Base64
-        });;
-        let url = `https://speech.googleapis.com/v1p1beta1/speech:recognize?key=${apiKey}`;
-        let body = {
-          audio: {
-            content: base64_file
-          },
-          config: {
-            "encoding": "MP3",
-            "sampleRateHertz": 16000,
-            "languageCode": "vi-VN",
-            "alternativeLanguageCodes": ['es-ES', 'en-US'],
-          }
+      let base64_file = await FileSystem.readAsStringAsync(uri, {
+        encoding: FileSystem.EncodingType.Base64
+      });;
+      let url = `https://speech.googleapis.com/v1p1beta1/speech:recognize?key=${apiKey}`;
+      let body = {
+        audio: {
+          content: base64_file
+        },
+        config: {
+          "encoding": "MP3",
+          "sampleRateHertz": 16000,
+          "languageCode": "vi-VN",
+          "alternativeLanguageCodes": ['es-ES', 'en-US'],
         }
-        let response = await axios.post(url, body);
-        console.log(response.data);
-    } catch(error) {
-        console.log('There was an error reading file', error);
-        // this.stopRecording();
-        // this.resetRecording();
+      }
+      let response = await axios.post(url, body);
+      let word = response.data.results[0].alternatives[0].transcript
+      setText(word);
+      goToWord();
+    } catch (error) {
+      console.log('There was an error reading file', error);
+      // this.stopRecording();
+      // this.resetRecording();
     }
     // this.setState({ isFetching: false });
-}
+  }
+  useFocusEffect(
+    React.useCallback(() => {
 
-async function handleOnPressIn(){
-  await startRecording();
-}
+      setSearchFocus(true)
+      return () => {
+        handleClear();
+        setSearchFocus(false)
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      };
+    }, [searchFocus])
+  );
+  async function handleOnPressIn() {
+    await startRecording();
+  }
 
-async function handleOnPressOut(){
-  await stopRecording();
-  await getTranscription();
-}
+  async function handleOnPressOut() {
+    await stopRecording();
+    await getTranscription();
+  }
 
   return (
     <Header searchBar rounded style={styles.header}>
@@ -195,7 +210,7 @@ const styles = StyleSheet.create({
     paddingRight : 15
   },
   centeredView: {
-    flex:1,
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(0,0,0,0.3)",
@@ -205,9 +220,9 @@ const styles = StyleSheet.create({
     margin: 10,
     backgroundColor: "white",
     borderRadius: 20,
-    
+
     height: 250,
-    width:250,
+    width: 250,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -218,21 +233,21 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   modalHeader: {
-    padding:10,
+    padding: 10,
     height: 50,
-    position:"absolute",
-    top:0,
-    right:0,
-    left:0,
-    flexDirection:"row",
-    justifyContent:"flex-end"
+    position: "absolute",
+    top: 0,
+    right: 0,
+    left: 0,
+    flexDirection: "row",
+    justifyContent: "flex-end"
   },
-  modalBody:{
-    position:"absolute",
-    top:60,
-    right:0,
-    left:0,
-    bottom:0,
+  modalBody: {
+    position: "absolute",
+    top: 60,
+    right: 0,
+    left: 0,
+    bottom: 0,
     // borderColor: "red",
     // borderWidth: 1,
     flex: 1,

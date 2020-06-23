@@ -56,10 +56,10 @@ async function translateText({from, to, word}){
                 query,
                 params: [Date.now(), result._array[0].id]
             })
-            console.log(result._array[0]);
             result = JSON.parse(result._array[0].result);
         }
         console.log(Date.now() - start);
+        db._db.close();
         return result;
     }
     catch(e){
@@ -76,6 +76,7 @@ async function translateEnToVi(word){
         let query = "select * from word where word = ?;";
         let result = await querySQLite({db, query, params: [word]});
         result = JSON.parse(result);
+        db._db.close();
         return result;
     }
     catch(e){
@@ -93,6 +94,7 @@ async function translateViToEn(word){
         let query = "select * from word where word = ? or word_ko_dau = ?";
         let result = await querySQLite({db, query, params: [word]});
         result = JSON.parse(result);
+        db._db.close();
         return result;
     }
     catch(e){
@@ -118,7 +120,8 @@ async function getHistoryTranslate(){
             e.result = JSON.parse(e.result);
             e.result.id = parseInt(e.result.id);
             return e;
-        })
+        });
+        db._db.close();
         return result;
     }
     catch(e){

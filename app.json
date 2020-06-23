@@ -25,7 +25,11 @@
       "supportsTablet": true
     },
     "packagerOpts": {
-      "assetExts": ["db"]
-    }
+      "assetExts": [
+        "db"
+      ]
+    },
+    "description": "",
+    "githubUrl": "https://github.com/tienquan1999/translate-mobile-app.git"
   }
 }

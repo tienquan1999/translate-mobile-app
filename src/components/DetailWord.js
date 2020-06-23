@@ -17,7 +17,32 @@ function DetailWord(props) {
   const speechText = async() =>{
     await textToSpeechWithApiGoogle(dataWord.word, from)
   }
-  
+  let mean = arrMean.map((e, index)=>
+  <View key={index}>
+    <Text style={styles.proper}>
+      {/* <Icon name="chevron-right" size={15} /> */}
+      {e.type}</Text>
+    {
+      e.values.map((type, index) =>
+        <View key={index}>
+          <Text style={styles.means}>
+            <Text style={styles.indexMean}>{index + 1}.</Text>
+            {type.mean}
+          </Text>
+          {
+            type.examples.map((ex, keyEx) =>
+              <View key={keyEx}>
+                <Text style={styles.exmEng}>{ex.word}</Text>
+                <Text style={styles.exmVie}>
+                  {/* <Icon name="chevron-right" /> */}
+                  {ex.mean}</Text>
+              </View>)
+          }
+        </View>)
+    }
+  </View>
+);
+
   return (
     <Content padder>
       <View>

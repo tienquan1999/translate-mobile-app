@@ -24,6 +24,7 @@ async function connectToDatabase(dbName) {
         await querySQLite({
             db, query, params: []
         })
+        db._db.close();
     }
     return await SQLite.openDatabase(internalDbName);
 }
