@@ -3,14 +3,9 @@ import { StyleSheet, TouchableHighlight, TouchableWithoutFeedback, View, Modal, 
 import { Icon, Item, Input, Header } from "native-base"
 import { connect } from "react-redux";
 import { translateText } from "../utils/controller"
-<<<<<<< HEAD
-import IconClose from "react-native-vector-icons/FontAwesome";
-import { Audio } from "expo-av";
-=======
  
 import { FontAwesome5,Ionicons } from '@expo/vector-icons'; 
 import {Audio} from "expo-av";
->>>>>>> 30611539e91024587fadcd20cdb8fdb48293ee56
 import * as Permissions from 'expo-permissions';
 import * as FileSystem from "expo-file-system";
 const { apiKey } = require("../../key.json");

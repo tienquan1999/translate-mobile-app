@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, StyleSheet ,FlatList} from "react-native";
 import { Text, Content } from 'native-base';
 import { connect } from "react-redux"
-<<<<<<< HEAD
-// import Icon from 'react-native-vector-icons/MaterialIcons'
-=======
 import { MaterialIcons, AntDesign} from '@expo/vector-icons';
->>>>>>> 92ee29df9343a906c30f4e6a994e4921b6ceb1a4
 import {textToSpeechWithApiGoogle} from "../utils/google-api/text-to-speech"
 
 function DetailWord(props) {
@@ -52,14 +48,6 @@ function DetailWord(props) {
       <View>
         <Text style={styles.wordHeader}>{dataWord.word}</Text>
         <View style={styles.viewPronunciation}>
-<<<<<<< HEAD
-          {/* <Icon name="volume-up" size={25} color="#0077b3" onPress={speechText} /> */}
-          <Text style={styles.pronunciation}>{dataWord.pronunciation}</Text>
-        </View>
-        {
-          mean
-        }
-=======
           <MaterialIcons name="volume-up" size={25}  color="#0077b3" onPress={speechText} />
           <Text style={styles.pronunciation}>{dataWord.pronunciation}</Text>
         </View>
@@ -91,7 +79,6 @@ function DetailWord(props) {
           )}
           keyExtractor={item => item.type}
         />
->>>>>>> 92ee29df9343a906c30f4e6a994e4921b6ceb1a4
         
         </View>
     </Content>
