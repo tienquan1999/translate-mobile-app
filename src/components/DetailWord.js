@@ -13,6 +13,7 @@ function DetailWord(props) {
 
   const dataWord = wordMeaning.data;
   const arrMean = dataWord.mean;
+  let newPronunciation = dataWord.pronunciation.split("; [us] ");
 
   const speechText = async() =>{
     await textToSpeechWithApiGoogle(dataWord.word, from)
@@ -44,13 +45,31 @@ function DetailWord(props) {
 );
 
   return (
-    <Content padder>
-      <View>
-        <Text style={styles.wordHeader}>{dataWord.word}</Text>
-        <View style={styles.viewPronunciation}>
-          <MaterialIcons name="volume-up" size={25}  color="#0077b3" onPress={speechText} />
-          <Text style={styles.pronunciation}>{dataWord.pronunciation}</Text>
+      <View style={styles.viewAround}>
+        <View>
+          <Text style={styles.wordHeader}>{dataWord.word}</Text>
+          {
+              newPronunciation.length === 1 ? 
+                <View style={styles.viewPronunciation}>
+                  <MaterialIcons name="volume-up" size={25}  color="#0077b3" onPress={speechText} />
+                  <Text style={styles.pronunciation}>uk{newPronunciation[0]}</Text>
+                </View> : 
+                <View>
+                  <View style={styles.viewPronunciation}>
+                    <MaterialIcons name="volume-up" size={25}  color="#0077b3" onPress={speechText} />
+                    <Text style={styles.pronunciation}>{newPronunciation[0]}</Text>
+                 </View>
+                 <View style={styles.viewPronunciation}>
+                  <MaterialIcons name="volume-up" size={25}  color="#0077b3" onPress={speechText} />
+                  <Text style={styles.pronunciation}>{newPronunciation[1]}</Text>
+                </View>
+
+                </View>
+               
+            }
+          
         </View>
+        
         <FlatList 
           data={arrMean}
           renderItem={({item, index })=>(
@@ -81,10 +100,12 @@ function DetailWord(props) {
         />
         
         </View>
-    </Content>
   )
 }
 const styles = StyleSheet.create({
+  viewAround :{
+    paddingLeft : 15
+  },
   wordHeader: {
     fontSize: 40,
     fontWeight: "bold",
@@ -93,7 +114,8 @@ const styles = StyleSheet.create({
   viewPronunciation: {
     flexDirection: "row",
     paddingTop: 18,
-    alignItems: "center"
+    alignItems: "center",
+    paddingBottom: 10
   },
   pronunciation: {
     paddingLeft: 20,
