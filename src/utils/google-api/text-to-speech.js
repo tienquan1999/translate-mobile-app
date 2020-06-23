@@ -66,10 +66,9 @@ async function textToSpeechWithApiGoogle(text, languageCode, gender){
           await soundObject.loadAsync({
             uri: path
           });
-          await soundObject.setVolumeAsync(1)
+          await soundObject.setVolumeAsync(1);
           await soundObject.playAsync();
           console.log("play audio done")
-          // Your sound is playing!
         } catch (error) {
           console.log("err  play soud ", error.message);
         }
