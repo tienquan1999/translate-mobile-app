@@ -52,10 +52,7 @@ function SearchOnlineScreen(props) {
       let { from, to, word, mean } = params.wordMeaning;
       setTextFrom(word)
       setTextTo(mean)
-      props.switchLanguage(from, to, ACTION_LANGUAGE.CHANGE)
     }
-    else
-      props.switchLanguage("en", "vi", ACTION_LANGUAGE.CHANGE);
   }, [props.route])
   return (
     <Container>
@@ -86,6 +83,7 @@ function SearchOnlineScreen(props) {
           <Text multiline={true} style={styles.textTo}>{textTo}</Text>
           <View>
             <MaterialIcons name="volume-up" size={25} color="#0077b3" style={styles.iconSound} onPress={() => speechText("to")} />
+            <MaterialIcons name="content-copy" size={25} color="#0077b3" style={styles.iconSound}/>
           </View>
         </View>
       </Content>

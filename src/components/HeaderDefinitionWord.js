@@ -19,7 +19,7 @@ export default function HeaderDefinitionWord(props) {
     <Header style={styles.headerTab}>
       <Left>
         <Button transparent onPress={handleBack}>
-          <AntDesign name='arrowleft'  size={30} color="#ffffff"/>
+          <AntDesign name='arrowleft'  size={25} color="#ffffff"/>
         </Button>
       </Left>
       <Body>

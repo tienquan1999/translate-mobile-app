@@ -42,9 +42,9 @@ export default function BottomTab() {
         name="SettingScreen"
         component={SettingScreen}
         options={{
-          tabBarLabel: 'Cài đặt',
+          tabBarLabel: 'Menu',
           tabBarIcon: ({ color, size }) => (
-            <Icon name="settings" color={color} size={size} />
+            <Icon name="menu" color={color} size={size} />
           ),
         }}
       />

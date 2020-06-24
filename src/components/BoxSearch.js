@@ -3,9 +3,9 @@ import { StyleSheet, TouchableHighlight, TouchableWithoutFeedback, View, Modal, 
 import { Icon, Item, Input, Header } from "native-base"
 import { connect } from "react-redux";
 import { translateText } from "../utils/controller"
- 
-import { FontAwesome5,Ionicons } from '@expo/vector-icons'; 
-import {Audio} from "expo-av";
+
+import { FontAwesome5, Ionicons } from '@expo/vector-icons';
+import { Audio } from "expo-av";
 import * as Permissions from 'expo-permissions';
 import * as FileSystem from "expo-file-system";
 const { apiKey } = require("../../key.json");
@@ -42,6 +42,7 @@ function BoxSearch(props) {
   const [recording, updateRecording] = useState(null);
   const [isRecording, updateIsRecording] = useState(false);
   const [searchFocus, setSearchFocus] = useState(false)
+  const [textSound, setTextSound] = useState("")
 
   const goToWord = async () => {
     const result = await translateText({
@@ -49,29 +50,28 @@ function BoxSearch(props) {
       to: to,
       word: textSearch
     })
-    
+
     if (result.type === "offline")
       props.navigation.navigate("Word", { wordMeaning: result });
-    else
-    {
+    else {
       props.navigation.navigate("SearchOnline", { wordMeaning: result })
     }
-      
+
   }
   const goToWordUseVoice = async (textSearch) => {
+    setTextSound("");
     const result = await translateText({
       from: from,
       to: to,
       word: textSearch
     })
-    
+
     if (result.type === "offline")
       props.navigation.navigate("Word", { wordMeaning: result });
-    else
-    {
+    else {
       props.navigation.navigate("SearchOnline", { wordMeaning: result })
     }
-      
+
   }
   const handleClear = () => {
     setText("")
@@ -148,6 +148,7 @@ function BoxSearch(props) {
       }
       let response = await axios.post(url, body);
       let word = response.data.results[0].alternatives[0].transcript;
+      setTextSound(word)
       hideModal();
       goToWordUseVoice(word);
     } catch (error) {
@@ -181,8 +182,8 @@ function BoxSearch(props) {
   return (
     <Header searchBar rounded style={styles.header}>
       <Item style={styles.boxSearch}>
-        <Ionicons name="md-search" size={25} color="gray" style={{paddingLeft :10}}/>
-        <Input autoFocus={false}  placeholder="Nhập từ cần tra " value={textSearch} onChangeText={(text) => setText(text)} onSubmitEditing={goToWord} />
+        <Ionicons name="md-search" size={25} color="gray" style={{ paddingLeft: 10 }} />
+        <Input autoFocus={false} placeholder="Nhập từ cần tra " value={textSearch} onChangeText={(text) => setText(text)} onSubmitEditing={goToWord} />
         {textSearch !== "" && <Ionicons name="md-close-circle-outline" size={30} style={styles.iconClose} onPress={handleClear} />}
       </Item>
       <FontAwesome5 name="microphone" size={25} style={styles.iconMic} onPress={showModal}></FontAwesome5>
@@ -198,9 +199,16 @@ function BoxSearch(props) {
               <Ionicons name="md-close-circle-outline" size={30} color="#bfbfbf" onPress={hideModal} />
             </View>
             <View style={styles.modalBody}>
-            <TouchableOpacity onPressIn={handleOnPressIn} onPressOut={handleOnPressOut}>
-              <FontAwesome5 name="microphone" size={100}></FontAwesome5>
-            </TouchableOpacity>
+              <TouchableOpacity onPressIn={handleOnPressIn} onPressOut={handleOnPressOut}>
+                <FontAwesome5 name="microphone" size={100} color="#0077b3"></FontAwesome5>
+              </TouchableOpacity>
+              <Text style={styles.structure}>Nhấn giữ để phát âm từ cần tra</Text>
+              {
+                textSound!==""? <Text style={styles.textSound}>{textSound}</Text> :null
+              }
+            </View>
+            <View style={styles.modalFooter}>
+              <Text style={styles.titleLanguage}>Tiếng Việt </Text>
             </View>
           </View>
         </View>
@@ -225,7 +233,7 @@ const styles = StyleSheet.create({
   },
   iconClose: {
     color: "#0077b3",
-    paddingRight : 15
+    paddingRight: 15
   },
   centeredView: {
     flex: 1,
@@ -238,7 +246,7 @@ const styles = StyleSheet.create({
     margin: 10,
     backgroundColor: "white",
     borderRadius: 20,
-
+   
     height: 250,
     width: 250,
     shadowColor: "#000",
@@ -251,8 +259,8 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   modalHeader: {
-    padding: 10,
-    height: 50,
+    padding: 5,
+    height: 40,
     position: "absolute",
     top: 0,
     right: 0,
@@ -262,16 +270,32 @@ const styles = StyleSheet.create({
   },
   modalBody: {
     position: "absolute",
-    top: 60,
+    top: 40,
+    right: 0,
+    left: 0,
+    bottom: 20,
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "center"
+  },
+  structure: {
+    marginVertical: 10
+  },
+  titleLanguage: {
+    fontSize: 12,
+    color: "#bfbfbf",
+    paddingBottom: 10
+  },
+  modalFooter: {
+    position: "absolute",
     right: 0,
     left: 0,
     bottom: 0,
-    // borderColor: "red",
-    // borderWidth: 1,
-    flex: 1,
-    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center"
+  },
+  textSound:{
+    fontSize:18
   }
 })
 
