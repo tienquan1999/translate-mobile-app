@@ -12,6 +12,7 @@ import DefinitionScreen from "../screens/DefinitionScreen"
 const HomeStack = createStackNavigator();
 
 export default function HomeStackScreen(props) {
+  
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen
@@ -19,7 +20,7 @@ export default function HomeStackScreen(props) {
         component={HomeScreen}
         options={{
           title: 'Welcome',
-          header: ({ navigation }) => <BoxSearch navigation={navigation} />
+          header: ({navigation}) => <BoxSearch navigation={navigation} />
         }}
       />
       <HomeStack.Screen

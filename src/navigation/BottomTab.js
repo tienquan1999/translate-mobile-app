@@ -6,6 +6,7 @@ import HomeStackScreen from './HomeStackScreen';
 import { SearchOnlineStack } from "./ElementStack"
 
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
+import SettingScreen from '../screens/SettingScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -34,6 +35,16 @@ export default function BottomTab() {
           tabBarLabel: 'Search online',
           tabBarIcon: ({ color, size }) => (
             <Icon name="earth" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="SettingScreen"
+        component={SettingScreen}
+        options={{
+          tabBarLabel: 'Settings',
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="settings" color={color} size={size} />
           ),
         }}
       />

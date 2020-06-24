@@ -11,7 +11,8 @@ import { translateWithGoogleApi } from "../utils/google-api/translate-api"
 import { useFocusEffect } from '@react-navigation/native';
 
 function SearchOnlineScreen(props) {
-
+  console.log("route in search onl: ", props.route)
+  
   let { from, to } = props.languages;
   let { params } = props.route;
   
@@ -41,7 +42,7 @@ function SearchOnlineScreen(props) {
       
 
       return () => {
-        //handleClearFrom();
+        handleClearFrom();
         // Do something when the screen is unfocused
         // Useful for cleanup functions
       };
@@ -61,7 +62,7 @@ function SearchOnlineScreen(props) {
       <View style={styles.boxText}>
         <Textarea placeholder="Nhập để dịch" value={textFrom} style={styles.textarea} onChangeText={(value) => setTextFrom(value)} />
         <View style={styles.boxMedia}>
-          {textFrom !== "" && <Icon name="close" size={25} style={styles.iconClose} onPress={handleClearFrom} />}
+          {textFrom !== "" && <MaterialIcons name="close" size={25} style={styles.iconClose} onPress={handleClearFrom} />}
           <MaterialIcons name="volume-up" size={25} color="#0077b3" style={styles.iconSound} onPress={() => speechText("from")} />
         </View>
       </View>
