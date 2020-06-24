@@ -8,7 +8,10 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import BottomTab from "./src/navigation/BottomTab";
 import Loading from "./src/components/Loading";
- 
+import * as Font from 'expo-font';
+import { Ionicons } from '@expo/vector-icons';
+
+
 
 export default function App() {
 
@@ -33,6 +36,17 @@ export default function App() {
   // if(isLoading){
   //   return <Loading/>
   // }
+  useEffect(()=>{
+    const fontNativeBase = async() =>{
+      await Font.loadAsync({
+        Roboto: require('native-base/Fonts/Roboto.ttf'),
+        Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+        ...Ionicons.font,
+      });
+    }
+    fontNativeBase()
+  }, []);
+
   return (
     <Provider store={store}>
       <NavigationContainer>

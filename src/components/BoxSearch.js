@@ -54,7 +54,7 @@ function BoxSearch(props) {
       props.navigation.navigate("Word", { wordMeaning: result });
     else
     {
-      props.navigation.jumpTo("SearchOnline", { wordMeaning: result })
+      props.navigation.navigate("SearchOnline", { wordMeaning: result })
     }
       
   }
