@@ -98,7 +98,8 @@ const styles = StyleSheet.create({
   },
    mean : {
      color : "#0077b3",
-     fontStyle : "italic"
+     fontStyle : "italic",
+     height : '35%'
    }
 })
 
