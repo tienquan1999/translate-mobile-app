@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, } from "react-native"
-import { Content, View, Textarea, Button } from "native-base"
+import { StyleSheet, Text, TextInput } from "react-native"
+import { Content, View, Textarea, Button, Container, Header, Title, Body, Left, Right } from "native-base"
 import BoxSwitchLanguage from "../components/BoxSwitchLanguage";
 import { switchLanguage } from "../actions/switchLanguage";
 import { ACTION_LANGUAGE } from "../constants/languages";
 import { connect } from "react-redux"
-import {MaterialIcons, Ionicons} from "@expo/vector-icons"
+import { MaterialIcons, MaterialCommunityIcons, Ionicons } from "@expo/vector-icons"
 import { textToSpeechWithApiGoogle } from "../utils/google-api/text-to-speech"
 import { translateWithGoogleApi } from "../utils/google-api/translate-api"
 import { useFocusEffect } from '@react-navigation/native';
 
 function SearchOnlineScreen(props) {
-  console.log("route in search onl: ", props.route)
-  
+
   let { from, to } = props.languages;
   let { params } = props.route;
-  
-  const [textFrom, setTextFrom] = useState(params ? params.wordMeaning.word : "");
-  const [textTo, setTextTo] = useState(params ? params.wordMeaning.mean : "");
+
+  const [textFrom, setTextFrom] = useState("");
+  const [textTo, setTextTo] = useState("");
 
   const translateOnline = async () => {
     const result = await translateWithGoogleApi({
@@ -39,7 +38,7 @@ function SearchOnlineScreen(props) {
   }
   useFocusEffect(
     React.useCallback(() => {
-      
+
 
       return () => {
         handleClearFrom();
@@ -49,60 +48,68 @@ function SearchOnlineScreen(props) {
     }, [])
   );
   useEffect(() => {
-    if(params)
-    {
-      const {from, to} = params.wordMeaning;
+    if (params) {
+      let { from, to, word, mean } = params.wordMeaning;
+      setTextFrom(word)
+      setTextTo(mean)
       props.switchLanguage(from, to, ACTION_LANGUAGE.CHANGE)
     }
     else
       props.switchLanguage("en", "vi", ACTION_LANGUAGE.CHANGE);
-  }, [])
+  }, [props.route])
   return (
-    <Content padder style={styles.body}>
-      <View style={styles.boxText}>
-        <Textarea placeholder="Nhập để dịch" value={textFrom} style={styles.textarea} onChangeText={(value) => setTextFrom(value)} />
-        <View style={styles.boxMedia}>
-          {textFrom !== "" && <MaterialIcons name="close" size={25} style={styles.iconClose} onPress={handleClearFrom} />}
-          <MaterialIcons name="volume-up" size={25} color="#0077b3" style={styles.iconSound} onPress={() => speechText("from")} />
+    <Container>
+      <Header style={styles.header}>
+        <Left>
+          <MaterialCommunityIcons name="earth" color="#ffffff" size={30}/>
+        </Left>
+        <Body>
+          <Title style={styles.title}>{"Dịch Online "}</Title>
+        </Body>
+        <Right/>
+      </Header>
+      <Content padder style={styles.body}>
+        <View style={styles.boxText}>
+          <TextInput multiline={true} placeholder="Nhập để dịch" value={textFrom} style={styles.textarea} onChangeText={(value) => setTextFrom(value)} />
+          <View style={styles.boxMedia}>
+            {textFrom !== "" && <MaterialIcons name="close" size={25} style={styles.iconClose} onPress={handleClearFrom} />}
+            <MaterialIcons name="volume-up" size={25} color="#0077b3" style={styles.iconSound} onPress={() => speechText("from")} />
+          </View>
         </View>
-      </View>
-      <View style={styles.boxBtn}>
-        <BoxSwitchLanguage />
-        <Button style={styles.btnTranslate} onPress={translateOnline}>
-          <Text style={styles.textBtn}>{"Dịch"}</Text>
-        </Button>
-      </View>
-      <View style={styles.boxText}>
-        <Text multiline={true} style={styles.textarea}>{textTo}</Text>
-        <View>
-          <MaterialIcons name="volume-up" size={25} color="#0077b3" style={styles.iconSound} onPress={() => speechText("to")} />
+        <View style={styles.boxBtn}>
+          <BoxSwitchLanguage />
+          <Button style={styles.btnTranslate} onPress={translateOnline}>
+            <Text style={styles.textBtn}>{"Dịch"}</Text>
+          </Button>
         </View>
-      </View>
-    </Content>
+        <View style={styles.boxText}>
+          <Text multiline={true} style={styles.textTo}>{textTo}</Text>
+          <View>
+            <MaterialIcons name="volume-up" size={25} color="#0077b3" style={styles.iconSound} onPress={() => speechText("to")} />
+          </View>
+        </View>
+      </Content>
+    </Container>
   )
 }
 const styles = StyleSheet.create({
   body: {
     backgroundColor: '#ffffff'
   },
-  boxText: {
-    flexDirection: "row",
-    borderColor: "#0077b3",
-    backgroundColor: "#ffffff",
-    borderWidth: 2,
-    borderRadius: 10,
-    height: 100,
-    marginVertical: 10,
-    paddingVertical: 10,
-    flex: 1
+  header: {
+    backgroundColor: "#0077b3"
+  },
+  title: {
+    color: "#ffffff",
+    paddingLeft: 10
   },
   boxMedia: {
     flexDirection: "column",
     justifyContent: "space-between"
   },
   btnTranslate: {
-    backgroundColor: "#3385ff",
-    color:"#ffffff",
+    backgroundColor: "#0099e6",
+    color: "#ffffff",
     borderRadius: 10,
     paddingHorizontal: 10,
     paddingVertical: 25,
@@ -114,9 +121,27 @@ const styles = StyleSheet.create({
   iconSound: {
     flex: 1
   },
+  boxText: {
+    flexDirection: "row",
+    borderColor: "#0077b3",
+    backgroundColor: "#ffffff",
+    borderWidth: 2,
+    borderRadius: 10,
+    minHeight: 100,
+    marginVertical: 10,
+    paddingVertical: 10,
+    flex: 1
+  },
   textarea: {
     fontSize: 20,
-    flex: 3
+    flex: 3,
+    paddingHorizontal: 10,
+    textAlignVertical: "top"
+  },
+  textTo: {
+    fontSize: 20,
+    flex: 3,
+    paddingHorizontal: 10
   },
   iconClose: {
     color: "#0077b3",
@@ -125,7 +150,7 @@ const styles = StyleSheet.create({
   boxBtn: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems:"center"
+    alignItems: "center"
   }
 })
 const mapStateToProps = (state) => {

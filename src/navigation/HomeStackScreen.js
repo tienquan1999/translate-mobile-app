@@ -12,7 +12,6 @@ import DefinitionScreen from "../screens/DefinitionScreen"
 const HomeStack = createStackNavigator();
 
 export default function HomeStackScreen(props) {
-  
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen
@@ -34,17 +33,6 @@ export default function HomeStackScreen(props) {
           }
         }}
       />
-      {/* <HomeStack.Screen
-        name="SearchOnline"
-        component={SearchOnlineScreen}
-        options={{
-          title: 'Dịch Online',
-          header:({navigation}) =>{
-            const title= "Dịch online";
-            return <HeaderSearchOnline handleBack={() => navigation.goBack()} navigation={navigation} title={title} />
-          }
-        }}
-      /> */}
     </HomeStack.Navigator>
   )
 }

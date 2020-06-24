@@ -1,18 +1,18 @@
 const LANGUAGE = [
     {
-        label:"Vietnamese",
+        label:"Tiếng Việt",
         value:"vi"
     },
     {
-        label:"English",
+        label:"Tiếng Anh",
         value:"en"
     },
     {
-        label:"Japanese",
+        label:"Tiếng Nhật",
         value:"ja"
     },
     {
-        label:"Korean",
+        label:"Tiếng Hàn ",
         value:"ko"
     }
 ]
