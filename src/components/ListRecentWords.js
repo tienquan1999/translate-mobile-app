@@ -29,19 +29,13 @@ export default function ListRecentWords(props) {
         )}
         keyExtractor={(item, index) => index.toString()}
       />
-      <View style={styles.viewBtn}>
-        <MaterialCommunityIcons.Button name="earth" color="#0088cc" backgroundColor="#ffffff" size={30}
-          onPress={() => props.navigation.navigate('SearchOnline')}>
-          <Text style={styles.btnText}>Dịch Online</Text>
-        </MaterialCommunityIcons.Button>
-      </View>
     </View>
   )
 }
 const styles = StyleSheet.create({
   body: {
     margin: 5,
-    height :'92%'
+    height :'90%'
   },
   titleList: {
     color: "#004466",
@@ -50,22 +44,8 @@ const styles = StyleSheet.create({
     alignContent :"center",
     textAlign : "center"
   },
-  viewBtn:{
-    marginVertical:5
-  },
-  btn:{
-    backgroundColor:"#ffffff",
-    textAlign:"left"
-  },
-  btnText: {
-    fontSize: 16,
-    color:"#000000"
-  },
-  button: {
-    alignItems: "center",
-    backgroundColor: "#DDDDDD",
-    padding: 10
-  },
+  
+   
   flatList :{
     paddingRight : 0,
     paddingLeft : 15
