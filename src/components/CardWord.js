@@ -43,16 +43,17 @@ function CardWord(props) {
               <Text style={styles.word}>{item.word}</Text>
               <View style={styles.bottomCard}>
                 <Text style={styles.proper}>{item.result.data.pronunciation}</Text>
-                  <MaterialIcons name="volume-up" size={25} color="#0077b3" onPress={speechText}/>
+                  <MaterialIcons name="volume-up" size={25} color="#0077b3"  onPress={speechText}/>
                  
               </View>
-          <Text>{item.result.data.mean[0].values[0].mean}</Text>
+              <Text style={styles.mean}>{item.result.data.mean[0].values[0].mean}</Text>
             </View>
              :  
              <View >
                 <Text style={styles.word}>{item.word}</Text>
                 <View style={styles.bottomCard}>
-                  <MaterialIcons name="volume-up" size={25} color="#0077b3" onPress={speechText}/>
+                  <Text style={styles.proper}></Text>
+                  <MaterialIcons name="volume-up" size={25} color="#0077b3"  onPress={speechText}/>
                 </View>
                 
              </View> 
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     elevation: 3,
     backgroundColor: "#ffffff",
-    width : '85%',
+    width : '94%',
     marginRight:15 ,
    },
   cardItem: {
@@ -87,17 +88,18 @@ const styles = StyleSheet.create({
   },  
   bottomCard:{
     flexDirection:"row",
-    justifyContent:"space-between",
-    width: 120,
-    marginVertical:0
+    justifyContent:"space-between"
   },
   proper: {
     color: "#007acc",
     fontWeight: "bold",
     height : 20,
-    width : 100
+    width : '90%'
   },
-   
+   mean : {
+     color : "#0077b3",
+     fontStyle : "italic"
+   }
 })
 
 const mapStateToProps = (state) => ({
