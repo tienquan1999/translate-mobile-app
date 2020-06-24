@@ -22,7 +22,7 @@ export default function BottomTab() {
         name="Home"
         component={HomeStackScreen}
         options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: 'Tra từ ',
           tabBarIcon: ({ color, size }) => (
             <Icon name="dictionary" color={color} size={size} />
           ),
@@ -32,7 +32,7 @@ export default function BottomTab() {
         name="SearchOnline"
         component={SearchOnlineScreen}
         options={{
-          tabBarLabel: 'Search online',
+          tabBarLabel: 'Dịch online',
           tabBarIcon: ({ color, size }) => (
             <Icon name="earth" color={color} size={size} />
           ),
@@ -42,7 +42,7 @@ export default function BottomTab() {
         name="SettingScreen"
         component={SettingScreen}
         options={{
-          tabBarLabel: 'Settings',
+          tabBarLabel: 'Cài đặt',
           tabBarIcon: ({ color, size }) => (
             <Icon name="settings" color={color} size={size} />
           ),

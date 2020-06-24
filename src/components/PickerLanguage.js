@@ -33,7 +33,7 @@ function PickerLanguage(props) {
       >
         {
           (LANGUAGE || []).map((e, index) => {
-            return <Picker.Item label={e.label} value={e.value} key={index}  />
+            return <Picker.Item style={styles.pickerItem} label={e.label} value={e.value} key={index}  />
           })
         }
         
@@ -45,12 +45,16 @@ function PickerLanguage(props) {
 }
 const styles = StyleSheet.create({
   picker: {
-   width :  120,
-  
+   width :  140,
     height: 40,
     color: "#66a3ff",
-    
-  } 
+    padding:0,
+    margin:0
+  },
+  pickerItem:{
+    borderColor:"red",
+    borderWidth:1
+  }
 })
 const mapStateToProps = (state) =>{
   return {

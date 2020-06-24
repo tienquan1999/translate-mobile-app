@@ -58,6 +58,21 @@ function BoxSearch(props) {
     }
       
   }
+  const goToWordUseVoice = async (textSearch) => {
+    const result = await translateText({
+      from: from,
+      to: to,
+      word: textSearch
+    })
+    
+    if (result.type === "offline")
+      props.navigation.navigate("Word", { wordMeaning: result });
+    else
+    {
+      props.navigation.navigate("SearchOnline", { wordMeaning: result })
+    }
+      
+  }
   const handleClear = () => {
     setText("")
   }
@@ -132,9 +147,9 @@ function BoxSearch(props) {
         }
       }
       let response = await axios.post(url, body);
-      let word = response.data.results[0].alternatives[0].transcript
-      setText(word);
-      goToWord();
+      let word = response.data.results[0].alternatives[0].transcript;
+      hideModal();
+      goToWordUseVoice(word);
     } catch (error) {
       console.log('There was an error reading file', error);
       // this.stopRecording();
@@ -167,8 +182,8 @@ function BoxSearch(props) {
     <Header searchBar rounded style={styles.header}>
       <Item style={styles.boxSearch}>
         <Ionicons name="md-search" size={25} color="gray" style={{paddingLeft :10}}/>
-        <Input autoFocus={false}  placeholder="Search" value={textSearch} onChangeText={(text) => setText(text)} onSubmitEditing={goToWord} />
-        {textSearch !== "" && <Ionicons name="ios-close" size={25} style={styles.iconClose} onPress={handleClear} />}
+        <Input autoFocus={false}  placeholder="Nhập từ cần tra " value={textSearch} onChangeText={(text) => setText(text)} onSubmitEditing={goToWord} />
+        {textSearch !== "" && <Ionicons name="md-close-circle-outline" size={30} style={styles.iconClose} onPress={handleClear} />}
       </Item>
       <FontAwesome5 name="microphone" size={25} style={styles.iconMic} onPress={showModal}></FontAwesome5>
       <Modal
@@ -180,7 +195,7 @@ function BoxSearch(props) {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <View style={styles.modalHeader}>
-              <Ionicons name="ios-close" size={25} color="#bfbfbf" onPress={hideModal} />
+              <Ionicons name="md-close-circle-outline" size={30} color="#bfbfbf" onPress={hideModal} />
             </View>
             <View style={styles.modalBody}>
             <TouchableOpacity onPressIn={handleOnPressIn} onPressOut={handleOnPressOut}>

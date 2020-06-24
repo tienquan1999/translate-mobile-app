@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, TextInput } from "react-native"
-import { Content, View, Textarea, Button, Container, Header, Title, Body } from "native-base"
+import { Content, View, Textarea, Button, Container, Header, Title, Body, Left, Right } from "native-base"
 import BoxSwitchLanguage from "../components/BoxSwitchLanguage";
 import { switchLanguage } from "../actions/switchLanguage";
 import { ACTION_LANGUAGE } from "../constants/languages";
 import { connect } from "react-redux"
-import { MaterialIcons, Ionicons } from "@expo/vector-icons"
+import { MaterialIcons, MaterialCommunityIcons, Ionicons } from "@expo/vector-icons"
 import { textToSpeechWithApiGoogle } from "../utils/google-api/text-to-speech"
 import { translateWithGoogleApi } from "../utils/google-api/translate-api"
 import { useFocusEffect } from '@react-navigation/native';
@@ -60,9 +60,13 @@ function SearchOnlineScreen(props) {
   return (
     <Container>
       <Header style={styles.header}>
+        <Left>
+          <MaterialCommunityIcons name="earth" color="#ffffff" size={30}/>
+        </Left>
         <Body>
           <Title style={styles.title}>{"Dịch Online "}</Title>
         </Body>
+        <Right/>
       </Header>
       <Content padder style={styles.body}>
         <View style={styles.boxText}>
@@ -99,13 +103,12 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     paddingLeft: 10
   },
-
   boxMedia: {
     flexDirection: "column",
     justifyContent: "space-between"
   },
   btnTranslate: {
-    backgroundColor: "#3385ff",
+    backgroundColor: "#0099e6",
     color: "#ffffff",
     borderRadius: 10,
     paddingHorizontal: 10,
