@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, TextInput } from "react-native"
+import { StyleSheet, Text, TextInput , Keyboard,TouchableWithoutFeedback} from "react-native"
 import { Content, View, Textarea, Button, Container, Header, Title, Body, Left, Right } from "native-base"
 import BoxSwitchLanguage from "../components/BoxSwitchLanguage";
 import { switchLanguage } from "../actions/switchLanguage";
@@ -17,6 +17,7 @@ function SearchOnlineScreen(props) {
 
   const [textFrom, setTextFrom] = useState("");
   const [textTo, setTextTo] = useState("");
+   
 
   const translateOnline = async () => {
     const result = await translateWithGoogleApi({
@@ -24,7 +25,8 @@ function SearchOnlineScreen(props) {
       to: to,
       word: textFrom
     })
-    setTextTo(result.mean)
+    setTextTo(result.mean);
+    Keyboard.dismiss;
   }
   const handleClearFrom = () => {
     setTextFrom("")
@@ -76,12 +78,13 @@ function SearchOnlineScreen(props) {
             <MaterialIcons name="volume-up" size={25} color="#0077b3" style={styles.iconSound} onPress={() => speechText("from")} />
           </View>
         </View>
-        <View style={styles.boxBtn}>
-          <BoxSwitchLanguage />
-          <Button style={styles.btnTranslate} onPress={translateOnline}>
-            <Text style={styles.textBtn}>{"Dịch"}</Text>
-          </Button>
-        </View>
+          <View style={styles.boxBtn}>
+            <BoxSwitchLanguage />
+            <Button style={styles.btnTranslate} onPress={translateOnline }>
+              <Text style={styles.textBtn}>{"Dịch"}</Text>
+            </Button>
+          </View>
+        
         <View style={styles.boxText}>
           <Text multiline={true} style={styles.textTo}>{textTo}</Text>
           <View>

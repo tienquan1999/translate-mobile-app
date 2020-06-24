@@ -12,7 +12,6 @@ function CardWord(props) {
   const {from, to} = props.languages;
   const item = props.item;
   const {word, proper} = props.item;
-  console.log(item.result.data)
   const handleGoToWord = async() =>{
     // const mean = await translateText({
     //   from: from,
@@ -50,7 +49,9 @@ function CardWord(props) {
             </View>
              :  
              <View >
+               {item.word.length >= 20 ?    <Text style={styles.word}>{item.word.split(' ').splice(0,7).join(' ')}...</Text> :
                 <Text style={styles.word}>{item.word}</Text>
+                }
                 <View style={styles.bottomCard}>
                   <Text style={styles.proper}></Text>
                   <MaterialIcons name="volume-up" size={25} color="#0077b3"  onPress={speechText}/>
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
    
   word: {
     fontSize: 25,
-    height: 50,
+    height: 65,
     fontWeight: "bold",
     color:"#004466"
   },  
