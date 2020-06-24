@@ -9,7 +9,7 @@ export default function HeaderSearchOnline(props) {
     <Header style={styles.headerTab}>
       <Left>
         <Button transparent onPress={handleBack}>
-          <AntDesign name='arrowleft' color="#ffffff" size={25}/>
+          <AntDesign name='arrowleft' size={30} color="#ffffff" />
         </Button>
       </Left>
       <Body>

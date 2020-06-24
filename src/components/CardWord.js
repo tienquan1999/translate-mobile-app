@@ -12,7 +12,7 @@ function CardWord(props) {
   const {from, to} = props.languages;
   const item = props.item;
   const {word, proper} = props.item;
-  
+  console.log(item.result.data)
   const handleGoToWord = async() =>{
     // const mean = await translateText({
     //   from: from,
@@ -46,6 +46,7 @@ function CardWord(props) {
                   <MaterialIcons name="volume-up" size={25} color="#0077b3" onPress={speechText}/>
                  
               </View>
+          <Text>{item.result.data.mean[0].values[0].mean}</Text>
             </View>
              :  
              <View >
@@ -67,14 +68,15 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     elevation: 3,
     backgroundColor: "#ffffff",
-    width: 180,
-    marginRight:15
-  },
+    width : '85%',
+    marginRight:15 ,
+   },
   cardItem: {
     borderRadius: 15,
     backgroundColor: "#ffffff",
     borderColor:"#007acc",
-    borderWidth:1
+    borderWidth:1,
+    height : 150
   },
    
   word: {

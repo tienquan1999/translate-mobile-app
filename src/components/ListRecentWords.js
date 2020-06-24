@@ -22,7 +22,7 @@ export default function ListRecentWords(props) {
     <View style={styles.body}>
       <Text style={styles.titleList}>Từ tìm kiếm gần đây</Text>
       <FlatList
-        horizontal={true}
+        style={styles.flatList}
         data={recentWords}
         renderItem={({ item }) => (
           <CardWord item={item} nav={props.navigation} key/>
@@ -40,12 +40,15 @@ export default function ListRecentWords(props) {
 }
 const styles = StyleSheet.create({
   body: {
-    margin: 5
+    margin: 5,
+    height :'92%'
   },
   titleList: {
     color: "#004466",
     fontSize: 17,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    alignContent :"center",
+    textAlign : "center"
   },
   viewBtn:{
     marginVertical:5
@@ -63,4 +66,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#DDDDDD",
     padding: 10
   },
+  
 })

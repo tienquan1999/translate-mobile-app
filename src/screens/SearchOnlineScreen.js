@@ -5,7 +5,7 @@ import BoxSwitchLanguage from "../components/BoxSwitchLanguage";
 import { switchLanguage } from "../actions/switchLanguage";
 import { ACTION_LANGUAGE } from "../constants/languages";
 import { connect } from "react-redux"
-import {MaterialIcons} from "@expo/vector-icons"
+import {MaterialIcons, Ionicons} from "@expo/vector-icons"
 import { textToSpeechWithApiGoogle } from "../utils/google-api/text-to-speech"
 import { translateWithGoogleApi } from "../utils/google-api/translate-api"
 import { useFocusEffect } from '@react-navigation/native';
