@@ -9,7 +9,7 @@ export default function HeaderDefinitionWord(props) {
 
   const title = route.params.wordMeaning.data.word;
   const { liked } = route.params.wordMeaning;
-  console.log("liked: ", liked)
+  console.log("liked: ", route.params)
   const [nameIconStar, setNameIconStar] = useState(liked ? "star" : "star-o");
 
   const toggleStar = async() => {
