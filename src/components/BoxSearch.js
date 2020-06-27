@@ -52,6 +52,7 @@ function BoxSearch(props) {
     setCurLan(tmp.label);
   }
   const goToWord = async () => {
+    if(textSearch.trim() !== ''){
     const result = await translateText({
       from: from,
       to: to,
@@ -62,6 +63,7 @@ function BoxSearch(props) {
       props.navigation.navigate("Word", { wordMeaning: result });
     else {
       props.navigation.navigate("SearchOnline", { wordMeaning: result })
+    }
     }
 
   }
