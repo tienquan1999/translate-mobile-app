@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { StyleSheet, ToastAndroid, Dimensions } from "react-native"
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import { ListItem, Right, Left, Button, Text } from "native-base"

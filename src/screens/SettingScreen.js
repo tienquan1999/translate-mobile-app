@@ -1,7 +1,7 @@
 import React from "react"
 import { View,  StyleSheet } from "react-native"
 import { Content, Text,Button, Icon, List, ListItem, Container, Header, Title, Body, Left, Right } from "native-base"
-import { MaterialCommunityIcons } from "@expo/vector-icons"
+import { MaterialCommunityIcons, Entypo } from "@expo/vector-icons"
 
 export default function SettingScreen(props) {
   return (
@@ -29,7 +29,7 @@ export default function SettingScreen(props) {
             </Body>
             <Right />
           </ListItem>
-          <ListItem icon>
+          <ListItem icon onPress={() => props.navigation.navigate('Grammar')}>
             <Left>
               <Button style={{ backgroundColor: "#007AFF" }}>
                 <Icon active name="book" />
