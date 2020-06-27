@@ -14,10 +14,12 @@ export default function BottomTab() {
   return (
     <Tab.Navigator
       tabBarOptions={{
-        activeTintColor: '#000000',
+        activeTintColor: '#0077b3',
+        keyboardHidesTabBar: true
       }}
       
       options={{ headerShown: false }}
+      
     >
       <Tab.Screen
         name="Home"
