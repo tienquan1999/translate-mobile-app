@@ -50,17 +50,16 @@ function BoxSearch(props) {
   }
   const goToWord = async () => {
     if(textSearch.trim() !== ''){
-    const result = await translateText({
-      from: from,
-      to: to,
-      word: textSearch
-    })
-    console.log(result);
-    if (result.type === "offline")
-      props.navigation.navigate("Word", { wordMeaning: result });
-    else {
-      props.navigation.navigate("SearchOnline", { wordMeaning: result })
-    }
+      const result = await translateText({
+        from: from,
+        to: to,
+        word: textSearch
+      })
+      if (result.type === "offline")
+        props.navigation.navigate("Word", { wordMeaning: result });
+      else if ((result.type === "online")){
+        props.navigation.navigate("SearchOnline", { wordMeaning: result })
+      }
     }
 
   }
@@ -71,10 +70,9 @@ function BoxSearch(props) {
       to: to,
       word: textSearch
     })
-
     if (result.type === "offline")
       props.navigation.navigate("Word", { wordMeaning: result });
-    else {
+    else if(result.type === "online") {
       props.navigation.navigate("SearchOnline", { wordMeaning: result })
     }
 

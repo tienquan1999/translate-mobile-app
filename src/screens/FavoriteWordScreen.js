@@ -1,40 +1,23 @@
-import React , {useEffect} from "react"
+import React , {useEffect, useState} from "react"
 import { List,Container, Content } from "native-base"
 import { addWordToFavoriteList, deleteWordFromFavoriteList,getFavoriteWord} from "../utils/controller"
 import { ItemFavoriteWord } from "../components/ItemFavoriteWord";
 
-const tmp_list = [
-  {
-    word: "hello",
-    liked: true
-  },
-  {
-    word: "cat",
-    like: false
-  },
-  {
-    word: "dog",
-    liked: false
-  },
-  {
-    word: "book",
-    liked: true
-  },
-]
 export function FavoriteWordScreen(props) {
+  let [listWord, updateListWord] = useState([]);
   useEffect(()=>{
-    const fetchData=async()=>{
+    async function fetchData(){
       const listItem = await getFavoriteWord();
-      console.log("list item: ", listItem)
+      updateListWord(listItem);
     }
     fetchData()
-  },[])
+  }, [])
   return (
     <Container>
       <Content>
         <List>
           {
-            tmp_list.map((e, index) => {
+            listWord.map((e, index) => {
               return (
                 <ItemFavoriteWord key={index} item={e}/>
               )

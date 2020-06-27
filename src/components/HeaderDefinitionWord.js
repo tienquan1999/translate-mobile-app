@@ -9,18 +9,18 @@ export default function HeaderDefinitionWord(props) {
 
   const title = route.params.wordMeaning.data.word;
   const { liked } = route.params.wordMeaning;
-  console.log("liked: ", route.params)
   const [nameIconStar, setNameIconStar] = useState(liked ? "star" : "star-o");
 
-  const toggleStar = async() => {
-    if (nameIconStar === "star")
+  const toggleStar = async () => {
+    console.log(title);
+    if (nameIconStar === "star-o")
     {
-      setNameIconStar("star-o")
+      setNameIconStar("star")
       await addWordToFavoriteList(title)
     }
     else
     {
-      setNameIconStar("star")
+      setNameIconStar("star-o")
       await deleteWordFromFavoriteList(title)
     }
   }

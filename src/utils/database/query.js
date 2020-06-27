@@ -6,17 +6,18 @@ function querySQLite({db, query, params}){
               tx.executeSql(query, params, (_, { rows }) =>
                 {
                   resolve(JSON.stringify(rows))
+                },
+                (e) => {
+                  console.log(e);
                 }
               );
-            }, 
-            (e) => {
-              console.log(e);
-              reject(e);
             },
-            () => {
-              // console.log("done")
+            (e) => {
+              console.log("Here");
+              console.log(e.message);
             }
           );
+        
     })
 }
 
