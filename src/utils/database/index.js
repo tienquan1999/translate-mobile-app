@@ -20,7 +20,9 @@ async function connectToDatabase(dbName) {
         await createTable({db, query})
         query = "create table if not exists historyTranslate (id integer primary key AUTOINCREMENT, word text, fromLanguage text, toLanguage text, result text, time_update text);"
         await createTable({db, query});
-        query = "create index audioIndex on audio(word); create index historyIndex on historyTranslate(word);"
+        query = "create table if not exists favoriteWord (id integer primary key AUTOINCREMENT, word text);"
+        await createTable({db, query});
+        query = "create index audioIndex on audio(word); create index historyIndex on historyTranslate(word);create index wordIndex on favoriteWord(word);"
         await querySQLite({
             db, query, params: []
         })

@@ -41,6 +41,7 @@ module.exports = (result, from, to) => {
             }
         })
         result.type = "offline";
+        
     }else{
         result.type = "online";
     }

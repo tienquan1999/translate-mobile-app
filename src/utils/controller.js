@@ -29,6 +29,17 @@ async function translateText({from, to, word}){
                 result = await translateWithGoogleApi({from, to, word});
             }
             result = formatResult(result);
+            query = "select * from favoriteWord where word = ?;";
+            let favoriteWords = await querySQLite({
+                db,
+                query,
+                params: [word]
+            })
+            if(JSON.parse(favoriteWords)._array.length === 0){
+                result.liked = false;
+            }else{
+                result.liked = true;
+            }
             query = "insert into historyTranslate(word, fromLanguage, toLanguage, result, time_update) values(?, ?, ?, ?, ?);";
             await querySQLite({
                 db,
@@ -133,7 +144,78 @@ async function getHistoryTranslate(){
     }
 }
 
+async function getFavoriteWord(){
+    try{
+        let db = await connectToDatabase("favoriteWord.db");
+        let query = "select * from favoriteWord order by id DESC;"
+        let result = await querySQLite({
+            db,
+            query,
+            params: []
+        })
+        result = JSON.parse(result)._array;
+        result = result.map(e => {
+            e.result = JSON.parse(e.result);
+            e.result.id = parseInt(e.result.id);
+            return e;
+        });
+        db._db.close();
+        console.log(result);
+        return result;
+    }   
+    catch(e){
+        console.log(e);
+        return {
+            success: false,
+            message: e.message
+        }
+    }
+}
+
+async function addWordToFavoriteList(word){
+    try{
+        let db = await connectToDatabase("favoriteWord.db");
+        let query = "insert into favoriteWord(word) values(?);"
+        await querySQLite({
+            db,
+            query,
+            params: [word]
+        })
+        db._db.close();
+    }
+    catch(e){
+        console.log(e);
+        return {
+            success: false,
+            message: e.message
+        }
+    }
+}
+
+async function deleteWordFromFavoriteList(word){
+    try{
+        let db = await connectToDatabase("favoriteWord.db");
+        let query = "delete from favoriteWord where word = ?;"
+        await querySQLite({
+            db,
+            query,
+            params: [word]
+        })
+        db._db.close();
+    }
+    catch(e){
+        console.log(e);
+        return {
+            success: false,
+            message: e.message
+        }
+    }
+}
+
 export {
     translateText,
-    getHistoryTranslate
+    getHistoryTranslate,
+    getFavoriteWord,
+    addWordToFavoriteList,
+    deleteWordFromFavoriteList
 };
