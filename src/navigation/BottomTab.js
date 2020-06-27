@@ -7,6 +7,7 @@ import HomeStackScreen from './HomeStackScreen';
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 import SettingScreen from '../screens/SettingScreen';
 import SearchOnlineScreen from '../screens/SearchOnlineScreen';
+import SettingStack from './SettingStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -43,7 +44,7 @@ export default function BottomTab() {
       />
       <Tab.Screen
         name="SettingScreen"
-        component={SettingScreen}
+        component={SettingStack}
         options={{
           tabBarLabel: 'Menu',
           tabBarIcon: ({ color, size }) => (

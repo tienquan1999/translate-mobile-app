@@ -43,12 +43,9 @@ function BoxSearch(props) {
   const [isRecording, updateIsRecording] = useState(false);
   const [textSound, setTextSound] = useState("")
   const [curLan, setCurLan] = useState("")
-  const [notice, setNotice] = useState("")
 
   const getLanguageCurrent = () => {
     let tmp = LANGUAGE.find(e => e.value === from)
-    let tmpNotice = TYPE_NOTICE_LANGUAGE.find(e => e.value === from)
-    setNotice(tmpNotice.label);
     setCurLan(tmp.label);
   }
   const goToWord = async () => {
@@ -213,7 +210,7 @@ function BoxSearch(props) {
               <TouchableOpacity onPressIn={handleOnPressIn} onPressOut={handleOnPressOut}>
                 <FontAwesome5 name="microphone" size={100} color="#0077b3"></FontAwesome5>
               </TouchableOpacity>
-              <Text style={styles.structure}>{notice}</Text>
+              <Text style={styles.structure}>Nhấn giữ để phát âm từ</Text>
               {
                 textSound !== "" ? <Text style={styles.textSound}>{textSound}</Text> : null
               }

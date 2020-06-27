@@ -20,10 +20,11 @@ export default function ListRecentWords(props) {
   }, [])
   useFocusEffect(
     React.useCallback(() => {
-
-
+      console.log("hello")
+      
       return async() => {
         let words = await getHistoryTranslate();
+        console.log("word past: ")
         setRecentWords(words);
         // Do something when the screen is unfocused
         // Useful for cleanup functions
