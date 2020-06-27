@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text , ToastAndroid,Dimensions} from "react-native"
-import { Header, Left, Body, Right, Button, Icon } from 'native-base';
+import { Header, Left, Body, Right, Button, Icon, Item } from 'native-base';
 import {FontAwesome,AntDesign} from "@expo/vector-icons"
 
 export default function HeaderDefinitionWord(props) {
-  const { navigation, title, handleBack} = props;
+  const { navigation, title, handleBack, route} = props;
+  console.log("route in header: ", route)
   const [nameIconStar, setNameIconStar] = useState("star-o");
   const screen = Dimensions.get('screen');
+  console.log(route.params.wordMeaning.liked)
 
   const showToastWithGravity = () => {
     setNameIconStar("star")
@@ -31,7 +33,8 @@ export default function HeaderDefinitionWord(props) {
           <AntDesign name='search1' size={25} color="#ffffff"/>
         </Button>
         <Button transparent onPress={showToastWithGravity}>
-          <FontAwesome name={nameIconStar} color={nameIconStar === 'star' ? "#e6e600" : "#ffffff"} backgroundColor="#ffffff" size={25} />
+          
+          <FontAwesome name={nameIconStar} color={route.params.wordMeaning.liked === true ? "#e6e600" : "#ffffff"} backgroundColor="#ffffff" size={25} />
         </Button>
       </Right>
     </Header>

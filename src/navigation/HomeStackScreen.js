@@ -29,7 +29,7 @@ export default function HomeStackScreen(props) {
           title: 'Word',
           header: ({ navigation, scene }) => {
             const title = scene.route.params.wordMeaning.data.word;
-            return <HeaderDefinitionWord handleBack={() => navigation.goBack()} navigation={navigation} title={title} />
+            return <HeaderDefinitionWord handleBack={() => navigation.goBack()} navigation={navigation} route={scene.route} title={title} />
           }
         }}
       />

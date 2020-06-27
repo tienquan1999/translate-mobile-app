@@ -58,7 +58,7 @@ function BoxSearch(props) {
       to: to,
       word: textSearch
     })
-
+    console.log(result);
     if (result.type === "offline")
       props.navigation.navigate("Word", { wordMeaning: result });
     else {
