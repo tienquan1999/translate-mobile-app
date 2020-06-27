@@ -19,14 +19,13 @@ function SearchOnlineScreen(props) {
   const [textTo, setTextTo] = useState("");
    
 
-  const translateOnline = async () => {
+  const translateOnline = async (translateFrom , translateTo , translateText) => {
     const result = await translateWithGoogleApi({
-      from: from,
-      to: to,
-      word: textFrom
+      from: translateFrom,
+      to: translateTo,
+      word: translateText
     })
     setTextTo(result.mean);
-    Keyboard.dismiss;
   }
   const handleClearFrom = () => {
     setTextFrom("")
@@ -56,6 +55,10 @@ function SearchOnlineScreen(props) {
       setTextTo(mean)
     }
   }, [props.route])
+  const changeWordSearch = async () => {
+    await translateOnline( to , from , textTo);     
+    setTextFrom(textTo);
+  }
   return (
     <Container>
       <Header style={styles.header}>
@@ -76,8 +79,8 @@ function SearchOnlineScreen(props) {
           </View>
         </View>
           <View style={styles.boxBtn}>
-            <BoxSwitchLanguage />
-            <Button style={styles.btnTranslate} onPress={translateOnline }>
+            <BoxSwitchLanguage  screen={"onlineScreen"} changeWordSearch={changeWordSearch}/>
+            <Button style={styles.btnTranslate} onPress={ () => translateOnline(from , to , textFrom) }>
               <Text style={styles.textBtn}>{"Dịch"}</Text>
             </Button>
           </View>
