@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, FlatList, Text} from "react-native";
+import { useFocusEffect } from '@react-navigation/native';
 
 import {MaterialCommunityIcons} from "@expo/vector-icons"
 
@@ -17,7 +18,18 @@ export default function ListRecentWords(props) {
     }
     getRecentWords();
   }, [])
+  useFocusEffect(
+    React.useCallback(() => {
 
+
+      return async() => {
+        let words = await getHistoryTranslate();
+        setRecentWords(words);
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      };
+    }, [])
+  );
   return (
     <View style={styles.body}>
       <Text style={styles.titleList}>Từ tìm kiếm gần đây</Text>

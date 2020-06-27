@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, TouchableHighlight, TouchableWithoutFeedback, View, Modal, Text, Button, TouchableOpacity } from "react-native"
 import { Icon, Item, Input, Header } from "native-base"
 import { connect } from "react-redux";
@@ -11,7 +11,7 @@ import * as FileSystem from "expo-file-system";
 const { apiKey } = require("../../key.json");
 const axios = require("axios");
 import { useFocusEffect } from '@react-navigation/native';
-
+import { LANGUAGE, TYPE_NOTICE_LANGUAGE } from "../constants/languages"
 
 const recordingOptions = {
   android: {
@@ -41,9 +41,16 @@ function BoxSearch(props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [recording, updateRecording] = useState(null);
   const [isRecording, updateIsRecording] = useState(false);
-  const [searchFocus, setSearchFocus] = useState(false)
   const [textSound, setTextSound] = useState("")
+  const [curLan, setCurLan] = useState("")
+  const [notice, setNotice] = useState("")
 
+  const getLanguageCurrent = () => {
+    let tmp = LANGUAGE.find(e => e.value === from)
+    let tmpNotice = TYPE_NOTICE_LANGUAGE.find(e => e.value === from)
+    setNotice(tmpNotice.label);
+    setCurLan(tmp.label);
+  }
   const goToWord = async () => {
     const result = await translateText({
       from: from,
@@ -161,15 +168,17 @@ function BoxSearch(props) {
   useFocusEffect(
     React.useCallback(() => {
 
-      setSearchFocus(true)
+
       return () => {
         handleClear();
-        setSearchFocus(false)
         // Do something when the screen is unfocused
         // Useful for cleanup functions
       };
-    }, [searchFocus])
+    }, [])
   );
+  useEffect(() => {
+    getLanguageCurrent();
+  }, [from])
   async function handleOnPressIn() {
     await startRecording();
   }
@@ -202,13 +211,13 @@ function BoxSearch(props) {
               <TouchableOpacity onPressIn={handleOnPressIn} onPressOut={handleOnPressOut}>
                 <FontAwesome5 name="microphone" size={100} color="#0077b3"></FontAwesome5>
               </TouchableOpacity>
-              <Text style={styles.structure}>Nhấn giữ để phát âm từ cần tra</Text>
+              <Text style={styles.structure}>{notice}</Text>
               {
-                textSound!==""? <Text style={styles.textSound}>{textSound}</Text> :null
+                textSound !== "" ? <Text style={styles.textSound}>{textSound}</Text> : null
               }
             </View>
             <View style={styles.modalFooter}>
-              <Text style={styles.titleLanguage}>Tiếng Việt </Text>
+              <Text style={styles.titleLanguage}>{curLan}</Text>
             </View>
           </View>
         </View>
@@ -246,7 +255,7 @@ const styles = StyleSheet.create({
     margin: 10,
     backgroundColor: "white",
     borderRadius: 20,
-   
+
     height: 250,
     width: 250,
     shadowColor: "#000",
@@ -279,7 +288,9 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   structure: {
-    marginVertical: 10
+    flexWrap: "wrap",
+    marginVertical: 10,
+    textAlign: "center",
   },
   titleLanguage: {
     fontSize: 12,
@@ -294,8 +305,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
-  textSound:{
-    fontSize:18
+  textSound: {
+    fontSize: 18
   }
 })
 
