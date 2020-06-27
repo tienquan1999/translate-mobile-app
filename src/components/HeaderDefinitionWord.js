@@ -8,7 +8,6 @@ export default function HeaderDefinitionWord(props) {
   console.log("route in header: ", route)
   const [nameIconStar, setNameIconStar] = useState("star-o");
   const screen = Dimensions.get('screen');
-  console.log(route.params.wordMeaning.liked)
 
   const showToastWithGravity = () => {
     setNameIconStar("star")
