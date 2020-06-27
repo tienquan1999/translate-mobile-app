@@ -16,6 +16,7 @@ export default function BottomTab() {
       tabBarOptions={{
         activeTintColor: '#000000',
       }}
+      
       options={{ headerShown: false }}
     >
       <Tab.Screen

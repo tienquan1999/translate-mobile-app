@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text , ToastAndroid} from "react-native"
+import { StyleSheet, Text , ToastAndroid,Dimensions} from "react-native"
 import { Header, Left, Body, Right, Button, Icon } from 'native-base';
 import {FontAwesome,AntDesign} from "@expo/vector-icons"
 
 export default function HeaderDefinitionWord(props) {
   const { navigation, title, handleBack} = props;
   const [nameIconStar, setNameIconStar] = useState("star-o");
-  
+  const screen = Dimensions.get('screen');
+
   const showToastWithGravity = () => {
     setNameIconStar("star")
-    ToastAndroid.showWithGravity(
+    ToastAndroid.showWithGravityAndOffset(
       "Đã thêm vào danh sách từ vựng của bạn",
       ToastAndroid.SHORT,
-      ToastAndroid.CENTER
+      ToastAndroid.BOTTOM,0,screen.height*1/4
     );
   };
   return (

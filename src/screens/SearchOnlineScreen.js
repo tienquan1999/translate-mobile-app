@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, TextInput , Keyboard,TouchableWithoutFeedback} from "react-native"
+import { StyleSheet, Text, TextInput, Keyboard, ToastAndroid, Clipboard,Dimensions} from "react-native"
 import { Content, View, Textarea, Button, Container, Header, Title, Body, Left, Right } from "native-base"
 import BoxSwitchLanguage from "../components/BoxSwitchLanguage";
 import { switchLanguage } from "../actions/switchLanguage";
@@ -17,7 +17,6 @@ function SearchOnlineScreen(props) {
 
   const [textFrom, setTextFrom] = useState("");
   const [textTo, setTextTo] = useState("");
-   
 
   const translateOnline = async (translateFrom , translateTo , translateText) => {
     const result = await translateWithGoogleApi({
@@ -36,6 +35,16 @@ function SearchOnlineScreen(props) {
       await textToSpeechWithApiGoogle(textFrom, from)
     else
       await textToSpeechWithApiGoogle(textTo, to)
+  }
+
+  const screen = Dimensions.get('screen');
+  const handleCopy = () => {
+    Clipboard.setString(textTo)
+    ToastAndroid.showWithGravityAndOffset(
+      "Nội dung đã được sao chép",
+      ToastAndroid.SHORT,
+      ToastAndroid.BOTTOM,0,screen.height*1/4
+    );
   }
   useFocusEffect(
     React.useCallback(() => {
@@ -63,12 +72,12 @@ function SearchOnlineScreen(props) {
     <Container>
       <Header style={styles.header}>
         <Left>
-          <MaterialCommunityIcons name="earth" color="#ffffff" size={30}/>
+          <MaterialCommunityIcons name="earth" color="#ffffff" size={30} />
         </Left>
         <Body>
           <Title style={styles.title}>{"Dịch Online "}</Title>
         </Body>
-        <Right/>
+        <Right />
       </Header>
       <Content padder style={styles.body}>
         <View style={styles.boxText}>
@@ -89,7 +98,7 @@ function SearchOnlineScreen(props) {
           <Text multiline={true} style={styles.textTo}>{textTo}</Text>
           <View>
             <MaterialIcons name="volume-up" size={25} color="#0077b3" style={styles.iconSound} onPress={() => speechText("to")} />
-            <MaterialIcons name="content-copy" size={25} color="#0077b3" style={styles.iconSound}/>
+            <MaterialIcons name="content-copy" size={25} color="#0077b3" style={styles.iconSound} onPress={handleCopy} />
           </View>
         </View>
       </Content>
