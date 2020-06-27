@@ -17,6 +17,7 @@ export default function BottomTab() {
         activeTintColor: '#0077b3',
         keyboardHidesTabBar: true
       }}
+      
       options={{ headerShown: false }}
       
     >

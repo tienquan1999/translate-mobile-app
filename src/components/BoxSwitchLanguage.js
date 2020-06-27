@@ -8,11 +8,21 @@ import {Ionicons} from "@expo/vector-icons"
 
 function BoxSwitchLanguage(props) {
   const {from, to} = props.languages;
+ const clickSwitchLanguage = () =>
+  {
+    if(props.screen === 'onlineScreen')
+      {
+        props.changeWordSearch();
+        props.switchLanguage(from,to,ACTION_LANGUAGE.SWITCH)
+      }
 
+    else
+      props.switchLanguage(from, to, ACTION_LANGUAGE.SWITCH)
+  }
   return (
     <View style={styles.boxTranslate}>
       <PickerLanguage languageDefault={from} typeLanguage={TYPE_LANGUAGE.FROM}/>
-      <Ionicons name="md-sync"size={30} onPress={()=>props.switchLanguage(from, to, ACTION_LANGUAGE.SWITCH)}/>
+      <Ionicons name="md-sync"size={30} onPress={ clickSwitchLanguage}/>
       <PickerLanguage languageDefault={to} typeLanguage={TYPE_LANGUAGE.TO}/>
     </View>
   );
