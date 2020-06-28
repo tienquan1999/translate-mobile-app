@@ -6,7 +6,7 @@ export default function DefinitionScreen({ navigation, route }) {
   
   return (
 
-    <DetailWord route={route}/>
+    <DetailWord navigation={navigation} route={route}/>
      
   )
 }

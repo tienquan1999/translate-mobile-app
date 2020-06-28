@@ -73,7 +73,7 @@ function CardWord(props) {
                   <MaterialIcons name="volume-up" size={25} color="#0077b3"  onPress={speechText}/>
                 </View>
                 {item.result.mean.length >= 20 ? <Text style={styles.mean}>{item.result.mean.split(' ').splice(0,5).join(' ')}...</Text> : 
-                <Text style={styles.meam}>{item.result.mean}</Text>} 
+                <Text style={styles.mean}>{item.result.mean}</Text>} 
                 
              </View> 
           }
