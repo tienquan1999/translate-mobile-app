@@ -6,30 +6,28 @@ import {MaterialCommunityIcons} from "@expo/vector-icons"
 
 import CardWord from "./CardWord";
 import {getHistoryTranslate} from "../utils/controller"
-import { Container } from "native-base";
 
 export default function ListRecentWords(props) {
   const [recentWords, setRecentWords] = useState([]);
   useEffect(() => {
-    console.log("Load");
     async function getRecentWords(){
       let words = await getHistoryTranslate();
       setRecentWords(words);
     }
     getRecentWords();
   }, [])
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     return async() => {
-  //       let words = await getHistoryTranslate();
-  //       setRecentWords(words);
-  //       // Do something when the screen is unfocused
-  //       // Useful for cleanup functions
-  //     };
-  //   }, [])
-  // );
+  useFocusEffect(
+    React.useCallback(() => {
+      return async() => {
+        let words = await getHistoryTranslate();
+        setRecentWords(words);
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      };
+    }, [])
+  );
   return (
-    <Container style={styles.body}>
+    <View style={styles.body}>
       <Text style={styles.titleList}>Từ tìm kiếm gần đây</Text>
       <FlatList
         style={styles.flatList}
@@ -39,7 +37,7 @@ export default function ListRecentWords(props) {
         )}
         keyExtractor={(item, index) => index.toString()}
       />
-    </Container>
+    </View>
   )
 }
 const styles = StyleSheet.create({
