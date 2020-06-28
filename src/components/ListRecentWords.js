@@ -18,18 +18,6 @@ export default function ListRecentWords(props) {
     }
     getRecentWords();
   }, [])
-<<<<<<< HEAD
-  useFocusEffect(
-    React.useCallback(() => {
-      return async() => {
-        let words = await getHistoryTranslate();
-        setRecentWords(words);
-        // Do something when the screen is unfocused
-        // Useful for cleanup functions
-      };
-    }, [])
-  );
-=======
   // useFocusEffect(
   //   React.useCallback(() => {
   //     return async() => {
@@ -40,7 +28,6 @@ export default function ListRecentWords(props) {
   //     };
   //   }, [])
   // );
->>>>>>> bf0b86c9489d0db8bdd59cf3cc6f4446e54a1841
   return (
     <Container style={styles.body}>
       <Text style={styles.titleList}>Từ tìm kiếm gần đây</Text>
