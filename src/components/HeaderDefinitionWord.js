@@ -6,13 +6,14 @@ import { addWordToFavoriteList, deleteWordFromFavoriteList} from "../utils/contr
 
 export default function HeaderDefinitionWord(props) {
   const { navigation, route, handleBack } = props;
-
-  const title = route.params.wordMeaning.data.word;
-  const { liked } = route.params.wordMeaning;
+  //console.log("params in header: ", route.params.wordMeaning)
+  let title = route.params.wordMeaning.data.word;
+  let { liked } = route.params.wordMeaning;
+  //console.log("liked in header: ", liked)
   const [nameIconStar, setNameIconStar] = useState(liked ? "star" : "star-o");
 
   const toggleStar = async () => {
-    console.log(title);
+    //console.log(title);
     if (nameIconStar === "star-o")
     {
       setNameIconStar("star")

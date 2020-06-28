@@ -114,7 +114,6 @@ const styles = StyleSheet.create({
   },
   title: {
     color: "#ffffff",
-    paddingLeft: 10
   },
   boxMedia: {
     flexDirection: "column",

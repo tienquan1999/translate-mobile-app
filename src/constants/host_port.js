@@ -1,0 +1,1 @@
+export const HOST = `34.87.80.48`;

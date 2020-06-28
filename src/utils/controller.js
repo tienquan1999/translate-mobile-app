@@ -126,7 +126,7 @@ async function getHistoryTranslate(){
     try{
         console.log("getHistoryTranslate")
         let db = await connectToDatabase("translate.db");
-        let query = "select * from historyTranslate order by time_update DESC limit 2;"
+        let query = "select * from historyTranslate order by time_update DESC limit 5;"
         let result = await querySQLite({
             db,
             query,
@@ -181,16 +181,13 @@ async function getFavoriteWord(){
 
 async function addWordToFavoriteList(word){
     try{
-        console.log("This is word:", word, "end");
-        console.log("addWordToFavoriteList: ", word)
         let db = await connectToDatabase("translate.db");
         let query = "insert into favoriteWord(word) values(?);"
-        let result = await querySQLite({
+        await querySQLite({
             db,
             query,
             params: [word]
         })
-        console.log("insert success");
         // db._db.close();
     }
     catch(e){
