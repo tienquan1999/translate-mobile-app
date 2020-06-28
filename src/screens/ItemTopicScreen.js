@@ -4,7 +4,7 @@ import {Container, Content, Body, Left, Right, Button, Text, Icon, List, ListIte
 import { Ionicons} from '@expo/vector-icons';
 import ItemWordInTopic from "../components/ItemWordInTopic";
 import Axios from "axios";
-
+import {HOST} from "../constants/host_port"
 
 export default function ItemTopicScreen(props)
 {
@@ -13,26 +13,22 @@ export default function ItemTopicScreen(props)
   const {id} = props.route.params;
   
   useEffect(() =>{
-    Axios.get(`http://192.168.1.163:3000/topics/${id}`)
+    Axios.get(`http://${HOST}:3000/topics/${id}`)
     .then((res) => {
-      console.log("id: ", id)
       setListWord(res.data.data.words)
-      console.log("list word: ",res.data)
     })
     .catch(err => console.log("err: ", err))
   },[])
   return(
     <Container>
       <Content>
-        <List>
-        {
-          (listWord || []).map((e, index) => {
-            return (
-              <ItemWordInTopic key={e.id} item={e}/>
-            )
-          })
-        }
-        </List>
+        <List
+          dataArray={listWord}
+          renderItem={({e}) => (
+            <ItemWordInTopic key={e.id} item={e}/>
+          )}
+          keyExtractor={e => e.id}
+        />
       </Content>
     </Container>
   )
