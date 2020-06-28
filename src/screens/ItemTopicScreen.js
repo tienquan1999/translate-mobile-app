@@ -1,40 +1,31 @@
 import React, { useState, useEffect } from "react"
-import {StyleSheet} from "react-native"
-import {Container, Content, Body, Left, Right, Button, Text, Icon, List, ListItem} from "native-base"
-import { Ionicons} from '@expo/vector-icons';
+import { StyleSheet } from "react-native"
+import { Container, Content, Body, Left, Right, Button, Text, Icon, List, ListItem } from "native-base"
+import { Ionicons } from '@expo/vector-icons';
 import ItemWordInTopic from "../components/ItemWordInTopic";
 import Axios from "axios";
+import { HOST } from "../constants/host_port"
 
-
-export default function ItemTopicScreen(props)
-{
+export default function ItemTopicScreen(props) {
   const [listWord, setListWord] = useState([]);
-  
-  const {id} = props.route.params;
-  
-  useEffect(() =>{
-    Axios.get(`http://172.20.10.7:3000/topics/${id}`)
-    .then((res) => {
-      console.log("id: ", id)
-      setListWord(res.data.data.words)
-      console.log("list word: ",res.data)
-    })
-    .catch(err => console.log("err: ", err))
-  },[])
-  return(
-    <Container>
-      <Content>
-        <List>
-        {
-          (listWord || []).map((e, index) => {
-            return (
-              <ItemWordInTopic key={e.id} item={e}/>
-            )
-          })
-        }
-        </List>
-      </Content>
-    </Container>
+
+  const { id } = props.route.params;
+
+  useEffect(() => {
+    Axios.get(`http://${HOST}:3000/topics/${id}`)
+      .then((res) => {
+        setListWord(res.data.data.words)
+      })
+      .catch(err => console.log("err: ", err))
+  }, [])
+  return (
+    <List
+      dataArray={listWord}
+      renderItem={({ item }) => (
+        <ItemWordInTopic item={item} />
+      )}
+      keyExtractor={item => Math.random().toString()}
+    />
   )
 }
 const styles = StyleSheet.create({
