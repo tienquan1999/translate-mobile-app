@@ -21,6 +21,7 @@ async function translateText({from, to, word}){
             if(from === "en" && to === "vi" && word.split(" ").length <= 2){
                 result = await translateEnToVi(word);
             } else if(from === "vi" && to === "en" && word.split(" ").length <= 2){
+                console.log("vi to en");
                 result = await translateViToEn(word);
             }else{
                 console.log("Online search");
@@ -137,7 +138,7 @@ async function getHistoryTranslate(){
             e.result.id = parseInt(e.result.id);
             return e;
         });
-        // db._db.close();
+        //db._db.close();
         console.log("getHistoryTranslate done.")
         return result;
     }

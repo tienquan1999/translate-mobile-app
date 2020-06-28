@@ -3,17 +3,34 @@ import { View, StyleSheet ,FlatList} from "react-native";
 import { Text, Content } from 'native-base';
 import { connect } from "react-redux"
 import { MaterialIcons, AntDesign} from '@expo/vector-icons';
-import {textToSpeechWithApiGoogle} from "../utils/google-api/text-to-speech"
+import {textToSpeechWithApiGoogle} from "../utils/google-api/text-to-speech";
+import { translateText } from "../utils/controller"
 
 function DetailWord(props) {
   let {route} = props;
   let {wordMeaning} = route.params;
 
-  let {from} = props.languages;
+  let {from , to} = props.languages;
 
   const dataWord = wordMeaning.data;
   const arrMean = dataWord.mean;
   let newPronunciation = dataWord.pronunciation.split("; [us] ");
+  
+  const goToWord = async (item) => {
+    if(item.trim() !== ''){
+      const result = await translateText({
+        from: from,
+        to: to,
+        word: item
+      })
+      if (result.type === "offline")
+        props.navigation.navigate("Word", { wordMeaning: result });
+      else if ((result.type === "online")){
+        props.navigation.navigate("SearchOnline", { wordMeaning: result })
+      }
+    }
+
+  }
 
   const speechText = async() =>{
     await textToSpeechWithApiGoogle(dataWord.word, from)
@@ -87,7 +104,21 @@ function DetailWord(props) {
                         data={item.examples}
                         renderItem ={({item, index}) =>(
                           <View key={index}>
-                            <Text style={styles.exmEng}>{item.word}</Text>
+                            <View style={{paddingLeft : 40 , maxWidth : 400}}>
+                            <FlatList
+                            horizontal ={true}
+                            data={item.word.split(' ')}
+                            renderItem={({item,index}) => (
+                             
+                              <View style={{paddingRight : 5}}>
+                                <Text style={item.match(/^[^a-zA-Z0-9]+$/) ? styles.exmEngCha : styles.exmEng}  onPress={() => {goToWord(item)}}>{item}</Text>
+                            
+                              </View>
+                            )}
+                            keyExtractor = { item => Math.random().toString()}
+                          />
+                         </View>
+                           
                             <Text style={styles.exmVie}><AntDesign name="right"/>{item.mean}</Text>
                           </View>
                         )}
@@ -150,8 +181,15 @@ const styles = StyleSheet.create({
     color: "#007acc",
     paddingTop: 10,
     fontSize: 17,
-    paddingLeft: 40
+    textDecorationLine : "underline"
   },
+  exmEngCha : {
+    fontStyle: "italic",
+    color: "#007acc",
+    paddingTop: 10,
+    fontSize: 17,
+  },
+
   exmVie: {
     color: "#595959",
     paddingTop: 10,
