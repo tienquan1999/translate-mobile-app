@@ -126,7 +126,7 @@ async function getHistoryTranslate(){
     try{
         console.log("getHistoryTranslate")
         let db = await connectToDatabase("translate.db");
-        let query = "select * from historyTranslate order by time_update DESC limit 5;"
+        let query = "select * from historyTranslate order by time_update DESC limit 2;"
         let result = await querySQLite({
             db,
             query,

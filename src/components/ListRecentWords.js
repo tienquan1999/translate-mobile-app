@@ -11,10 +11,13 @@ import { Container } from "native-base";
 export default function ListRecentWords(props) {
   const [recentWords, setRecentWords] = useState([]);
   useEffect(() => {
-    console.log("Load");
     async function getRecentWords(){
       let words = await getHistoryTranslate();
-      setRecentWords(words);
+      console.log(words.length)
+      setTimeout(async () => {
+        await setRecentWords(words);
+        console.log(recentWords.length);
+      }, 0)
     }
     getRecentWords();
   }, [])
@@ -22,7 +25,10 @@ export default function ListRecentWords(props) {
   //   React.useCallback(() => {
   //     return async() => {
   //       let words = await getHistoryTranslate();
+        
   //       setRecentWords(words);
+
+  //       console.log(recentWords.length)
   //       // Do something when the screen is unfocused
   //       // Useful for cleanup functions
   //     };
@@ -39,6 +45,7 @@ export default function ListRecentWords(props) {
         )}
         keyExtractor={(item, index) => index.toString()}
       />
+      <Text style={styles.titleList}>Từ tìm kiếm gần đây</Text>
     </Container>
   )
 }
