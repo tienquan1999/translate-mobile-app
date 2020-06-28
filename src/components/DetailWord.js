@@ -111,7 +111,7 @@ function DetailWord(props) {
 const styles = StyleSheet.create({
   viewAround :{
     paddingLeft : 15,
-    height : '75%'
+    maxHeight : '75%'
   },
   wordHeader: {
     fontSize: 40,
