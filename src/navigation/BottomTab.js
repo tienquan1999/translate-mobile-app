@@ -46,7 +46,7 @@ export default function BottomTab() {
         name="SettingScreen"
         component={SettingStack}
         options={{
-          tabBarLabel: 'Menu',
+          tabBarLabel: 'Tiện ích',
           tabBarIcon: ({ color, size }) => (
             <Icon name="menu" color={color} size={size} />
           ),

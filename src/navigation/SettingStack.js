@@ -3,6 +3,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { FavoriteWordScreen } from "../screens/FavoriteWordScreen";
 import SettingScreen from "../screens/SettingScreen";
 import GrammarScreen from "../screens/GrammarScreen";
+import TopicWordScreen from "../screens/TopicWordScreen";
+import ItemTopicScreen from "../screens/ItemTopicScreen"
 
 const Stack = createStackNavigator();
 
@@ -43,6 +45,34 @@ export default function SettingStack(props) {
             color:"#ffffff"
           },
         }}
+      />
+      <Stack.Screen
+        name="Topic"
+        component={TopicWordScreen}
+        options={{
+          title: 'Từ vựng ',
+          headerStyle: {
+            backgroundColor: '#0077b3',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            color:"#ffffff"
+          },
+        }}
+      />
+      <Stack.Screen
+        name="ItemTopic"
+        component={ItemTopicScreen}
+        options={({route}) => ({
+          title: route.params.title,
+          headerStyle: {
+            backgroundColor: '#0077b3',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            color:"#ffffff"
+          },
+        })}
       />
     </Stack.Navigator>
   )

@@ -1,30 +1,25 @@
 import React, { useEffect, useState } from "react"
-import { List, Container, Content , Text, Body} from "native-base"
-import { addWordToFavoriteList, deleteWordFromFavoriteList, getFavoriteWord } from "../utils/controller"
+import { List, Container, Content, Text, Body } from "native-base"
+import { getFavoriteWord } from "../utils/controller"
 import { ItemFavoriteWord } from "../components/ItemFavoriteWord";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 export function FavoriteWordScreen(props) {
   let [listWord, updateListWord] = useState([]);
-  console.log(listWord)
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const listItem = await getFavoriteWord();
-  //     updateListWord(listItem);
-  //     console.log("list item: ", listItem)
-  //   }
-  //   fetchData()
-  // }, [])
+  useEffect(() => {
+    async function fetchData() {
+      const listItem = await getFavoriteWord();
+      updateListWord(listItem);
+    }
+    fetchData()
+  }, [])
   return (
     <Container>
       {
-        (listWord === []) ? (
-          <Content style={styles.content}>
-            <Body>
+        (listWord.length === 0) ? (
+          <View style={styles.content}>
             <Text style={styles.text}>Chưa có từ nào trong danh sách từ vựng của bạn </Text>
-
-            </Body>
-          </Content>
+          </View>
         ) : (
             <Content>
               <List>
@@ -43,13 +38,16 @@ export function FavoriteWordScreen(props) {
   )
 }
 const styles = StyleSheet.create({
-  content:{
-    flexDirection:"row",
-    justifyContent:"center",
-    alignItems:"center",
+  content: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
-  text:{
-    textAlign:"center",
-    color:"gray"
+  text: {
+    flexWrap: "wrap",
+    fontSize: 18,
+    color: "gray",
+    textAlign: "center",
   }
 })
