@@ -7,7 +7,7 @@ import { addWordToFavoriteList, deleteWordFromFavoriteList } from "../utils/cont
 export default function ItemWordInTopic(props) {
 
   const { content, mean } = props.item;
-  const [nameIconStar, setNameIconStar] = useState("star");
+  const [nameIconStar, setNameIconStar] = useState("star-o");
 
   const toggleStar = async () => {
     //console.log(title);
@@ -63,12 +63,14 @@ export default function ItemWordInTopic(props) {
 const styles = StyleSheet.create({
   boxWord: {
     flexDirection: "column",
-    alignItems: "flex-start"
+    alignItems: "flex-start",
+    paddingLeft : 0
   },
   word: {
     color: "#004466",
     fontWeight: "bold",
-    fontSize: 18
+    fontSize: 18,
+    marginLeft : 0
   },
   mean: {
     color: "#bfbfbf",

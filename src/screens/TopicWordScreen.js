@@ -7,7 +7,7 @@ import Axios from "axios"
 export default function TopicWordScreen(props) {
   const [data, setData] = useState([])
   useEffect(()=>{
-    Axios.get(`http://192.168.1.163:3000/topics`)
+    Axios.get(`http://172.20.10.3:3000/topics`)
     .then((res) =>{
       setData(res.data.data.topics)
     })

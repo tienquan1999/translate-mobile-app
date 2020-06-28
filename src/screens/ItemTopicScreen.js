@@ -13,7 +13,7 @@ export default function ItemTopicScreen(props)
   const {id} = props.route.params;
   
   useEffect(() =>{
-    Axios.get(`http://192.168.1.163:3000/topics/${id}`)
+    Axios.get(`http://172.20.10.7:3000/topics/${id}`)
     .then((res) => {
       console.log("id: ", id)
       setListWord(res.data.data.words)
