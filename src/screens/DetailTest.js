@@ -54,9 +54,9 @@ export default function DetailTest(props) {
           //     </View>
           //   )
           //   : (
-              <TouchableOpacity onPress={() => setIndex(index + 1)}>
+              <TouchableOpacity onPress={() => setIndex(index + 1)} >
                 <View style={styles.footer} >
-                  <Text style={{ color: "#0077b3", fontSize: 18 }}>{(index + 1 === list.length) ? "End" : "Next"}</Text>
+                  <Text style={{ color: "#0077b3", fontSize: 18   }}>{(index + 1 === list.length) ? "End" : "Next"}</Text>
                   <MaterialIcons name="keyboard-arrow-right" color="#0077b3" size={25} />
                 </View>
               </TouchableOpacity>
@@ -73,7 +73,9 @@ const styles = StyleSheet.create({
   },
   footer: {
     flexDirection: "row",
-    justifyContent: "flex-end",
+    justifyContent: "center",
     alignItems: "center",
-  }
+   
+  },
+  
 })

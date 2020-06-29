@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react"
-import { StyleSheet,View, Button} from "react-native"
+import { StyleSheet,View, Button,TouchableOpacity} from "react-native"
 import { Text, Body, Card, CardItem} from "native-base"
 import RadioForm from 'react-native-simple-radio-button';
 
@@ -45,7 +45,9 @@ export default function RadioQuestion(props)
           />
         </Body>
       </CardItem>
-      <Button title="Submit" disabled={answered} onPress={checkAnswer}/>
+      <TouchableOpacity title="Submit" disabled={answered}  onPress={checkAnswer} style={styles.buttonSubmit}>
+            <Text style={styles.textSubmit}>Submit</Text>
+          </TouchableOpacity>
       <CardItem footer />
     </Card>
   )
@@ -66,5 +68,22 @@ const styles = StyleSheet.create({
   txt: {
     paddingLeft: 10,
     flexWrap: "wrap"
+  }
+  ,
+  buttonSubmit : {
+    width : '70%',
+    height : "13%",
+    backgroundColor : "#0077b3",
+    
+   borderRadius : 4 ,
+   marginTop : 30,
+   marginLeft: 50 
+  },
+  textSubmit :{
+    color : "#ffffff",
+    fontSize : 20,
+    fontWeight : "bold",
+    textAlign : "center",
+    marginTop :10
   }
 })

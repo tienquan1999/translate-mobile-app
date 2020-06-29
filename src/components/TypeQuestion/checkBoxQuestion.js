@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
-import { StyleSheet,View, Button} from "react-native"
+import { StyleSheet,View, Button,TouchableOpacity} from "react-native"
 import { Text,ListItem, List, Body, Card, CardItem, CheckBox} from "native-base"
+import {Feather} from "@expo/vector-icons"
 export default function CheckBoxQuestion(props) {
   let { item, idx } = props;
   let { content, Answers } = item;
@@ -77,14 +78,18 @@ export default function CheckBoxQuestion(props) {
               </ListItem>
             )}
           />
+           
         </Body>
       </CardItem>
-      <Button title="Submit" disabled={answered} onPress={checkAnswer}/>
+          <TouchableOpacity title="Submit" disabled={answered}  onPress={checkAnswer} style={styles.buttonSubmit}>
+            <Text style={styles.textSubmit}>Submit</Text>
+          </TouchableOpacity>
+        
       <CardItem footer />
     </Card>
     ) : 
     (
-      <View><Text>Loading Icon</Text></View>
+      <View><Feather name="loader"  color="#0077b3"/></View>
     )
   )
 }
@@ -101,5 +106,21 @@ const styles = StyleSheet.create({
   txt: {
     paddingLeft: 10,
     flexWrap: "wrap"
+  },
+  buttonSubmit : {
+    width : '70%',
+    height : "10%",
+    backgroundColor : "#0077b3",
+    
+   borderRadius : 4 ,
+   marginTop : 30,
+   marginLeft: 50 
+  },
+  textSubmit :{
+    color : "#ffffff",
+    fontSize : 20,
+    fontWeight : "bold",
+    textAlign : "center",
+    marginTop :10
   }
 })
