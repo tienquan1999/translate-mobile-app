@@ -9,7 +9,7 @@ import { translateText } from "../utils/controller"
 function DetailWord(props) {
   let {route} = props;
   let {wordMeaning} = route.params;
-
+  console.log("word: ", wordMeaning)
   let {from , to} = props.languages;
  
   const dataWord = wordMeaning.data;

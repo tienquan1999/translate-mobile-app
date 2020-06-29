@@ -14,27 +14,19 @@ export function FavoriteWordScreen(props) {
     fetchData()
   }, [])
   return (
-    <Container>
-      {
-        (listWord.length === 0) ? (
-          <View style={styles.content}>
-            <Text style={styles.text}>Chưa có từ nào trong danh sách từ vựng của bạn </Text>
-          </View>
-        ) : (
-            <Content>
-              <List>
-                {
-                  listWord.map((e, index) => {
-                    return (
-                      <ItemFavoriteWord key={index} item={e} />
-                    )
-                  })
-                }
-              </List>
-            </Content>
-          )
-      }
-    </Container>
+    (listWord.length === 0) ? (
+      <View style={styles.content}>
+        <Text style={styles.text}>Chưa có từ nào trong danh sách từ vựng của bạn </Text>
+      </View>
+    ) : (
+        <List 
+          dataArray={listWord}
+          keyExtractor={item => item.id.toString()}
+          renderItem={({item}) => (
+            <ItemFavoriteWord item={item} />
+          )}
+        />
+      )
   )
 }
 const styles = StyleSheet.create({
