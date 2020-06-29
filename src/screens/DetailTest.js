@@ -65,8 +65,28 @@ export default function DetailTest(props) {
               
             // )
         }
-
-      </View>) : <Text>Screen Noti Count {count}</Text>
+       
+      </View>) : 
+      <View>
+      {
+        count >= 5 ? 
+        <View style={styles.viewTotal}>
+          <Text style={styles.grade}>Your Grade </Text>
+          <View style= {styles.modalGrade}>
+              <Text style={styles.countHappy}>{count}</Text>
+          </View>
+          <Text style={styles.infoHappy}>Great Job !</Text>
+        </View> : 
+        <View style={styles.viewTotal}>
+          <Text style={styles.grade}>Your Grade </Text>
+          <View style= {styles.modalGrade}>
+              <Text style={styles.countSad}>{count}</Text>
+          </View>
+          <Text style={styles.infoSad}>You have to try harder next time !</Text>
+      </View>
+      }
+    </View>
+      
   )
 }
 const styles = StyleSheet.create({
@@ -81,5 +101,52 @@ const styles = StyleSheet.create({
      
   
   },
-  
+  viewTotal : {
+    flexDirection : "column",
+    justifyContent : "center",
+    alignItems :"center"
+  },
+  grade : {
+    textAlign : "center",
+    marginTop : 50,
+    fontSize : 35,
+    fontWeight : "bold",
+    color : "#0077b3"
+  },
+  modalGrade : {
+    flexDirection : "row" ,
+    justifyContent : "center",
+    alignItems:"center",
+    width : " 70 %",
+    height : 300 ,
+    borderWidth : 2 ,
+    borderColor : "#0077b3",
+    borderRadius : 8,
+    backgroundColor : "#ffffff",
+    marginTop : 30
+  },
+  countHappy : {
+    fontWeight :"bold",
+    fontSize : 200,
+    color :"#01A151"
+  },
+  countSad : {
+    fontWeight :"bold",
+    fontSize : 200,
+    color :"red"
+  },
+  infoSad :{
+    fontSize : 35 ,
+    fontWeight : "bold",
+    color : "red",
+    textAlign :"center",
+    paddingTop : 30
+  },
+  infoHappy :{
+    fontSize : 35 ,
+    fontWeight : "bold",
+    color : "#01A151",
+    textAlign :"center",
+    paddingTop : 30
+  }
 })
