@@ -32,9 +32,9 @@ export default function IrregularVerbs(props)
    return(
     <View style={{paddingLeft : 15 ,paddingRight : 15}}>
       <View style={styles.input}>
-        <FontAwesome name="search" color="#0077b3"  size={20} style={{paddingRight :10 , paddingLeft : 10, paddingTop : 20,paddingBottom : 20}}/>
+        <FontAwesome name="search" color="#0077b3"  size={20} style={{paddingRight :10 , paddingLeft : 10, paddingTop : 5,paddingBottom : 5}}/>
         <TextInput  placeholder=" nhập từ cần tra" value={textSearch} onChangeText={ (text) => setText(text)} onSubmitEditing={gotoWordSearch} style={styles.textInput}/>
-        {textSearch !== "" && <Ionicons name="md-close" color="#0077b3" size={25} onPress={handleClear} style={{ paddingBottom : 20 , paddingTop : 20}} />}
+        {textSearch !== "" && <Ionicons name="md-close" color="#0077b3" size={25} onPress={handleClear} style={{ paddingBottom : 5 , paddingTop : 5}} />}
       </View>
       <View style={styles.around}> 
         <Table>
@@ -90,8 +90,8 @@ const styles = StyleSheet.create({
    },
    textInput : {
      width : '83%',
-     paddingBottom : 20,
-     paddingTop : 20
+    //  paddingBottom : 5,
+    //  paddingTop : 5
    },
    viewTable :{
      height : "72%",

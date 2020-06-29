@@ -11,7 +11,7 @@ function DetailWord(props) {
   let {wordMeaning} = route.params;
 
   let {from , to} = props.languages;
-  const item = props.item;
+ 
   const dataWord = wordMeaning.data;
  
   const arrMean = dataWord.mean;
