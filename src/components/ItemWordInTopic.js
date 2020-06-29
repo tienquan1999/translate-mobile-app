@@ -41,36 +41,36 @@ export default function ItemWordInTopic(props) {
     toggleNotice()
   };
   return (
-    <ListItem>
-      <Left >
-        <View style={styles.boxWord}>
-          <Text style={styles.word}>{content}</Text>
-          <Text style={styles.mean}>{mean}</Text>
-        </View>
-      </Left>
-      <Body />
-      <Right>
-        <View style={styles.boxMedia}>
-          <Ionicons name="md-volume-high" color="#0077b3" size={25} />
-          <Button transparent onPress={showToastWithGravity}>
-            <FontAwesome name={nameIconStar} color={nameIconStar === "star" ? "#e6e600" : "#0077b3"} backgroundColor="#ffffff" size={25} />
-          </Button>
-        </View>
-      </Right>
+    <ListItem style={styles.list}>
+      <View style={styles.boxWord}>
+        <Text style={styles.word}>{content}</Text>
+        <Text style={styles.mean}>{mean}</Text>
+    </View>
+      
+      <View style={styles.boxMedia}>
+        <Ionicons name="md-volume-high" color="#0077b3" size={25} style={{paddingRight : 10}}/>
+        <Button transparent onPress={showToastWithGravity}>
+          <FontAwesome name={nameIconStar} color={nameIconStar === "star" ? "#e6e600" : "#0077b3"} backgroundColor="#ffffff" size={25}  style={{ marginRight: 10}}/>
+        </Button>
+      </View>
+       
     </ListItem>
   )
 }
 const styles = StyleSheet.create({
+  list : {
+  } ,
   boxWord: {
     flexDirection: "column",
-    alignItems: "flex-start",
+    // alignItems: "flex-start",
     paddingLeft : 0
   },
   word: {
     color: "#004466",
     fontWeight: "bold",
     fontSize: 18,
-    marginLeft : 0
+    paddingLeft : 0,
+    
   },
   mean: {
     color: "#bfbfbf",
@@ -79,6 +79,6 @@ const styles = StyleSheet.create({
   boxMedia: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
   }
 })
