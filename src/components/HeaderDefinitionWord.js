@@ -1,26 +1,24 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, ToastAndroid, Dimensions } from "react-native"
-import { Header, Left, Body, Right, Button, Icon, Item } from 'native-base';
-import { FontAwesome, AntDesign } from "@expo/vector-icons"
-import { addWordToFavoriteList, deleteWordFromFavoriteList} from "../utils/controller"
+import { StyleSheet, ToastAndroid, Dimensions } from "react-native"
+import { Button, View } from 'native-base';
+import { FontAwesome, Ionicons } from "@expo/vector-icons"
+import { addWordToFavoriteList, deleteWordFromFavoriteList } from "../utils/controller"
 
 export default function HeaderDefinitionWord(props) {
-  const { navigation, route, handleBack } = props;
-  //console.log("params in header: ", route.params.wordMeaning)
+  const { navigation, route } = props;
+ 
   let title = route.params.wordMeaning.data.word;
   let { liked } = route.params.wordMeaning;
-  //console.log("liked in header: ", liked)
+  
   const [nameIconStar, setNameIconStar] = useState(liked ? "star" : "star-o");
 
   const toggleStar = async () => {
-    //console.log(title);
-    if (nameIconStar === "star-o")
-    {
+    
+    if (nameIconStar === "star-o") {
       setNameIconStar("star")
       await addWordToFavoriteList(title)
     }
-    else
-    {
+    else {
       setNameIconStar("star-o")
       await deleteWordFromFavoriteList(title)
     }
@@ -46,27 +44,25 @@ export default function HeaderDefinitionWord(props) {
     toggleNotice()
   };
   return (
-    <Header style={styles.headerTab}>
-      <Left>
-        <Button transparent onPress={handleBack}>
-          <AntDesign name='arrowleft' size={25} color="#ffffff" />
-        </Button>
-      </Left>
-      <Body>
-        <Text style={styles.title}>{title}</Text>
-      </Body>
-      <Right>
-        <Button transparent onPress={() => navigation.navigate('Home')}>
-          <AntDesign name='search1' size={25} color="#ffffff" />
-        </Button>
-        <Button transparent onPress={showToastWithGravity}>
-          <FontAwesome name={nameIconStar} color={nameIconStar === "star" ? "#e6e600" : "#ffffff"} backgroundColor="#ffffff" size={25} />
-        </Button>
-      </Right>
-    </Header>
+    <View style={styles.boxRight}>
+      <Button transparent onPress={() => navigation.navigate('Home')}>
+        <Ionicons name='md-search' size={25} color="#ffffff" />
+      </Button>
+      <Button transparent onPress={showToastWithGravity}>
+        <FontAwesome name={nameIconStar} color={nameIconStar === "star" ? "#e6e600" : "#ffffff"} backgroundColor="#ffffff" size={25} />
+      </Button>
+    </View>
   );
 }
 const styles = StyleSheet.create({
+  boxRight:{
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    flex:1,
+    width:100,
+    padding:20
+  },
   boxSearch: {
     flexDirection: "row",
     alignItems: "center",

@@ -60,6 +60,17 @@ export default function SettingScreen(props) {
             </Right>
           </CardItem>
         </Card>
+        <Card>
+          <CardItem button style={styles.listItem} onPress={() => props.navigation.navigate('WordType')}>
+            <Left>
+              <MaterialCommunityIcons name="feature-search" color="purple" size={25} />
+              <Text>Tra cứu động từ bất quy tắc </Text>
+            </Left>
+            <Right>
+              <MaterialIcons name="keyboard-arrow-right" color="#bfbfbf" size={30} />
+            </Right>
+          </CardItem>
+        </Card>
       </Content>
     </Container>
   )

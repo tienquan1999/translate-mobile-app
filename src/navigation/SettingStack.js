@@ -8,6 +8,7 @@ import ItemTopicScreen from "../screens/ItemTopicScreen"
 import ChildFirstOfGrammar from "../screens/ChildFirstOfGrammar";
 import ChildSecondOfGrammar from "../screens/ChildSecondOfGrammar";
 import TestScreen from "../screens/TestScreen";
+import WordType from "../screens/WordType";
 
 const Stack = createStackNavigator();
 
@@ -110,6 +111,20 @@ export default function SettingStack(props) {
         component={TestScreen}
         options={({route}) => ({
           title: "Bài Test",
+          headerStyle: {
+            backgroundColor: '#0077b3',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            color:"#ffffff"
+          },
+        })}
+      />
+      <Stack.Screen
+        name="WordType"
+        component={WordType}
+        options={({route}) => ({
+          title: "Động từ bất quy tắc",
           headerStyle: {
             backgroundColor: '#0077b3',
           },

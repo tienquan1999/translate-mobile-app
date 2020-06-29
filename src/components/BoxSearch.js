@@ -49,7 +49,7 @@ function BoxSearch(props) {
     setCurLan(tmp.label);
   }
   const goToWord = async () => {
-    if(textSearch.trim() !== ''){
+    if (textSearch.trim() !== '') {
       const result = await translateText({
         from: from,
         to: to,
@@ -57,7 +57,7 @@ function BoxSearch(props) {
       })
       if (result.type === "offline")
         props.navigation.navigate("Word", { wordMeaning: result });
-      else if ((result.type === "online")){
+      else if ((result.type === "online")) {
         props.navigation.navigate("SearchOnline", { wordMeaning: result })
       }
     }
@@ -72,7 +72,7 @@ function BoxSearch(props) {
     })
     if (result.type === "offline")
       props.navigation.navigate("Word", { wordMeaning: result });
-    else if(result.type === "online") {
+    else if (result.type === "online") {
       props.navigation.navigate("SearchOnline", { wordMeaning: result })
     }
 
@@ -152,9 +152,17 @@ function BoxSearch(props) {
       }
       let response = await axios.post(url, body);
       let word = response.data.results[0].alternatives[0].transcript;
-      setTextSound(word)
-      hideModal();
-      goToWordUseVoice(word);
+
+      if (word !== "") {
+        setTextSound(word)
+        setTimeout(() => {
+          hideModal();
+        }, 1000)
+        goToWordUseVoice(word);
+      }
+      else
+        setTextSound("Not Found")
+
     } catch (error) {
       console.log('There was an error reading file', error);
       // this.stopRecording();
@@ -209,9 +217,7 @@ function BoxSearch(props) {
                 <FontAwesome5 name="microphone" size={100} color="#0077b3"></FontAwesome5>
               </TouchableOpacity>
               <Text style={styles.structure}>Nhấn giữ để phát âm từ</Text>
-              {
-                textSound !== "" ? <Text style={styles.textSound}>{textSound}</Text> : null
-              }
+              <Text style={styles.textSound}>{textSound}</Text>
             </View>
             <View style={styles.modalFooter}>
               <Text style={styles.titleLanguage}>{curLan}</Text>
@@ -303,7 +309,8 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   textSound: {
-    fontSize: 18
+    fontSize: 18,
+    color: "red"
   }
 })
 
