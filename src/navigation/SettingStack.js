@@ -10,6 +10,8 @@ import ChildSecondOfGrammar from "../screens/ChildSecondOfGrammar";
 import TestScreen from "../screens/TestScreen";
  
 import IrregularVerbs from "../screens/IrregularVerbs";
+ 
+import DetailTest from "../screens/DetailTest";
 
 const Stack = createStackNavigator();
 
@@ -126,6 +128,20 @@ export default function SettingStack(props) {
         component={IrregularVerbs}
         options={({route}) => ({
           title: "Động từ bất quy tắc",
+          headerStyle: {
+            backgroundColor: '#0077b3',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            color:"#ffffff"
+          },
+        })}
+      />
+      <Stack.Screen
+        name="DetailTest"
+        component={DetailTest}
+        options={({route}) => ({
+          title: route.params.title,
           headerStyle: {
             backgroundColor: '#0077b3',
           },

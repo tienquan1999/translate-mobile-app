@@ -71,9 +71,6 @@ function SearchOnlineScreen(props) {
   return (
     <Container>
       <Header style={styles.header}>
-        <Left>
-          <MaterialCommunityIcons name="earth" color="#ffffff" size={30} />
-        </Left>
         <Body>
           <Title style={styles.title}>{"Dịch Online "}</Title>
         </Body>
