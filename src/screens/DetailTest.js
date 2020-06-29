@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   },
   grade : {
     textAlign : "center",
-    marginTop : 50,
+    marginTop : 30,
     fontSize : 35,
     fontWeight : "bold",
     color : "#0077b3"
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     justifyContent : "center",
     alignItems:"center",
     width : " 70 %",
-    height : 300 ,
+    height : "50%" ,
     borderWidth : 2 ,
     borderColor : "#0077b3",
     borderRadius : 8,
