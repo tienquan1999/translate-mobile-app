@@ -8,14 +8,17 @@ export default function InputTextQuestion(props)
   let { content} = item;
   let [answered, setAnswered] = useState(false);
   let [text, setText] = useState("");
+  let [response, setResponse] = useState("");
 
   function checkAnswer(){
+    setAnswered(true);
     if(item.correct_answer === text){
       props.updateCount(1);
+      setResponse(`Chính xác.`);
     }else{
       props.updateCount(0);
+      setResponse(`Đáp án đúng là: ${item.correct_answer}`);
     }
-    setAnswered(true);
   }
 
   return (
@@ -31,9 +34,17 @@ export default function InputTextQuestion(props)
       <TextInput editable={!answered} style={{borderColor: "#0077b3", height: 40, width: "95%", borderWidth: 2, fontSize: 20 ,borderRadius: 4}} placeholder="Nhập đán án tại đây" value={text} onChangeText={ (value) => setText(value)} onSubmitEditing={() => {}}/>
       </Body>
     </CardItem>
-    <TouchableOpacity title="Submit" disabled={answered}  onPress={checkAnswer} style={styles.buttonSubmit}>
+    {
+      (!answered) ? (
+        <TouchableOpacity title="Submit" disabled={answered}  onPress={checkAnswer} style={styles.buttonSubmit}>
             <Text style={styles.textSubmit}>Submit</Text>
           </TouchableOpacity>
+      ) : (
+        <View>
+          <Text style={{color: "red", fontSize: 25}}>{response}</Text>
+        </View>
+      )
+    }
     <CardItem footer />
   </Card>
 )

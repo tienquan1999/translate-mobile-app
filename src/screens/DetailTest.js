@@ -148,6 +148,7 @@ const styles = StyleSheet.create({
   bottom: {
     flex: 1,
     justifyContent: 'flex-end',
-    marginBottom: "2%"
+    marginBottom: "1%",
+    paddingTop: 2
   }
 })

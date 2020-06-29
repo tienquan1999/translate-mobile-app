@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from "react"
-import { StyleSheet,View, Button,TouchableOpacity} from "react-native"
+import React, {useState} from "react"
+import { StyleSheet,View,TouchableOpacity} from "react-native"
 import { Text, Body, Card, CardItem} from "native-base"
 import RadioForm from 'react-native-simple-radio-button';
 
@@ -11,6 +11,8 @@ export default function RadioQuestion(props)
   let { content, Answers } = item;
   let [answered, setAnswered] = useState(false);
   let [value, setValue] = useState("");
+  let [response, setResponse] = useState("");
+
 
   var radio_props = Answers.map(e => {
     return {
@@ -20,12 +22,15 @@ export default function RadioQuestion(props)
   });
 
   function checkAnswer(){
+    setAnswered(true);
     if(item.correct_answer === value){
       props.updateCount(1);
+      setResponse("Chính xác.")
     }else{
       props.updateCount(0);
+      let index = radio_props.findIndex(e => e.value === item.correct_answer);
+      setResponse(`Đáp án đúng là: ${radio_props[index].label}`)
     }
-    setAnswered(true);
   }
 
   return (
@@ -45,9 +50,17 @@ export default function RadioQuestion(props)
           />
         </Body>
       </CardItem>
-      <TouchableOpacity title="Submit" disabled={answered}  onPress={checkAnswer} style={styles.buttonSubmit}>
+      {
+      (!answered) ? (
+        <TouchableOpacity title="Submit" disabled={answered}  onPress={checkAnswer} style={styles.buttonSubmit}>
             <Text style={styles.textSubmit}>Submit</Text>
           </TouchableOpacity>
+      ) : (
+        <View>
+          <Text style={{color: "red", fontSize: 25}}>{response}</Text>
+        </View>
+      )
+    }
       <CardItem footer />
     </Card>
   )

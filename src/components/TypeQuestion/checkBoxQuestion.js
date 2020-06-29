@@ -8,6 +8,8 @@ export default function CheckBoxQuestion(props) {
 
   let [listCheck, updateListCheck] = useState([]);
   let [answered, setAnswered] = useState(false);
+  let [response, setResponse] = useState("");
+
 
   useEffect(() => {
     let arr = [...listCheck];
@@ -46,12 +48,22 @@ export default function CheckBoxQuestion(props) {
     }else{
       check=false;
     }
+    setAnswered(true);
     if(check === false){
+      let correct_answers = item.correct_answer.split(",");
       props.updateCount(0);
+      console.log(Answers);
+      console.log(correct_answers);
+      let arr = Answers.filter(e => {
+        if(correct_answers.findIndex(f => f === e.id_answer) >= 0){
+          return e;
+        }
+      }).map(e => e.content);
+      setResponse(`Đáp án chính xác là: ${arr.join(" và ")}`);
     }else{
       props.updateCount(1);
+      setResponse(`Chính xác.`);
     }
-    setAnswered(true);
   }
   return (
     listCheck.length > 0 ? (
@@ -81,10 +93,17 @@ export default function CheckBoxQuestion(props) {
            
         </Body>
       </CardItem>
-          <TouchableOpacity title="Submit" disabled={answered}  onPress={checkAnswer} style={styles.buttonSubmit}>
+      {
+      (!answered) ? (
+        <TouchableOpacity title="Submit" disabled={answered}  onPress={checkAnswer} style={styles.buttonSubmit}>
             <Text style={styles.textSubmit}>Submit</Text>
           </TouchableOpacity>
-        
+      ) : (
+        <View>
+          <Text style={{color: "red", fontSize: 25}}>{response}</Text>
+        </View>
+      )
+      }
       <CardItem footer />
     </Card>
     ) : 
