@@ -11,7 +11,6 @@ export function ItemFavoriteWord(props) {
   const speechText = async() =>{
     await textToSpeechWithApiGoogle(word, "en") //ban them from, to
   }
-
   const deleteWord = async() =>{
     await props.onDelete(word);
     // ToastAndroid.showWithGravityAndOffset(
