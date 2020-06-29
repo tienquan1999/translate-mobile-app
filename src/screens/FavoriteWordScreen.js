@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { List, Container, Content, Text, Body } from "native-base"
-import { getFavoriteWord } from "../utils/controller"
+import { getFavoriteWord, deleteWordFromFavoriteList } from "../utils/controller"
 import { ItemFavoriteWord } from "../components/ItemFavoriteWord";
 import { StyleSheet, View } from "react-native";
+
 
 export function FavoriteWordScreen(props) {
   let [listWord, updateListWord] = useState([]);
@@ -13,6 +14,17 @@ export function FavoriteWordScreen(props) {
     }
     fetchData()
   }, [])
+
+  async function deleteItem(word){
+    await deleteWordFromFavoriteList(word);
+    let newArray = [...listWord];
+    let index = newArray.findIndex(e => 
+      e.word === word
+    )
+    newArray.splice(index, 1);
+    updateListWord(newArray)
+  }
+
   return (
     <Container>
       {
@@ -26,7 +38,7 @@ export function FavoriteWordScreen(props) {
                 {
                   listWord.map((e, index) => {
                     return (
-                      <ItemFavoriteWord key={index} item={e} />
+                      <ItemFavoriteWord key={index} item={e} onDelete={deleteItem}/>
                     )
                   })
                 }

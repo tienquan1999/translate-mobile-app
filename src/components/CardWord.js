@@ -13,7 +13,6 @@ function CardWord(props) {
   const item = props.item;
   const {word, proper} = props.item;
  
-
   const handleGoToWord = async() =>{
     // const mean = await translateText({
     //   from: from,

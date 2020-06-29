@@ -5,7 +5,6 @@ const formatResult = require("./format-result-translate");
 
 async function translateText({from, to, word}){
     try{
-        let start = Date.now();
         let db = await connectToDatabase("translate.db");
         word = word.replace(/\s\s+/g, ' ');
         let result = {};
@@ -52,28 +51,36 @@ async function translateText({from, to, word}){
                     params: []
                 })
             }
+            query = "select * from favoriteWord where word = ?;";
+            let favoriteWords = await querySQLite({
+                db,
+                query,
+                params: [word]
+            })
+            if(JSON.parse(favoriteWords)._array.length === 0){
+                result.liked = false;
+            }else{
+                result.liked = true;
+            }
         }else {
-            query = "update historyTranslate set time_update = ? where id = ?;";
+            query = "select * from favoriteWord where word = ?;";
+            let favoriteWords = await querySQLite({
+                db,
+                query,
+                params: [word]
+            })
+            if(JSON.parse(favoriteWords)._array.length === 0){
+                result.liked = false;
+            }else{
+                result.liked = true;
+            }
+            query = "update historyTranslate set time_update = ?, result = ? where id = ?;";
             await querySQLite({
                 db,
                 query,
-                params: [Date.now(), result._array[0].id]
+                params: [Date.now(), JSON.stringify(result), result._array[0].id]
             })
             result = JSON.parse(result._array[0].result);
-        }
-        console.log(Date.now() - start);
-        // db._db.close();
-        // db._running = false;
-        query = "select * from favoriteWord where word = ?;";
-        let favoriteWords = await querySQLite({
-            db,
-            query,
-            params: [word]
-        })
-        if(JSON.parse(favoriteWords)._array.length === 0){
-            result.liked = false;
-        }else{
-            result.liked = true;
         }
         return result;
     }
@@ -188,6 +195,7 @@ async function addWordToFavoriteList(word){
             query,
             params: [word]
         })
+
         // db._db.close();
     }
     catch(e){

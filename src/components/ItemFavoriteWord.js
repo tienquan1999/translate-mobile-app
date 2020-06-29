@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import { StyleSheet, ToastAndroid, Dimensions } from "react-native"
 import { Ionicons, FontAwesome, MaterialIcons} from '@expo/vector-icons';
 import { ListItem, Right, Left, Button, Text } from "native-base"
-import { deleteWordFromFavoriteList } from "../utils/controller"
 import {textToSpeechWithApiGoogle} from "../utils/google-api/text-to-speech";
 
 export function ItemFavoriteWord(props) {
@@ -14,12 +13,12 @@ export function ItemFavoriteWord(props) {
   }
 
   const deleteWord = async() =>{
-    await deleteWordFromFavoriteList(word)
-    ToastAndroid.showWithGravityAndOffset(
-      `Đã xóa từ ${word} vào danh sách từ vựng của bạn`,
-      ToastAndroid.SHORT,
-      ToastAndroid.BOTTOM, 0, screen.height * 1 / 4
-    );
+    await props.onDelete(word);
+    // ToastAndroid.showWithGravityAndOffset(
+    //   `Đã xóa từ ${word} vào danh sách từ vựng của bạn`,
+    //   ToastAndroid.SHORT,
+    //   ToastAndroid.BOTTOM, 0, screen.height * 1 / 4
+    // );
   }
 
   return (
