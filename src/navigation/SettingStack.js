@@ -5,6 +5,9 @@ import SettingScreen from "../screens/SettingScreen";
 import GrammarScreen from "../screens/GrammarScreen";
 import TopicWordScreen from "../screens/TopicWordScreen";
 import ItemTopicScreen from "../screens/ItemTopicScreen"
+import ChildFirstOfGrammar from "../screens/ChildFirstOfGrammar";
+import ChildSecondOfGrammar from "../screens/ChildSecondOfGrammar";
+import TestScreen from "../screens/TestScreen";
 
 const Stack = createStackNavigator();
 
@@ -65,6 +68,48 @@ export default function SettingStack(props) {
         component={ItemTopicScreen}
         options={({route}) => ({
           title: route.params.title,
+          headerStyle: {
+            backgroundColor: '#0077b3',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            color:"#ffffff"
+          },
+        })}
+      />
+      <Stack.Screen
+        name="ChildFirst"
+        component={ChildFirstOfGrammar}
+        options={({route}) => ({
+          title: route.params.title,
+          headerStyle: {
+            backgroundColor: '#0077b3',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            color:"#ffffff"
+          },
+        })}
+      />
+      <Stack.Screen
+        name="ChildSecond"
+        component={ChildSecondOfGrammar}
+        options={({route}) => ({
+          title: route.params.title,
+          headerStyle: {
+            backgroundColor: '#0077b3',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            color:"#ffffff"
+          },
+        })}
+      />
+      <Stack.Screen
+        name="Test"
+        component={TestScreen}
+        options={({route}) => ({
+          title: "Bài Test",
           headerStyle: {
             backgroundColor: '#0077b3',
           },

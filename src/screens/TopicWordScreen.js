@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { StyleSheet } from "react-native"
-import { Container, Content, Body, Left, Right, Button, Text, Icon, List, ListItem } from "native-base"
+import {Left, Right, Text, List, ListItem } from "native-base"
 import { MaterialIcons } from "@expo/vector-icons"
 import Axios from "axios"
 import { HOST } from "../constants/host_port"
@@ -23,7 +22,7 @@ export default function TopicWordScreen(props) {
         return (
           <ListItem onPress={() => props.navigation.navigate("ItemTopic", { title: item.content, id: item.id_topic })}>
             <Left>
-              <Text>{item.content}</Text>
+              <Text style={{color:"#0077b3"}}>{item.content}</Text>
             </Left>
             <Right>
               <MaterialIcons name="keyboard-arrow-right" color="#bfbfbf" size={30} />
@@ -31,7 +30,7 @@ export default function TopicWordScreen(props) {
           </ListItem>
         )
       }}
-      keyExtractor={item => Math.random().toString()}
+      keyExtractor={item => item.id_topic.toString()}
     />
   )
 }

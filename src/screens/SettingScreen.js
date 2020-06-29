@@ -30,7 +30,7 @@ export default function SettingScreen(props) {
         <Card>
           <CardItem button style={styles.listItem} onPress={() => props.navigation.navigate('Grammar')}>
             <Left>
-              <FontAwesome5 name="book" color="#00ff00" size={25} />
+              <FontAwesome5 name="book" color="#009933" size={25} />
               <Text>Ngữ pháp</Text>
             </Left>
             <Right>
@@ -43,6 +43,17 @@ export default function SettingScreen(props) {
             <Left>
               <FontAwesome5 name="book-reader" color="#33bbff" size={25} />
               <Text>Từ vựng theo chủ đề </Text>
+            </Left>
+            <Right>
+              <MaterialIcons name="keyboard-arrow-right" color="#bfbfbf" size={30} />
+            </Right>
+          </CardItem>
+        </Card>
+        <Card>
+          <CardItem button style={styles.listItem} onPress={() => props.navigation.navigate('Test')}>
+            <Left>
+              <FontAwesome5 name="pencil-alt" color="#ff33cc" size={25} />
+              <Text>Làm bài test</Text>
             </Left>
             <Right>
               <MaterialIcons name="keyboard-arrow-right" color="#bfbfbf" size={30} />

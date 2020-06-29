@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { StyleSheet } from "react-native"
-import { Container, Content, Body, Left, Right, Button, Text, Icon, List, ListItem } from "native-base"
-import { Ionicons } from '@expo/vector-icons';
+import { List } from "native-base"
 import ItemWordInTopic from "../components/ItemWordInTopic";
 import Axios from "axios";
 import { HOST } from "../constants/host_port"
@@ -24,7 +23,7 @@ export default function ItemTopicScreen(props) {
       renderItem={({ item }) => (
         <ItemWordInTopic item={item} />
       )}
-      keyExtractor={item => Math.random().toString()}
+      keyExtractor={item => item.id.toString()}
     />
   )
 }

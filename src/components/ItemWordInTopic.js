@@ -3,21 +3,26 @@ import { StyleSheet, Dimensions, View, ToastAndroid } from "react-native"
 import { Body, Left, Right, Button, Text, ListItem } from "native-base"
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import { addWordToFavoriteList, deleteWordFromFavoriteList } from "../utils/controller"
+import {textToSpeechWithApiGoogle} from "../utils/google-api/text-to-speech";
 
 export default function ItemWordInTopic(props) {
 
   const { content, mean } = props.item;
   const [nameIconStar, setNameIconStar] = useState("star-o");
 
+  const speechText = async() =>{
+    await textToSpeechWithApiGoogle(content, "en")
+  }
+
   const toggleStar = async () => {
     //console.log(title);
     if (nameIconStar === "star-o") {
       setNameIconStar("star")
-      //await addWordToFavoriteList(title)
+      await addWordToFavoriteList(content)
     }
     else {
       setNameIconStar("star-o")
-      //await deleteWordFromFavoriteList(title)
+      await deleteWordFromFavoriteList(content)
     }
   }
   const toggleNotice = () => {
@@ -41,19 +46,17 @@ export default function ItemWordInTopic(props) {
     toggleNotice()
   };
   return (
-    <ListItem style={styles.list}>
-      <View style={styles.boxWord}>
+    <ListItem>
+      <Body >
         <Text style={styles.word}>{content}</Text>
-        <Text style={styles.mean}>{mean}</Text>
-    </View>
-      
-      <View style={styles.boxMedia}>
-        <Ionicons name="md-volume-high" color="#0077b3" size={25} style={{paddingRight : 10}}/>
+        <Text note numberOfLines={1} >{mean}</Text>
+      </Body>
+      <Right style={styles.boxMedia}>
+        <Ionicons name="md-volume-high" color="#0077b3" size={25} onPress={speechText}/>
         <Button transparent onPress={showToastWithGravity}>
-          <FontAwesome name={nameIconStar} color={nameIconStar === "star" ? "#e6e600" : "#0077b3"} backgroundColor="#ffffff" size={25}  style={{ marginRight: 10}}/>
+          <FontAwesome name={nameIconStar} color={nameIconStar === "star" ? "#e6e600" : "#0077b3"} backgroundColor="#ffffff" size={25} />
         </Button>
-      </View>
-       
+      </Right>
     </ListItem>
   )
 }
@@ -62,15 +65,11 @@ const styles = StyleSheet.create({
   } ,
   boxWord: {
     flexDirection: "column",
-    // alignItems: "flex-start",
-    paddingLeft : 0
+    alignItems: "flex-start",
+    paddingLeft: 0
   },
   word: {
-    color: "#004466",
-    fontWeight: "bold",
-    fontSize: 18,
-    paddingLeft : 0,
-    
+    color: "#0077b3",
   },
   mean: {
     color: "#bfbfbf",
