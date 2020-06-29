@@ -59,27 +59,28 @@ export default function DetailTest(props) {
               </TouchableOpacity>
         }
        </View>
-      </View>) : 
-      <View>
-      {
-        count >= 5 ? 
-        <View style={styles.viewTotal}>
-          <Text style={styles.grade}>Your Grade </Text>
-          <View style= {styles.modalGrade}>
-              <Text style={styles.countHappy}>{count}</Text>
+      </View>) : (index >= list.length && index !== 0) ? 
+      (
+        <View>
+        {
+          count >= 5 ? 
+          <View style={styles.viewTotal}>
+            <Text style={styles.grade}>Your Grade </Text>
+            <View style= {styles.modalGrade}>
+                <Text style={styles.countHappy}>{count}</Text>
+            </View>
+            <Text style={styles.infoHappy}>Great Job !</Text>
+          </View> : 
+          <View style={styles.viewTotal}>
+            <Text style={styles.grade}>Your Grade </Text>
+            <View style= {styles.modalGrade}>
+                <Text style={styles.countSad}>{count}</Text>
+            </View>
+            <Text style={styles.infoSad}>You have to try harder next time !</Text>
           </View>
-          <Text style={styles.infoHappy}>Great Job !</Text>
-        </View> : 
-        <View style={styles.viewTotal}>
-          <Text style={styles.grade}>Your Grade </Text>
-          <View style= {styles.modalGrade}>
-              <Text style={styles.countSad}>{count}</Text>
-          </View>
-          <Text style={styles.infoSad}>You have to try harder next time !</Text>
-      </View>
-      }
-    </View>
-      
+        }
+        </View>
+      ) : <View></View>
   )
   
 }
