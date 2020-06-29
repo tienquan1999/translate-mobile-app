@@ -9,15 +9,17 @@ import { translateText } from "../utils/controller"
 function DetailWord(props) {
   let {route} = props;
   let {wordMeaning} = route.params;
-
+  console.log("word: ", wordMeaning)
   let {from , to} = props.languages;
-
+ 
   const dataWord = wordMeaning.data;
+ 
   const arrMean = dataWord.mean;
   let newPronunciation = dataWord.pronunciation.split("; [us] ");
-  
+  console.log(props.item);
   const goToWord = async (item) => {
     if(item.trim() !== ''){
+    
       const result = await translateText({
         from: from,
         to: to,
@@ -66,6 +68,9 @@ function DetailWord(props) {
         <View>
           <Text style={styles.wordHeader}>{dataWord.word}</Text>
           {
+            from === "en" ? 
+            <View>
+            {
               newPronunciation.length === 1 ? 
                 <View style={styles.viewPronunciation}>
                   <MaterialIcons name="volume-up" size={25}  color="#0077b3" onPress={speechText} />
@@ -87,6 +92,14 @@ function DetailWord(props) {
                 </View>
                
             }
+            </View>
+             : 
+            <View style={styles.viewPronunciation}>
+              <MaterialIcons name="volume-up" size={25}  color="#0077b3" onPress={speechText} />
+              <Text style={styles.pronunciation}>{newPronunciation}</Text>
+          </View>
+          }
+         
           
         </View>
         <View>
