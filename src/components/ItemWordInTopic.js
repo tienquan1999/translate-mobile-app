@@ -61,6 +61,8 @@ export default function ItemWordInTopic(props) {
   )
 }
 const styles = StyleSheet.create({
+  list : {
+  } ,
   boxWord: {
     flexDirection: "column",
     alignItems: "flex-start",
@@ -76,6 +78,6 @@ const styles = StyleSheet.create({
   boxMedia: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
   }
 })

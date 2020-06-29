@@ -127,13 +127,13 @@ function BoxSearch(props) {
       const info = await FileSystem.getInfoAsync(recording.getURI());
       const uri = info.uri;
 
-      const soundObject = new Audio.Sound();
-      await soundObject.loadAsync({
-        uri: uri
-      });
-      await soundObject.setVolumeAsync(1.0)
-      await soundObject.playAsync();
-      console.log("play audio done")
+      // const soundObject = new Audio.Sound();
+      // await soundObject.loadAsync({
+      //   uri: uri
+      // });
+      // await soundObject.setVolumeAsync(1.0)
+      // await soundObject.playAsync();
+      // console.log("play audio done")
 
       let base64_file = await FileSystem.readAsStringAsync(uri, {
         encoding: FileSystem.EncodingType.Base64
