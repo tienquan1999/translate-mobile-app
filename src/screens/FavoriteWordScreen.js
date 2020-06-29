@@ -35,7 +35,7 @@ export function FavoriteWordScreen(props) {
           dataArray={listWord}
           keyExtractor={item => item.id.toString()}
           renderItem={({item}) => (
-            <ItemFavoriteWord item={item} />
+            <ItemFavoriteWord item={item} onDelete={deleteItem}/>
           )}
         />
       )
