@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   },
   buttonSubmit : {
     width : '70%',
-    height : "10%",
+    height : 45,
     backgroundColor : "#0077b3",
     
    borderRadius : 4 ,
@@ -121,6 +121,6 @@ const styles = StyleSheet.create({
     fontSize : 20,
     fontWeight : "bold",
     textAlign : "center",
-    marginTop :10
+    marginTop :6
   }
 })
