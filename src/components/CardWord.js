@@ -12,8 +12,7 @@ function CardWord(props) {
   const {from, to} = props.languages;
   const item = props.item;
   const {word, proper} = props.item;
- 
-
+  
   const handleGoToWord = async() =>{
     // const mean = await translateText({
     //   from: from,
@@ -43,29 +42,40 @@ function CardWord(props) {
             <View>
               <Text style={styles.word}>{item.word}</Text>
               {
-                item.result.data.pronunciation.split("; [us]").length === 1 ?
-                <View style={styles.bottomCard}>
-                  <Text style={styles.proper}>[uk]{item.result.data.pronunciation.split("; [us]")[0]}</Text>
-                    <MaterialIcons name="volume-up" size={25} color="#0077b3"  onPress={speechText}/>
-                 
-              </View> : 
-              <View>
-                <View style={styles.bottomCard}>
-                  <Text style={styles.proper}>[uk]{item.result.data.pronunciation.split("; [us]")[0]}/</Text>
-                  <MaterialIcons name="volume-up" size={25} color="#0077b3"  onPress={speechText}/>
+                item.fromLanguage === "en" ?
+                <View>
+                {
+                    item.result.data.pronunciation.split("; [us]").length === 1 ?
+                    <View style={styles.bottomCard}>
+                      <Text style={styles.proper}>[uk]{item.result.data.pronunciation.split("; [us]")[0]}</Text>
+                        <MaterialIcons name="volume-up" size={25} color="#0077b3"  onPress={speechText}/>
+                    
+                  </View> : 
+                  <View>
+                    <View style={styles.bottomCard}>
+                      <Text style={styles.proper}>[uk]{item.result.data.pronunciation.split("; [us]")[0]}/</Text>
+                      <MaterialIcons name="volume-up" size={25} color="#0077b3"  onPress={speechText}/>
+                      </View>
+                    <View style={styles.bottomCard}>
+                        <Text style={styles.proper}>[us]/{item.result.data.pronunciation.split("; [us]")[1]}</Text>
+                      <MaterialIcons name="volume-up" size={25} color="#0077b3"  onPress={speechText}/>
                   </View>
+                </View>
+                  }
+                </View>
+                :
                 <View style={styles.bottomCard}>
-                    <Text style={styles.proper}>[us]/{item.result.data.pronunciation.split("; [us]")[1]}</Text>
-                  <MaterialIcons name="volume-up" size={25} color="#0077b3"  onPress={speechText}/>
-              </View>
-             </View>
+                      <Text style={styles.proper}>{item.result.data.pronunciation}</Text>
+                      <MaterialIcons name="volume-up" size={25} color="#0077b3"  onPress={speechText}/>
+                </View>
               }
+              
              
               <Text style={styles.mean}>{item.result.data.mean[0].values[0].mean}</Text>
             </View>
              :  
              <View >
-               {item.word.length >= 20 ?    <Text style={styles.word}>{item.word.split(' ').splice(0,5).join(' ')} ...</Text> :
+               {item.word.length >= 30 ?    <Text style={styles.word}>{item.word.split(' ').splice(0,5).join(' ')} ...</Text> :
                 <Text style={styles.word}>{item.word}</Text>
                 }
                 <View style={styles.bottomCard}>
