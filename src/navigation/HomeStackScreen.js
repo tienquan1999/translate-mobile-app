@@ -25,13 +25,21 @@ export default function HomeStackScreen(props) {
       <HomeStack.Screen
         name="Word"
         component={DefinitionScreen}
-        options={{
-          title: 'Word',
-          header: ({ navigation, scene }) => {
-            //const title = scene.route.params.wordMeaning.data.word;
-            return <HeaderDefinitionWord handleBack={() => navigation.goBack()} navigation={navigation} route={scene.route}/>
+        options={({route, navigation}) => ({
+          title: route.params.wordMeaning.data.word,
+          headerStyle: {
+            backgroundColor: '#0077b3',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            color:"#ffffff"
+          },
+          route:{route},
+          navigation:{navigation},
+          headerRight: () => {
+            return (<HeaderDefinitionWord navigation={navigation} route={route} />)
           }
-        }}
+        })}
       />
     </HomeStack.Navigator>
   )
