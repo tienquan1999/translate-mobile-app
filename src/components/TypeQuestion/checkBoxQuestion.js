@@ -35,8 +35,7 @@ export default function CheckBoxQuestion(props) {
 const styles = StyleSheet.create({
   question: {
     flexDirection: "row",
-    alignItems: "center",
-    flex:1
+    alignItems: "center"
   },
   header: {
     // flexDirection: "row",

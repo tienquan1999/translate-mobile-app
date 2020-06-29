@@ -8,6 +8,8 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 import SettingScreen from '../screens/SettingScreen';
 import SearchOnlineScreen from '../screens/SearchOnlineScreen';
 import SettingStack from './SettingStack';
+import { MaterialIcons } from "@expo/vector-icons"
+
 const Tab = createBottomTabNavigator();
 
 export default function BottomTab() {
@@ -47,7 +49,7 @@ export default function BottomTab() {
         options={{
           tabBarLabel: 'Tiện ích',
           tabBarIcon: ({ color, size }) => (
-            <Icon name="menu" color={color} size={size} />
+            <MaterialIcons name="extension" color={color} size={size} />
           ),
         }}
       />
