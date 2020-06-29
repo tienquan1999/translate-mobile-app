@@ -131,7 +131,6 @@ async function translateViToEn(word){
 
 async function getHistoryTranslate(){
     try{
-        console.log("getHistoryTranslate")
         let db = await connectToDatabase("translate.db");
         let query = "select * from historyTranslate order by time_update DESC limit 5;"
         let result = await querySQLite({
@@ -146,7 +145,6 @@ async function getHistoryTranslate(){
             return e;
         });
         //db._db.close();
-        console.log("getHistoryTranslate done.")
         return result;
     }
     catch(e){

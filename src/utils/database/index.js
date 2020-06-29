@@ -14,7 +14,6 @@ async function connectToDatabase(dbName) {
         console.log("load file ");
         await FileSystem.makeDirectoryAsync(sqlDir, {intermediates: true});
         let module = dbName === "enToVi.db" ? require("../../assets/databases/enToVi.db") : require("../../assets/databases/viToEn.db");
-        console.log(module);
         const asset = Asset.fromModule(module);
         await FileSystem.downloadAsync(asset.uri, sqlDir + internalDbName);
        

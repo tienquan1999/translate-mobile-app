@@ -12,10 +12,8 @@ export default function ListRecentWords(props) {
   useEffect(() => {
     async function getRecentWords(){
       let words = await getHistoryTranslate();
-      console.log(words.length)
       setTimeout(async () => {
         await setRecentWords(words);
-        console.log(recentWords.length);
       }, 0)
     }
     getRecentWords();
