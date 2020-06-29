@@ -89,7 +89,7 @@ export default function CheckBoxQuestion(props) {
     </Card>
     ) : 
     (
-      <View><Feather name="loader"  color="#0077b3"/></View>
+      <View style={{ flexDirection : "row",justifyContent : "center"}}><Feather name="loader" size ={30}  color="#0077b3"/></View>
     )
   )
 }
