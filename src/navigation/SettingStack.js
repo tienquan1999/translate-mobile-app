@@ -8,7 +8,8 @@ import ItemTopicScreen from "../screens/ItemTopicScreen"
 import ChildFirstOfGrammar from "../screens/ChildFirstOfGrammar";
 import ChildSecondOfGrammar from "../screens/ChildSecondOfGrammar";
 import TestScreen from "../screens/TestScreen";
-import WordType from "../screens/WordType";
+ 
+import IrregularVerbs from "../screens/IrregularVerbs";
 
 const Stack = createStackNavigator();
 
@@ -122,7 +123,7 @@ export default function SettingStack(props) {
       />
       <Stack.Screen
         name="WordType"
-        component={WordType}
+        component={IrregularVerbs}
         options={({route}) => ({
           title: "Động từ bất quy tắc",
           headerStyle: {
