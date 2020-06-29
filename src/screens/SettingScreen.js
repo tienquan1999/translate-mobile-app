@@ -7,9 +7,6 @@ export default function SettingScreen(props) {
   return (
     <Container>
       <Header style={styles.header}>
-        <Left>
-          <MaterialCommunityIcons name="menu" color="#ffffff" size={30} />
-        </Left>
         <Body>
           <Title style={styles.title}>Tiện ích</Title>
         </Body>
@@ -54,6 +51,17 @@ export default function SettingScreen(props) {
             <Left>
               <FontAwesome5 name="pencil-alt" color="#ff33cc" size={25} />
               <Text>Làm bài test</Text>
+            </Left>
+            <Right>
+              <MaterialIcons name="keyboard-arrow-right" color="#bfbfbf" size={30} />
+            </Right>
+          </CardItem>
+        </Card>
+        <Card>
+          <CardItem button style={styles.listItem} onPress={() => props.navigation.navigate('WordType')}>
+            <Left>
+              <MaterialCommunityIcons name="feature-search" color="purple" size={25} />
+              <Text>Tra cứu động từ bất quy tắc </Text>
             </Left>
             <Right>
               <MaterialIcons name="keyboard-arrow-right" color="#bfbfbf" size={30} />

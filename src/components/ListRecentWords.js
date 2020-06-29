@@ -22,6 +22,7 @@ export default function ListRecentWords(props) {
   }, [])
   useFocusEffect(
     React.useCallback(() => {
+      
       return async() => {
         let words = await getHistoryTranslate();
         setRecentWords(words);
