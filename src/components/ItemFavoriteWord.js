@@ -13,11 +13,11 @@ export function ItemFavoriteWord(props) {
   }
   const deleteWord = async() =>{
     await props.onDelete(word);
-    // ToastAndroid.showWithGravityAndOffset(
-    //   `Đã xóa từ ${word} vào danh sách từ vựng của bạn`,
-    //   ToastAndroid.SHORT,
-    //   ToastAndroid.BOTTOM, 0, screen.height * 1 / 4
-    // );
+    ToastAndroid.showWithGravityAndOffset(
+      `Đã xóa từ ${word} vào danh sách từ vựng của bạn`,
+      ToastAndroid.SHORT,
+      ToastAndroid.BOTTOM, 0, screen.height * 1 / 4
+    );
   }
 
   return (
