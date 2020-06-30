@@ -99,8 +99,8 @@ export default function CheckBoxQuestion(props) {
             <Text style={styles.textSubmit}>Submit</Text>
           </TouchableOpacity>
       ) : (
-        <View>
-          <Text style={{color: "red", fontSize: 25}}>{response}</Text>
+        <View >
+          <Text style={{color: "red", fontSize: 16, textAlign:"center"}}>{response}</Text>
         </View>
       )
       }
@@ -128,18 +128,18 @@ const styles = StyleSheet.create({
   },
   buttonSubmit : {
     width : '70%',
-    height : 45,
+    height : 40,
     backgroundColor : "#0077b3",
     
    borderRadius : 4 ,
    marginTop : 30,
-   marginLeft: 50 
+   marginLeft: 60 
   },
   textSubmit :{
     color : "#ffffff",
-    fontSize : 20,
+    fontSize : 16,
     fontWeight : "bold",
     textAlign : "center",
-    marginTop :6
+    padding:10
   }
 })

@@ -67,14 +67,14 @@ export default function DetailTest(props) {
           <View style={styles.viewTotal}>
             <Text style={styles.grade}>Your Grade </Text>
             <View style= {styles.modalGrade}>
-                <Text style={styles.countHappy}>{count}</Text>
+        <Text style={styles.countHappy}>{count}/{list.length}</Text>
             </View>
             <Text style={styles.infoHappy}>Great Job !</Text>
           </View> : 
           <View style={styles.viewTotal}>
             <Text style={styles.grade}>Your Grade </Text>
             <View style= {styles.modalGrade}>
-                <Text style={styles.countSad}>{count}</Text>
+                <Text style={styles.countSad}>{count}/{list.length}</Text>
             </View>
             <Text style={styles.infoSad}>You have to try harder next time !</Text>
           </View>
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   grade : {
     textAlign : "center",
     marginTop : 20,
-    fontSize : 35,
+    fontSize : 25,
     fontWeight : "bold",
     color : "#0077b3"
   },
@@ -121,23 +121,23 @@ const styles = StyleSheet.create({
   },
   countHappy : {
     fontWeight :"bold",
-    fontSize : 200,
+    fontSize : 100,
     color :"#01A151"
   },
   countSad : {
     fontWeight :"bold",
-    fontSize : 200,
+    fontSize : 100,
     color :"red"
   },
   infoSad :{
-    fontSize : 35 ,
+    fontSize : 25 ,
     fontWeight : "bold",
     color : "red",
     textAlign :"center",
     paddingTop : 30
   },
   infoHappy :{
-    fontSize : 35 ,
+    fontSize : 25 ,
     fontWeight : "bold",
     color : "#01A151",
     textAlign :"center",
