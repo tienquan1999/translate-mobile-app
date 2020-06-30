@@ -152,12 +152,10 @@ function BoxSearch(props) {
       }
       let response = await axios.post(url, body);
       let word = response.data.results[0].alternatives[0].transcript;
-
+      
       if (word !== "") {
         setTextSound(word)
-        setTimeout(() => {
-          hideModal();
-        }, 1000)
+        hideModal();
         goToWordUseVoice(word);
       }
       else
